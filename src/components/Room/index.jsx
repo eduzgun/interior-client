@@ -62,12 +62,12 @@ gui
 //This is the enviornement map texture which makes up the room 
 
 const environmentMap = cubeTextureLoader.load([
-    '../../src/assets/environmentMaps/0/px.png',
-    '../../src/assets/environmentMaps/0/nx.png',
-    '../../src/assets/environmentMaps/0/py.png',
-    '../../src/assets/environmentMaps/0/ny.png',
-    '../../src/assets/environmentMaps/0/pz.png',
-    '../../src/assets/environmentMaps/0/nz.png'
+    '../../src/assets/environmentMaps/3/px.png',
+    '../../src/assets/environmentMaps/3/nx.png',
+    '../../src/assets/environmentMaps/3/py.png',
+    '../../src/assets/environmentMaps/3/ny.png',
+    '../../src/assets/environmentMaps/3/pz.png',
+    '../../src/assets/environmentMaps/3/nz.png'
 ])
 
 scene.environment = environmentMap
