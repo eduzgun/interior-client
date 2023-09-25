@@ -32,12 +32,12 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
             <h2>Log In</h2>
             <p>*placeholder text*</p>
         </header>
-        <form onSubmit={sendLoginRequest}>
+        <form data-testid={"login-form"} onSubmit={sendLoginRequest}>
             <label htmlFor="username">username</label>
-            <input type="text" name="username" id="user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} type="text" name="username" id="user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="password">password</label>
-            <input type="password" name="password" id="password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} type="password" name="password" id="password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
 
             <button type='submit' id='signin-btn' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}}>Sign In</button>
         </form>
