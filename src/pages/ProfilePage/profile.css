@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+}
+#container {
+    display: flex;
+}
+
+#container div {
+    height: 100vh;
+    padding: 2rem;
+}
+
+#container #sidebar {
+    width: 20vw;
+    border-right: 1px solid black;
+}
+
+#container #main-content {
+    width: 80vw;
+}
