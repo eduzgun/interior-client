@@ -9,6 +9,25 @@ const Login = () => {
 
   const [toggleSwitch, setToggleSwitch] = useState(false)
 
+  const shadedStyle = {
+    "width": "108px",
+    "height": "140px",
+    "left": "-4px",
+    "top": "-65px",
+    "transform": "rotateX(85deg)"
+  }
+
+  const mainStyle = {
+    "top": "-25px",
+    "width": "100px",
+    "height": "290px",
+    "transform": "rotateX(-40deg)"
+  }
+
+  const focusStyle = {
+    "backgroundColor":"var(--outline)"
+  }
+
   function handleUserInput(e) {
     setUsername(e.target.value)
   }
@@ -24,6 +43,10 @@ const Login = () => {
     setPassword("")
   }
 
+  function changeState() {
+    setToggleSwitch(!toggleSwitch)
+  }
+
   useEffect(() => {
     function handleResize(){
       setCardHeight(window.innerHeight *.55)
@@ -35,7 +58,7 @@ const Login = () => {
 
   return (
     <div id='login-page'>
-        <div className="card" style={{"height":cardHeight}}>
+        <div className="card" style={Object.assign({"height":cardHeight},!toggleSwitch ? focusStyle : {})} >
             <header>
               <h2>Log In</h2>
               <p>*placeholder text*</p>
@@ -53,11 +76,14 @@ const Login = () => {
             </form>
         </div>
 
-        <div className="switch">
-          <div id="toggle"></div>
+        <div className="switch" onClick={changeState}>
+          <div id="toggle">
+            <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
+            <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
+          </div>
         </div>
 
-        <div className="card" style={{"height":cardHeight}}>
+        <div className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {})}>
 
         </div>
     </div>

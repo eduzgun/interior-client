@@ -4,6 +4,7 @@
     --outline: rgba(219, 217, 217, 0.103);
     --outlinefocus: rgba(219, 217, 217, 0.418);
     font-size: 24px;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 body{

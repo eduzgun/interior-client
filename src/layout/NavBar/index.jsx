@@ -6,7 +6,7 @@ const NavBar = () => {
 
   const activeStyle = {
     "outline": "solid 2px var(--outlinefocus)",
-    "background-color": "var(--outline)"
+    "backgrounColor": "var(--outline)"
   }
 
   const navActive = ({isActive}) => (isActive ? activeStyle : undefined)
