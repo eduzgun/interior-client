@@ -1,0 +1,46 @@
+.nav-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+h2{
+    font-size: 2rem;
+    color: whitesmoke;
+    margin-left: 50px;
+}
+
+ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+li{
+    list-style: none;
+}
+
+li:nth-child(3){
+    margin-right: 90%;
+}
+
+a{
+    font-size: 0.7rem;
+    text-decoration: none;
+    margin-right: 60px;
+    outline: solid 2px var(--outline);
+    padding: 12px 60px;
+    border-radius: 100px;
+}
+
+a:hover{
+    cursor: pointer;
+    background-color: var(--outline);
+    outline: solid 2px var(--outlinefocus);
+    
+}
+
+a:visited{
+    color: whitesmoke;
+}
