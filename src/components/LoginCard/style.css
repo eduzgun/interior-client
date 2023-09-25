@@ -1,0 +1,46 @@
+#login h2{
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+#login header>p{
+    margin-bottom: 150px;
+}
+
+#login form{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 40%
+}
+
+#login label{
+    font-size: 0.8rem;
+    align-self: start;
+}
+
+#login input{
+    width: 100%;
+    height: 2rem;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-radius: 25px;
+    background-color: var(--bg);
+    color: whitesmoke;
+    border: 1px solid var(--outlinefocus);
+}
+
+#login button{
+    font-size: 0.8rem;
+    border: 1px solid var(--outlinefocus);
+    padding: 10px 25px;
+    outline: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: var(--bg);
+    color: whitesmoke;
+    font-family: inherit;
+}

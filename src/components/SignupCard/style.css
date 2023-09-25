@@ -1,0 +1,46 @@
+#signup h2{
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+#signup header>p{
+    margin-bottom: 150px;
+}
+
+#signup form{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 23%
+}
+
+#signup label{
+    font-size: 0.8rem;
+    align-self: start;
+}
+
+#signup input{
+    width: 100%;
+    height: 2rem;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-radius: 25px;
+    background-color: var(--bg);
+    color: whitesmoke;
+    border: 1px solid var(--outlinefocus);
+}
+
+#signup button{
+    font-size: 0.8rem;
+    border: 1px solid var(--outlinefocus);
+    padding: 10px 25px;
+    outline: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: var(--bg);
+    color: whitesmoke;
+    font-family: inherit;
+}

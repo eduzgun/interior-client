@@ -7,8 +7,6 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
-    --switchbg: rgb(209, 206, 200);
 }
 
 .card{
@@ -26,71 +24,3 @@
     z-index: 2;
 }
 
-/* label+input,
-button+a{
-    display: flex;
-} */
-
-h2{
-    font-size: 2.4rem;
-    text-align: center;
-}
-
-header>p{
-    margin-bottom: 150px;
-}
-
-form{
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 40%
-}
-
-label{
-    align-self: start;
-}
-
-input[type="text"]{
-    width: 100%;
-    height: 2rem;
-    margin-bottom: 30px;
-}
-
-.switch{
-    position: relative;
-    /* outline: solid red 1px; */
-    width: 100px;
-    height: 200px;
-    background-color: var(--switchbg);
-    perspective: 600px;
-}
-
-#toggle{
-    perspective: inherit;
-    position: relative;
-}
-
-/* LOGIN */
-
-#shadedbit{
-    position: absolute;
-    width: 110px;
-    height: 140px;
-    background-color: rgb(89, 92, 95);
-    left: -5px;
-    bottom: -263px;
-    transform: rotateX(-65deg);
-}
-
-#mainbit{
-    content: "";
-    position: absolute;
-    top: -54px;
-    width: 100px;
-    height: 260px;
-    background-color: rgb(170, 171, 172);
-    transform: rotateX(55deg);
-}
