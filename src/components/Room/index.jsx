@@ -3,10 +3,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import  Marker  from '../Marker';
 
 // import room from "../../assets/environmentMaps/0/px.png"
-
-
 
 
 const Room = () => {
@@ -102,6 +101,7 @@ window.addEventListener('resize', () =>
 
 
 // orthoCamera testing - is as if its looking birdseye view of a room
+
 // const zoomFactor = 800;  
 // const camera = new THREE.OrthographicCamera(
 //   -sizes.width/2 / zoomFactor,
@@ -154,7 +154,9 @@ controls.enableDamping = true
   }, []);
 
   return (
-    <div ref={containerRef} id="three-container" ></div>
+    <div ref={containerRef} id="three-container" >
+        <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" />
+    </div>
   );
 };
 
