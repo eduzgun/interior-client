@@ -7,11 +7,11 @@ const Profile = () => {
       {/* <div>Profile</div> */}
       <div id='container'>
         <div id="sidebar">
-          <h5>Profile</h5>
+          <a id="sidebar-heading"href="#profile-title"><h5>Profile</h5></a>
           <a id='sidebar-likes' href="#likes"><h5 >Likes</h5></a>
         </div>
         <div id="main-content">
-          <h2>Profile</h2>
+          <h2 id='profile-title'>Profile</h2>
           <h3>Name</h3>
           <input type="text" placeholder='Name' id="" />
           <h3>Username</h3>
