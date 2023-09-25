@@ -11,10 +11,36 @@
 }
 
 #container #sidebar {
+    color: white;
     width: 20vw;
-    border-right: 1px solid black;
+    /* border-right: 1px solid hsla(244, 11%, 50%, 0.469); */
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar h5 {
+    padding-bottom: 1rem;
 }
 
 #container #main-content {
     width: 80vw;
+    color: white;
+}
+
+#main-content input {
+    background-color: var(--bg);
+    border: none;
+}
+
+#sidebar-likes {
+    outline: none;
+}
+
+#sidebar-likes:hover {
+    outline: none;
+    background-color: var(--bg)
+}
+
+#main-content input {
+    color: var(--fg);
 }
