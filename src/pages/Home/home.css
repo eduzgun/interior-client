@@ -1,9 +1,43 @@
 #home-container {
-    /* color: white;
-    background-color: red; */
-    height: 100vh;
+    height: 88.2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
 }
 
-/* canvas {
-    background-color: red;
-} */
+#centre-button button {
+    padding: 1rem 5.5rem;
+    font-size: 0.7rem;
+    text-decoration: none;
+    background-color: var(--outline);
+    outline: solid 1px var(--outlinefocus);
+    color: aliceblue;
+    border-radius: 100px;
+    font-size: 1rem;
+    /* font-weight: bold; */
+}
+
+#centre-button button:hover {
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1401px) {
+    #centre-button {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        bottom: 6rem;
+        z-index: 1;
+    }
+}
+
+@media only screen and (max-width:1400px) {
+    #centre-button {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        bottom: 3.3rem;
+        z-index: 1;
+    }
+}
