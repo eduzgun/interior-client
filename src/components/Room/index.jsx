@@ -99,7 +99,24 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-// Here setting up the camera so looks like POV looking in a room 
+
+
+// orthoCamera testing - is as if its looking birdseye view of a room
+// const zoomFactor = 800;  
+// const camera = new THREE.OrthographicCamera(
+//   -sizes.width/2 / zoomFactor,
+//    sizes.width/2 / zoomFactor,
+//    sizes.height/2 / zoomFactor,
+//   -sizes.height/2 / zoomFactor,
+//   0.1,
+//   100
+// );
+// camera.position.set(4, 5, 4);
+// scene.add(camera);
+
+
+// Here setting up the camera so looks like POV looking in a room yourself
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
 camera.position.set(4, 5, 4)
 scene.add(camera)
