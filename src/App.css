@@ -1,0 +1,15 @@
+:root{
+    --bg: hsl(263, 67%, 2%);
+    --fg: hsl(244, 11%, 50%);
+    --outline: rgba(219, 217, 217, 0.103);
+    --outlinefocus: rgba(219, 217, 217, 0.418);
+    font-size: 24px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    
+}
+

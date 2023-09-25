@@ -1,14 +1,26 @@
 import React from 'react'
 import * as Pages from './pages';
-import {Routes, Route} from 'react-router-dom';
+// import { Login } from "./pages"
+import { NavBar } from './layout'
+import { Routes, Route } from "react-router-dom"
+import "./App.css"
 
-const App = () => {
+
+export default function App() {
+
   return (
-    <Routes>
-      <Route path='/' element={<Pages.Homepage/>} />
-      <Route path='/profile' element={<Pages.ProfilePage/>} />
-    </Routes>
+    <div className="main">
+      <Routes>
+        <Route path="/" element={<NavBar/>}>
+          <Route index element={<Pages.Home/>}/>
+          <Route path='Rooms' element={<Pages.Rooms/>}/>
+          <Route path='Login' element={<Pages.Login/>}/>
+          <Route path='*' element={<Pages.NotFound/>}/>
+          <Route path='/profile' element={<Pages.ProfilePage/>} />
+        </Route>
+      </Routes>
+
+    </div>
+
   )
 }
-
-export default App
