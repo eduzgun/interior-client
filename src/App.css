@@ -1,9 +1,10 @@
 :root{
     --bg: hsl(263, 67%, 2%);
     --fg: hsl(244, 11%, 50%);
-    --outline: rgba(219, 217, 217, 0.103);
-    --outlinefocus: rgba(219, 217, 217, 0.418);
+    --outline: rgba(25,23,30);
+    --outlinefocus: rgba(170,171,172);
     font-size: 24px;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 body{
