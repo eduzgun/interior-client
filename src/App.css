@@ -10,6 +10,21 @@ body{
     margin: 0;
     padding: 0;
     background-color: var(--bg);
-    
 }
 
+#three-container {
+    width: 1800px;
+    height: 1200px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* styling for the page component - this is on the page where the room lives */
+.room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 70px);
+}
