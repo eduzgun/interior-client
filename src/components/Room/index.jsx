@@ -18,6 +18,7 @@ const Room = () => {
     // Here is to load any models and textures that we use in our project
     const gltfLoader = new GLTFLoader();
     const cubeTextureLoader = new THREE.CubeTextureLoader();
+    const textureLoader = new THREE.TextureLoader();
 
    // Here is the controls panel that comes up in the corner which will be able to change different things in the room (hopefully)
     const gui = new dat.GUI();
@@ -62,13 +63,19 @@ gui
 //This is the enviornement map texture which makes up the room 
 
 const environmentMap = cubeTextureLoader.load([
-    '../../src/assets/environmentMaps/3/px.png',
-    '../../src/assets/environmentMaps/3/nx.png',
-    '../../src/assets/environmentMaps/3/py.png',
-    '../../src/assets/environmentMaps/3/ny.png',
-    '../../src/assets/environmentMaps/3/pz.png',
-    '../../src/assets/environmentMaps/3/nz.png'
+    '../../src/assets/environmentMaps/0/px.png',
+    '../../src/assets/environmentMaps/0/nx.png',
+    '../../src/assets/environmentMaps/0/py.png',
+    '../../src/assets/environmentMaps/0/ny.png',
+    '../../src/assets/environmentMaps/0/pz.png',
+    '../../src/assets/environmentMaps/0/nz.png'
 ])
+
+//testing AI generated environment maps 
+
+// const environmentMap = textureLoader.load('../../src/assets/environmentMaps/ai/kitchenAI.png')
+// environmentMap.mapping = THREE.EquirectangularReflectionMapping
+// environmentMap.colorSpace = THREE.SRGBColorSpace
 
 scene.environment = environmentMap
 scene.background = environmentMap
