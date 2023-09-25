@@ -13,6 +13,14 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
         "color": "var(--outline)"
     }
 
+    const showLight = {
+        "display":"block"
+    }
+
+    const lampShade = {
+        "filter": "brightness(1)"
+    }
+
     function handleUserInput(e) {
         setUsername(e.target.value)
     }
@@ -63,11 +71,14 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
 
   return (
     <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outline)"})}>
+        <div className="lamp">
+            <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
+            <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
+        </div>
         <header>
             <h2>Register</h2>
         </header>
         <form onSubmit={sendRegisterRequest} data-testid="signup-form">
-
             <label htmlFor="username">username</label>
             <input data-testid={"input"} type="text" name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 

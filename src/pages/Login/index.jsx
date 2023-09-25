@@ -4,7 +4,7 @@ import "./style.css"
 
 const Login = () => {
 
-  const [cardHeight, setCardHeight] = useState(window.innerHeight *.55)
+  const [cardHeight, setCardHeight] = useState(window.innerHeight *.6)
 
   const [toggleSwitch, setToggleSwitch] = useState(false)
 
@@ -20,7 +20,7 @@ const Login = () => {
 
   useEffect(() => {
     function handleResize(){
-      setCardHeight(window.innerHeight *.55)
+      setCardHeight(window.innerHeight *.6)
     }
 
     window.addEventListener("resize",handleResize)

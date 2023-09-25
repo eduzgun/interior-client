@@ -1,3 +1,7 @@
+#login{
+    position: relative;
+}
+
 #login h2{
     font-size: 2.4rem;
     text-align: center;
@@ -43,4 +47,27 @@
     background-color: var(--bg);
     color: whitesmoke;
     font-family: inherit;
+}
+
+.lamp{
+    position: absolute;
+    top: -70%;
+    scale: 40%;
+}
+
+#left-lamp{
+    position: relative;
+    filter: brightness(0.2);
+
+}
+
+#llight{
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px;
+    width: 800px;
+    height: 300px;
+    background: radial-gradient(ellipse at 50% 100px, rgba(255, 255, 235,0.95) 20%, rgba(80,92,103,0) 60%);
 }

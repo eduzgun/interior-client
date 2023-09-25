@@ -11,6 +11,14 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
       "color": "var(--outline)"
     }
 
+    const showLight = {
+        "display":"block"
+    }
+
+    const lampShade = {
+        "filter": "brightness(1)"
+    }
+
     function handleUserInput(e) {
         setUsername(e.target.value)
     }
@@ -28,6 +36,10 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
   return (
     <div id="login"  className="card" style={Object.assign({"height":cardHeight},!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
+        <div className="lamp">
+            <img src="./src/assets/images/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
+            <div id="llight" style={!toggleSwitch ? showLight : {}}></div>
+        </div>
         <header>
             <h2>Log In</h2>
             <p>*placeholder text*</p>
