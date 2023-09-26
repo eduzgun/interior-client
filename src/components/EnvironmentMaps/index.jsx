@@ -1,14 +1,28 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import  Marker  from '../Marker';
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
+    
+
+    const gltfLoader = new GLTFLoader();
+    const cubeTextureLoader = new THREE.CubeTextureLoader();
+    const textureLoader = new THREE.TextureLoader();
+
+  
+    const gui = new dat.GUI();
+    const global = {};
+
     const canvas = document.createElement('canvas');
     container.appendChild(canvas);
+
 
     const scene = new THREE.Scene();
     const sizes = {
@@ -30,6 +44,35 @@ const EnvironmentMap = ({ mapUrls }) => {
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    
+const updateAllMaterials = () =>
+{
+    scene.traverse((child) =>
+    {
+        if(child.isMesh && child.material.isMeshStandardMaterial)
+        {
+            child.material.envMapIntensity = global.envMapIntensity
+        }
+    })
+}
+
+
+
+ scene.backgroundBlurriness = 0 
+scene.backgroundIntensity = 1 
+
+gui.add(scene, 'backgroundBlurriness').min(0).max(1).step(0.001)
+gui.add(scene, 'backgroundIntensity').min(0).max(10).step(0.001)
+
+global.envMapIntensity = 1
+gui
+    .add(global, 'envMapIntensity')
+    .min(0)
+    .max(10)
+    .step(0.001)
+    .onChange(updateAllMaterials)
+
+
     const environmentMap = new THREE.CubeTextureLoader().load(mapUrls);
     scene.environment = environmentMap;
     scene.background = environmentMap;
@@ -45,7 +88,7 @@ const EnvironmentMap = ({ mapUrls }) => {
 
     tick();
 
-
+    
     const onResize = () => {
       sizes.width = container.clientWidth;
       sizes.height = container.clientHeight;
@@ -58,16 +101,19 @@ const EnvironmentMap = ({ mapUrls }) => {
     window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(tick); 
-      window.removeEventListener('resize', onResize);  
+      cancelAnimationFrame(tick);  
+      window.removeEventListener('resize', onResize); 
       controls.dispose();  
       renderer.dispose();  
     };
   }, [mapUrls]);
 
-  return <div ref={containerRef} className="environment-map" />;
+  return (
+    <>
+  <div ref={containerRef} className="environment-map" />
+  <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" />
+  </>
+  );
 };
 
 export default EnvironmentMap;
-
-

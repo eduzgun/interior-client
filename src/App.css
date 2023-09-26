@@ -13,14 +13,6 @@ body{
     background-color: var(--bg);
 }
 
-#three-container {
-    width: 1800px;
-    height: 1200px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
 
 /* styling for the page component - this is on the page where the room lives */
 .room {
@@ -86,14 +78,34 @@ font-size: 18px;
   visibility: visible;
 }
 
-.grid-container {
+.environment-map-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-   width: 1800px;
-    height: 1200px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 5px;
+}
+
+/* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
+.arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.arrow-button.left {
+    left: 10px;
+}
+
+.arrow-button.right {
+    right: 10px;
+}
+
+/* new styling for separate grid items - in environment map component and styling of the map itself */
+.environment-map {
+  min-width: 1000px; 
+  min-height: 800px;
 }
