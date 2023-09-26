@@ -1,4 +1,4 @@
-.nav-row{
+.nav-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -6,26 +6,26 @@
     font-family: 'Space Grotesk', sans-serif;
 }
 
-h2{
+.nav-row h2{
     font-size: 2rem;
     color: whitesmoke;
     margin-left: 50px;
 }
 
-ul{
+.nav-row ul{
     display: flex;
     justify-content: space-evenly;
 }
 
-li{
+.nav-row li{
     list-style: none;
 }
 
-li:nth-child(3){
+.nav-row li:nth-child(3){
     margin-right: 90%;
 }
 
-a{
+.nav-row a{
     font-size: 0.7rem;
     text-decoration: none;
     margin-right: 60px;
@@ -34,13 +34,19 @@ a{
     border-radius: 100px;
 }
 
-a:hover{
+.nav-row a:hover{
     cursor: pointer;
     background-color: var(--outline);
     outline: solid 2px var(--outlinefocus);
     
 }
 
-a:visited{
+.nav-row a:visited{
     color: whitesmoke;
 }
+
+
+/* styling for the three-container - this is the canvas it sits on the page, not the page layout  */
+
+
+

@@ -1,32 +1,26 @@
 import React,{ useState, useEffect, useRef } from 'react'
+import { LoginCard, LightSwitch, SignupCard } from "../../components"
 import "./style.css"
 
 const Login = () => {
 
-  const [username, setUsername] = useState("")
-  const [password,setPassword] = useState("")
-  const [cardHeight, setCardHeight] = useState(window.innerHeight *.55)
+  const [cardHeight, setCardHeight] = useState(window.innerHeight *.6)
 
   const [toggleSwitch, setToggleSwitch] = useState(false)
 
-  function handleUserInput(e) {
-    setUsername(e.target.value)
+  const focusStyle = {
+    "background": "linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%)",
+    "backgroundColor":"var(--outline)"
+
   }
 
-  function handlePassInput(e){
-    setPassword(e.target.value)
-  }
-
-  function sendLoginRequest(e){
-    e.preventDefault()
-    console.log(username,password)
-    setUsername("")
-    setPassword("")
+  function changeState() {
+    setToggleSwitch(!toggleSwitch)
   }
 
   useEffect(() => {
     function handleResize(){
-      setCardHeight(window.innerHeight *.55)
+      setCardHeight(window.innerHeight *.6)
     }
 
     window.addEventListener("resize",handleResize)
@@ -35,31 +29,15 @@ const Login = () => {
 
   return (
     <div id='login-page'>
-        <div className="card" style={{"height":cardHeight}}>
-            <header>
-              <h2>Log In</h2>
-              <p>*placeholder text*</p>
-            </header>
-            <form onSubmit={sendLoginRequest}>
-              <label htmlFor="username">username</label>
-              <input type="text" name="username" id="user-input" value={username} placeholder='username' onChange={handleUserInput} autoComplete='false'/>
+        <LoginCard cardHeight={cardHeight} toggleSwitch={toggleSwitch} focusStyle={focusStyle} />
 
-              <label htmlFor="password">password</label>
-              <input type="text" name="password" id="user-input" value={password} placeholder='password' onChange={handlePassInput} autoComplete='false'/>
+        <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/>
 
-              <button type='submit' id='signin-btn'>Sign In</button>
+        <SignupCard cardHeight={cardHeight} toggleSwitch={toggleSwitch} focusStyle={focusStyle} setToggleSwitch={setToggleSwitch}/>
 
-              <a href="" id='forgot-password'>Forgot Password?</a>
-            </form>
-        </div>
+        {/* <div className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outline)"})}>
 
-        <div className="switch">
-          <div id="toggle"></div>
-        </div>
-
-        <div className="card" style={{"height":cardHeight}}>
-
-        </div>
+        </div> */}
     </div>
   )
 }
