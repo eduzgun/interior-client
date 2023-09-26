@@ -72,6 +72,12 @@ font-size: 18px;
     transition: opacity 0.3s;
 }
 
+.like-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 /* opacity of text when visibible - regarding the useState in the marker component  */
 .text.visible {
   opacity: 1;

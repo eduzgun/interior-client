@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 function Marker({ label, text }) {
@@ -11,7 +10,14 @@ function Marker({ label, text }) {
         onMouseLeave={() => setIsHovered(false)}
     >
         <div className="label">{label}</div>
-        <div className={`text ${isHovered ? 'visible' : ''}`}>{text}</div>
+        <div className={`text ${isHovered ? 'visible' : ''}`}>
+            {text}
+            {isHovered && (
+                <button className="like-button">
+                    Like
+                </button>
+            )}
+        </div>
     </div>
   );
 }
