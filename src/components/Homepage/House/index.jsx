@@ -9,7 +9,7 @@ import Door from '../Door'
 const House = (props) => {
     const csg = useRef()
     useFrame(() => {
-        csg.current.rotation.y += 0.015
+        csg.current.rotation.y += 0.02
     })
     return (
         <mesh ref={csg} {...props}>

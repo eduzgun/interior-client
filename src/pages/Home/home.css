@@ -7,7 +7,7 @@
 }
 
 #centre-button button {
-    padding: 1rem 5.5rem;
+    padding: 0.75rem 5rem;
     font-size: 0.7rem;
     text-decoration: none;
     background-color: var(--outline);
@@ -15,11 +15,13 @@
     color: aliceblue;
     border-radius: 100px;
     font-size: 1rem;
+    z-index: 1;
     /* font-weight: bold; */
 }
 
 #centre-button button:hover {
     cursor: pointer;
+    background-color: var(--outlinefocus);
 }
 
 @media only screen and (min-width: 1401px) {
@@ -28,7 +30,6 @@
         justify-content: center;
         position: relative;
         bottom: 6rem;
-        z-index: 1;
     }
 }
 
@@ -38,6 +39,5 @@
         justify-content: center;
         position: relative;
         bottom: 3.3rem;
-        z-index: 1;
     }
 }
