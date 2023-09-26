@@ -19,6 +19,7 @@ body{
     text-align: center;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 /* styling for the page component - this is on the page where the room lives */
@@ -28,4 +29,59 @@ body{
     align-items: center;
     width: 100%;
     height: calc(100vh - 70px);
+}
+
+/* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
+.point {
+  position: absolute;
+    top: 50%;
+    left: 50%
+}
+
+/* hovering over marker text */
+.point:hover .text {
+    opacity: 1;
+}
+
+/* styling of the label - this is the number it is */
+.point .label {
+ position: absolute;
+ top: -20px;
+ left: -20px;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: #00000077;
+color: #ffffff;
+font-family: Arial, Helvetica, sans-serif;
+text-align: center;
+line-height: 40px;
+font-weight: 100;
+font-size: 18px;
+}
+
+/* styling of the text itself (when hovered on) */
+.point .text {
+    /* display: none; */
+    position: absolute;
+    top: 30px;
+    left: -120px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 4px;
+    background: #00000077;
+    color: #ffffff;
+    line-height: 1.3em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: 100;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* opacity of text when visibible - regarding the useState in the marker component  */
+.text.visible {
+  opacity: 1;
+  visibility: visible;
 }
