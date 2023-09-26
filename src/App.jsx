@@ -1,8 +1,8 @@
 import React from 'react'
-import { Login } from "./pages"
+import * as Pages from './pages';
+// import { Login } from "./pages"
 import { NavBar } from './layout'
 import { Routes, Route } from "react-router-dom"
-import * as Pages from "./pages"
 import "./App.css"
 
 
@@ -17,6 +17,7 @@ export default function App() {
           <Route path='bedroom' element={<Pages.Bedroom/>}/>
           <Route path='Login' element={<Pages.Login/>}/>
           <Route path='*' element={<Pages.NotFound/>}/>
+          <Route path='/profile' element={<Pages.ProfilePage/>} />
         </Route>
       </Routes>
 

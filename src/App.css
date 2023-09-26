@@ -1,3 +1,4 @@
+
 :root{
     --bg: hsl(263, 67%, 2%);
     --fg: hsl(244, 11%, 50%);
@@ -12,6 +13,7 @@ body{
     padding: 0;
     background-color: var(--bg);
 }
+
 
 
 /* styling for the page component - this is on the page where the room lives */
@@ -72,17 +74,20 @@ font-size: 18px;
     transition: opacity 0.3s;
 }
 
+
 .like-button {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
+
 /* opacity of text when visibible - regarding the useState in the marker component  */
 .text.visible {
   opacity: 1;
   visibility: visible;
 }
+
 
 .environment-map-grid {
   display: grid;
@@ -119,3 +124,5 @@ font-size: 18px;
   display: flex;
     
 }
+
+
