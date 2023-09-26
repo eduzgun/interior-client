@@ -1,6 +1,6 @@
 import React from 'react'
 import { Canvas } from "@react-three/fiber"
-import Environment from '../../components/Environment'
+import Environment from '../../components/Homepage/Environment'
 import "./home.css"
 import * as THREE from 'three'
 import { OrbitControls} from '@react-three/drei'
@@ -25,9 +25,9 @@ export default function Home() {
         <OrbitControls makeDefault />
       </Canvas>
       <div id='centre-button'>
-        {/* <Link to={`/rooms`}> */}
+        <Link to={`/rooms`}>
           <button>Enter</button>
-        {/* </Link> */}
+        </Link>
         
       </div>
       

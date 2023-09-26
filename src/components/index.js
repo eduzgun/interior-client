@@ -1,4 +1,4 @@
-export { default as Environment } from './Environment'
+export { default as Environment } from './Homepage/Environment'
 export { default as LightSwitch } from './LightSwitch'
 export { default as LoginCard } from './LoginCard'
 export {default as SignupCard} from "./SignupCard"
