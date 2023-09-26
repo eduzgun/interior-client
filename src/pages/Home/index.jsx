@@ -5,6 +5,8 @@ import "./home.css"
 import * as THREE from 'three'
 import { OrbitControls} from '@react-three/drei'
 import { House } from '../../components/Homepage'
+import { Link } from "react-router-dom";
+
 
 const box = new THREE.BoxGeometry()
 const cyl = new THREE.CylinderGeometry(1, 1, 2, 20)
@@ -23,7 +25,10 @@ export default function Home() {
         <OrbitControls makeDefault />
       </Canvas>
       <div id='centre-button'>
-        <button>Enter</button>
+        {/* <Link to={`/rooms`}> */}
+          <button>Enter</button>
+        {/* </Link> */}
+        
       </div>
       
     </div>
