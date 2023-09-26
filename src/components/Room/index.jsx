@@ -3,10 +3,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import  Marker  from '../Marker';
 
-// import room from "../../assets/environmentMaps/0/px.png"
-
-
+import EnvironmentMap from '../EnvironmentMaps';
 
 
 const Room = () => {
@@ -18,6 +17,7 @@ const Room = () => {
     // Here is to load any models and textures that we use in our project
     const gltfLoader = new GLTFLoader();
     const cubeTextureLoader = new THREE.CubeTextureLoader();
+    const textureLoader = new THREE.TextureLoader();
 
    // Here is the controls panel that comes up in the corner which will be able to change different things in the room (hopefully)
     const gui = new dat.GUI();
@@ -61,17 +61,23 @@ gui
 
 //This is the enviornement map texture which makes up the room 
 
-const environmentMap = cubeTextureLoader.load([
-    '../../src/assets/environmentMaps/0/px.png',
-    '../../src/assets/environmentMaps/0/nx.png',
-    '../../src/assets/environmentMaps/0/py.png',
-    '../../src/assets/environmentMaps/0/ny.png',
-    '../../src/assets/environmentMaps/0/pz.png',
-    '../../src/assets/environmentMaps/0/nz.png'
-])
+// const environmentMap = cubeTextureLoader.load([
+//     '../../src/assets/environmentMaps/0/px.png',
+//     '../../src/assets/environmentMaps/0/nx.png',
+//     '../../src/assets/environmentMaps/0/py.png',
+//     '../../src/assets/environmentMaps/0/ny.png',
+//     '../../src/assets/environmentMaps/0/pz.png',
+//     '../../src/assets/environmentMaps/0/nz.png'
+// ])
 
-scene.environment = environmentMap
-scene.background = environmentMap
+//testing AI generated environment maps 
+
+// const environmentMap = textureLoader.load('../../src/assets/environmentMaps/ai/kitchenAI.png')
+// environmentMap.mapping = THREE.EquirectangularReflectionMapping
+// environmentMap.colorSpace = THREE.SRGBColorSpace
+
+// scene.environment = environmentMap
+// scene.background = environmentMap
 
 
 
@@ -92,7 +98,25 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-// Here setting up the camera so looks like POV looking in a room 
+
+
+// orthoCamera testing - is as if its looking birdseye view of a room
+
+// const zoomFactor = 800;  
+// const camera = new THREE.OrthographicCamera(
+//   -sizes.width/2 / zoomFactor,
+//    sizes.width/2 / zoomFactor,
+//    sizes.height/2 / zoomFactor,
+//   -sizes.height/2 / zoomFactor,
+//   0.1,
+//   100
+// );
+// camera.position.set(4, 5, 4);
+// scene.add(camera);
+
+
+// Here setting up the camera so looks like POV looking in a room yourself
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
 camera.position.set(4, 5, 4)
 scene.add(camera)
@@ -129,8 +153,37 @@ controls.enableDamping = true
     };
   }, []);
 
-  return (
-    <div ref={containerRef} id="three-container" ></div>
+  const environmentMaps = [
+ ['../../src/assets/environmentMaps/0/px.png',
+    '../../src/assets/environmentMaps/0/nx.png',
+    '../../src/assets/environmentMaps/0/py.png',
+    '../../src/assets/environmentMaps/0/ny.png',
+    '../../src/assets/environmentMaps/0/pz.png',
+    '../../src/assets/environmentMaps/0/nz.png'],
+    ['../../src/assets/environmentMaps/1/px.png',
+    '../../src/assets/environmentMaps/1/nx.png',
+    '../../src/assets/environmentMaps/1/py.png',
+    '../../src/assets/environmentMaps/1/ny.png',
+    '../../src/assets/environmentMaps/1/pz.png',
+    '../../src/assets/environmentMaps/1/nz.png'],
+    ['../../src/assets/environmentMaps/2/px.png',
+    '../../src/assets/environmentMaps/2/nx.png',
+    '../../src/assets/environmentMaps/2/py.png',
+    '../../src/assets/environmentMaps/2/ny.png',
+    '../../src/assets/environmentMaps/2/pz.png',
+    '../../src/assets/environmentMaps/2/nz.png'],
+]
+  
+
+   return (
+    <div ref={containerRef} id="three-container">
+      <div className="grid-container">
+        {environmentMaps.map((mapUrls, index) => (
+          <EnvironmentMap key={index} mapUrls={mapUrls} />
+        ))}
+      </div>
+      <Marker label="1" text="Information text and linking will go here !!!!! Have to make other components" />
+    </div>
   );
 };
 
