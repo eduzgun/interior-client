@@ -13,6 +13,7 @@
     background-color: var(--outline);
     outline: solid 1px var(--outlinefocus);
     color: aliceblue;
+    font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
     z-index: 1;
