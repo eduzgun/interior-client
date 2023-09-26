@@ -8,3 +8,5 @@ export {default as Room} from "./Room"
 export {default as Marker} from "./Marker"
 
 export {default as EnvironmentMap} from "./EnvironmentMaps"
+
+export {default as ExploreItems} from "./Explore"

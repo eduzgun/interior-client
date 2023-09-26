@@ -86,8 +86,10 @@ font-size: 18px;
 
 .environment-map-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(1, 1fr); 
   gap: 5px;
+  justify-content: center;
+ margin-top: 30px;
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -112,6 +114,8 @@ font-size: 18px;
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
 .environment-map {
-  min-width: 1000px; 
-  min-height: 800px;
+  min-width: 1600px; 
+  min-height: 1200px;
+  display: flex;
+    
 }

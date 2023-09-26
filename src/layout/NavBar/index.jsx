@@ -17,7 +17,7 @@ const NavBar = () => {
             <h2>LOGO</h2>
             <ul>
                 <li><NavLink to="/" style={navActive}>Home</NavLink></li>
-                <li><NavLink to="/rooms" style={navActive}>Rooms</NavLink></li>
+                <li><NavLink to="/explore" style={navActive}>Explore</NavLink></li>
                 <li><NavLink to="/login" style={navActive}>Login</NavLink></li>
             </ul>
         </nav>
