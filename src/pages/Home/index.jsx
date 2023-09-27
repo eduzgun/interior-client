@@ -13,6 +13,7 @@ const cyl = new THREE.CylinderGeometry(1, 1, 2, 20)
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3)
 
 export default function Home() {
+
     return (
       <div id='home-container'>
         <div id='centre-button'>
