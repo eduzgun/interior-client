@@ -119,10 +119,14 @@ font-size: 18px;
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
 .environment-map {
-  min-width: 1600px; 
-  min-height: 1200px;
+  width: 100%; 
+  height: 1800px;
   display: flex;
+  margin: auto;
     
 }
 
 
+.bedroom-heading {
+    color: white
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -7,6 +7,10 @@ import  Marker  from '../Marker';
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
+
+    // const [markerPosition, setMarkerPosition] = useState({ x: 0, y: 0 });
+
+    
 
   useEffect(() => {
     const container = containerRef.current;
