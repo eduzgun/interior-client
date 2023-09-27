@@ -15,6 +15,7 @@ export default function App() {
           <Route index element={<Pages.Home/>}/>
           <Route path='Rooms' element={<Pages.Rooms/>}/>
           <Route path='Login' element={<Pages.Login/>}/>
+          <Route path="generate" element={ <Pages.GenerateRoom /> }/>
           <Route path='*' element={<Pages.NotFound/>}/>
         </Route>
       </Routes>
