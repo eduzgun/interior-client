@@ -1,16 +1,22 @@
+
 .nav-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
     font-family: 'Space Grotesk', sans-serif;
+    background-color: #ffffff;
+    padding: 5px;
+
+    
 }
 
-.nav-row h2{
+/* .nav-row h2{
     font-size: 2rem;
-    color: whitesmoke;
+    color: #009688;
     margin-left: 50px;
-}
+    
+} */
 
 .nav-row ul{
     display: flex;
@@ -22,7 +28,7 @@
 }
 
 .nav-row li:nth-child(3){
-    margin-right: 90%;
+    margin-right: 60%;
 }
 
 .nav-row a{
@@ -42,7 +48,16 @@
 }
 
 .nav-row a:visited{
-    color: whitesmoke;
+    color: #009688;
+
+}
+
+#logo{
+    
+    max-width:250px ;
+    max-height: 300px;
+    
+
 }
 
 

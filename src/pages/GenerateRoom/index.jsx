@@ -1,164 +1,278 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { loadImage } from "canvas"
-// import { convertImage } from "./functions"
-import fs from "fs"
-import "./style.css"
+// import React, { useEffect, useRef, useState } from 'react'
+// import { loadImage } from "canvas"
+// import "./style.css"
 
 
-import { renderFace } from "./convert";
-import { mimeType } from "./utils"
-
-const GenerateRoom = () => {
-
-    const [fileState,setFileState] = useState("")
-    const [selectedFile, setSelectedFile] = useState("")
-    const [previewSource,setPreviewSource] = useState("")
-    const [context,setContext] = useState("")
-
-    const canvasRef = useRef()
-
-    const equiRectRef = useRef()
-
-    const pzRef = useRef()
-    const nzRef = useRef()
-    const pxRef = useRef()
-    const nxRef = useRef()
-    const pyRef = useRef()
-    const nyRef = useRef()
-
-    const options = {
-        rotation: 180,
-        interpolation: "lanczos",
-        outformat: "jpg",
-        outtype: "file",
-        width: Infinity
-    };
+// import { renderFace } from "./convert";
 
 
-    function handleConversion(e){
-        e.preventDefault()
-        convertImage(fileState,options).then(x => {
-            console.log(x)
-        })
-        setFileState("")
-    }
+// const GenerateRoom = () => {
 
-    const getDataURL = (imgData, extension) => {
-        canvasRef.current.width = imgData.width;
-        canvasRef.current.height = imgData.height;
-        context.putImageData(imgData, 0, 0);
-        return new Promise(resolve => resolve(canvasRef.current.toBuffer(mimeType[extension], { quality: 0.92 })));
-    }
+//     const [fileState,setFileState] = useState("")
+//     const [context,setContext] = useState("")
+
+//     const canvasRef = useRef()
+
+//     const imageInputRef = useRef()
+//     const facesRef = useRef()
     
-    
-    const convertImage = (src, usrOptions) => {
-        const options = {
-            rotation: 180,
-            interpolation: 'lanczos',
-            outformat: 'jpg',
-            outtype: 'file',
-            width: Infinity,
-            ...usrOptions
-        }
+//     const [imageArrayData,setImageArrayData] = useState([])
+
+//     const pzRef = useRef()
+//     const nzRef = useRef()
+//     const pxRef = useRef()
+//     const nxRef = useRef()
+//     const pyRef = useRef()
+//     const nyRef = useRef()
+
+//     let finished = 0;
+//     let workers = [];
+
+//     const options = {
+//         rotation: 180,
+//         interpolation: "lanczos",
+//         outtype: "file",
+//         width: Infinity
+//     };
+
+// ///////////////////////////////////////////////////////////////////////
+
+
+// // creates class for each cube face, containing relevant manipulatable data
+//     class CubeFace {
+//         constructor(faceName) {
+//             this.faceName = faceName;
+
+//             this.anchor = document.createElement('a');
+//             this.anchor.style.position='absolute';
+//             this.anchor.title = faceName;
+
+//             this.img = document.createElement('img');
+//             this.img.style.filter = 'blur(4px)';
+
+//             this.anchor.appendChild(this.img);
+//         }
+
+//         setPreview(url, x, y) {
+
+//             this.img.src = url;
+//             this.anchor.style.left = `${x}px`;
+//             this.anchor.style.top = `${y}px`;
+//         }
+
+//         setDownload(url, fileExtension) {
+
+//             this.anchor.href = url;
+//             this.anchor.download = `${this.faceName}.${fileExtension}`;
+//             this.img.style.filter = '';
+//         }
+//     }
+
+//     function removeChildren(node) {
+//     console.log("removeChildren");
+
+//     while (node.firstChild) {
+//         node.removeChild(node.firstChild);
+//     }
+//     }
+
+//     function getDataURL(imgData) {
+
+//     canvas.width = imgData.width;
+//     canvas.height = imgData.height;
+//     context.putImageData(imgData, 0, 0);
+//     return new Promise(resolve => {
+//         canvas.toBlob(blob => resolve(URL.createObjectURL(blob)), 'image/png', 0.92);
+//     });
+//     }
+
+//     const dom = {
+//     imageInput: document.getElementById('imageInput'),
+//     faces: document.getElementById('faces'),
+//     generating: document.getElementById('generating')
+//     };
+
+//     // imageInputRef.addEventListener('change', loadImage);
+
+//     const facePositions = {
+//         pz: {x: 1, y: 1},
+//         nz: {x: 3, y: 1},
+//         px: {x: 2, y: 1},
+//         nx: {x: 0, y: 1},
+//         py: {x: 1, y: 0},
+//         ny: {x: 1, y: 2}
+//     };
+
+//     function loadImage() {
+//         console.log("loadImage")
+
+//         const file = imageInputRef.files[0];
+
+//         if (!file) {
+//             return;
+//         }
+
+//         const img = new Image();
+
+//         img.src = URL.createObjectURL(file);
+
+//         img.addEventListener('load', () => {
+//             const {width, height} = img;
+//             canvas.width = width;
+//             canvas.height = height;
+//             context.drawImage(img, 0, 0);
+//             const data = context.getImageData(0, 0, width, height);
+
+//             processImage(data);
+//         });
+//     }
 
 
 
-        return new Promise(resolve => {
-            loadImage(src).then((img) => {
-                img.crossOrigin = ""
+//     // function processImage(data) {
+//     //     console.log("prcoessImage")
 
-                const { width, height } = img;
-                canvasRef.current.width = width;
-                canvasRef.current.height = height;
-                context.drawImage(img, 0, 0);
-                const data = context.getImageData(0, 0, width, height);
-                processImage(data, options).then(x => resolve(x));
-            })
-        });
-    }
-    
-    
-    const processFace = (data, options, facename) => {
-        return new Promise(resolve => {
-            const optons = {
-                data,
-                face: facename,
-                rotation: Math.PI * options.rotation / 180,
-                interpolation: options.interpolation,
-                maxWidth: options.width
-            };
-    
-            renderFace(optons).then(data => {
-                getDataURL(data, options.outformat).then(file => {
-                    if (options.outtype === 'file') {
-                        console.log(file)
-                        // CONVERT WRITING FILE INTO STORING EACH IMAGE INTO ARRAY / HTML ELEMENT
+//     //     removeChildren(dom.faces);
+//     //     dom.generating.style.visibility = 'visible';
 
-                        // fs.writeFile(`${facename}.${options.outformat}`, file, "binary", (err) => {
-                        //     if (err) console.log(err);
-                        //     else {
-                        //         console.log("The file was saved!");
-                        //         resolve(`${facename}.${options.outformat} was saved`)
-                        //     }
-                        // });
-                    } else {
-                        resolve({
-                            buffer: file,
-                            filename: `${facename}.${options.outformat}`
-                        });
-                    }
-                })
-            })
-        });
-    }
-    
-    
-    const processImage = (data, options) => {
-        const faces = ["pz", "nz", "px", "nx", "py", "ny"].map(face => processFace(data, options, face))
-    
-        return new Promise(resolve => Promise.all(faces).then(x => resolve(x)));
-    }
-    
+//     //     for (let worker of workers) {
+//     //         worker.terminate();
+//     //     }
 
-    function handleFileInput(e){
-        const file = e.target.files[0]
-        previewFile(file)
-    }
+//     //     for (let [faceName, position] of Object.entries(facePositions)) {
+//     //         renderFace(data, faceName, position);
+//     //     }
+//     // }
 
-    function previewFile(file){
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onloadend = () => setPreviewSource(reader.result)
-        console.log(file)
-    }
+//     function renderCubeFace(data, faceName, position) {
+//         const face = new CubeFace(faceName);
+//         facesRef.appendChild(face.anchor);
 
 
-    useEffect(() => {
+//         const worker = new Worker('convert.js');
 
-        setSelectedFile("./src/pages/GenerateRoom/equimap1.jpg")
+//         const setDownload = ({data: imageData}) => {
+            
+//             const extension = "png";
 
-        setPreviewSource(equiRectRef)
-        setContext(canvasRef.current.getContext("2d"))
-    },[])
+//             getDataURL(imageData, extension)
+//             .then(url => {
+//                 face.setDownload(url, extension)
+//             });
 
-    return (
-        <div className="generator-container">
-            {/* <input type="file" onChange={convertImage}/> */}
-            <form onSubmit={handleConversion}>
-                <input type="file" name='file' onChange={handleFileInput} value={fileState} className='form-input'/>
-                <button type='submit'>Create</button>
-            </form>
-            {/* <img ref={equiRectRef}  src={selectedFile} alt="chosen" style={{"width":"50%"}}/> */}
-            {/* <img src="" alt="" ref={pzRef}/>
-            <img src="" alt="" ref={nzRef}/>
-            <img src="" alt="" ref={pxRef}/>
-            <img src="" alt="" ref={nxRef}/>
-            <img src="" alt="" ref={pyRef}/>
-            <img src="" alt="" ref={nyRef}/> */}
-            <canvas id="generateCanvas" ref={canvasRef}></canvas>
+//             finished++;
 
-        </div>
-    )
-}
+//             if (finished === 6) {
+//             // dom.generating.style.visibility = 'hidden';
+//                 finished = 0;
+//                 workers = [];
+//         }
+//     };
 
-export default GenerateRoom
+//     const setPreview = ({data: imageData}) => {
+
+//         const x = imageData.width * position.x;
+//         const y = imageData.height * position.y;
+
+
+//         /////////////////////////////////////////
+//         imageArrayData.push(imageData)
+//         if(imageArrayData.length === 6){
+
+//         let pz = new Image()
+//         let nz = new Image()
+//         let px = new Image()
+//         let nx = new Image()
+//         let py = new Image()
+//         let ny = new Image()
+
+//         const canvas2 = document.createElement("canvas")
+//         const cvctx = canvas2.getContext("2d")
+//         const i = imageArrayData[0]
+
+//         document.body.appendChild(canvas2)
+//         canvas2.width = i.width
+//         canvas2.height = i.height
+
+//         cvctx.putImageData(i,0,0)
+
+//         // let ii = new Image()
+//         // ii.name = "beans"
+//         // ii.src = canvas.toDataURL() 
+
+//         pz.name = "rinde"
+//         pz.src = canvas.toDataURL()
+        
+//         cvctx?.clearRect(0,0,canvas2.width,canvas2.height)
+
+//         console.log(pz)
+
+//     }
+
+//     /////////////////////////////////////////
+
+
+//     getDataURL(imageData, 'jpg')
+//       .then(url => face.setPreview(url, x, y));
+
+//     worker.onmessage = setDownload;
+//     worker.postMessage(options);
+//   };
+
+//   worker.onmessage = setPreview;
+//   worker.postMessage(Object.assign({}, options, {
+//     maxWidth: 200,
+//     interpolation: 'linear',
+//   }));
+
+//   workers.push(worker);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ///////////////////////////////////////////////////////////////////////
+
+//     useEffect(() => {
+
+//         setSelectedFile("./src/pages/GenerateRoom/equimap1.jpg")
+
+//         setPreviewSource(equiRectRef)
+//         setContext(canvasRef.current.getContext("2d"))
+//     },[])
+
+//     return (
+//         <div className="generator-container">
+//             {/* <input type="file" onChange={convertImage}/> */}
+//             <form onSubmit={handleConversion}>
+//                 <input ref={imageInputRef} type="file" name='file' onChange={handleFileInput} value={fileState} className='form-input'/>
+//                 <button type='submit'>Create</button>
+//             </form>
+//             <div id="cubemap">
+//                 <output id="faces" ref={facesRef} ></output>
+//             </div>
+//             {/* <img ref={equiRectRef}  src={selectedFile} alt="chosen" style={{"width":"50%"}}/> */}
+//             {/* <img src="" alt="" ref={pzRef}/>
+//             <img src="" alt="" ref={nzRef}/>
+//             <img src="" alt="" ref={pxRef}/>
+//             <img src="" alt="" ref={nxRef}/>
+//             <img src="" alt="" ref={pyRef}/>
+//             <img src="" alt="" ref={nyRef}/> */}
+//             <canvas id="generateCanvas" ref={canvasRef}></canvas>
+
+//         </div>
+//     )
+// }
+
+// export default GenerateRoom
