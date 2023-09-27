@@ -4,10 +4,11 @@ import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import  Marker  from '../Marker';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
-
+  const markerRef = useRef(null);
     // const [markerPosition, setMarkerPosition] = useState({ x: 0, y: 0 });
 
     
@@ -34,6 +35,11 @@ const EnvironmentMap = ({ mapUrls }) => {
       height: container.clientHeight,
     };
 
+    const markerDiv = markerRef.current;
+    const markerObj = new CSS2DObject(markerDiv);
+    markerObj.position.set(0, 1, 0);  // Change position as per requirement
+    scene.add(markerObj);
+
     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
     camera.position.set(4, 5, 4);
     scene.add(camera);
@@ -59,6 +65,7 @@ const updateAllMaterials = () =>
         }
     })
 }
+
 
 
 
@@ -115,7 +122,7 @@ gui
   return (
     <>
   <div ref={containerRef} className="environment-map" />
-  <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" />
+  <Marker ref={markerRef} label="1" text="Information text and liking will go here !!!!! Have to make other components" />
   </>
   );
 };

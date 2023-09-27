@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+// marker component:
+import React, { forwardRef, useState } from 'react';
 
-function Marker({ label, text }) {
+const Marker = forwardRef(({ label, text }, ref) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div ref={ref} 
         className="point" 
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)}
@@ -20,6 +21,6 @@ function Marker({ label, text }) {
         </div>
     </div>
   );
-}
+});
 
 export default Marker;
