@@ -154,9 +154,7 @@ function copyPixelLanczos(read, write) {
     }
   };
   
-export function renderFace({data: readData, face, rotation, interpolation, maxWidth = Infinity}) {
-
-    console.log(readData)
+function renderFace({data: readData, face, rotation, interpolation, maxWidth = Infinity}) {
   
     const faceWidth = Math.min(maxWidth, readData.width / 4);
     const faceHeight = faceWidth;
@@ -184,8 +182,8 @@ export function renderFace({data: readData, face, rotation, interpolation, maxWi
         const r = Math.sqrt(cube.x*cube.x + cube.y*cube.y + cube.z*cube.z);
         const lon = mod(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
         const lat = Math.acos(cube.z / r);
-  
         copyPixel(readData.width * lon / Math.PI / 2 - 0.5, readData.height * lat / Math.PI - 0.5, to);
+
       }
     }
   
