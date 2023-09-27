@@ -7,12 +7,12 @@ import { OrbitControls} from '@react-three/drei'
 import { House } from '../../components/Homepage'
 import { Link } from "react-router-dom";
 
-
 const box = new THREE.BoxGeometry()
 const cyl = new THREE.CylinderGeometry(1, 1, 2, 20)
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3)
 
 export default function Home() {
+
 
     return (
       <div id='home-container'>
@@ -20,7 +20,7 @@ export default function Home() {
           <h3>Welcome</h3>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
             ab soluta ullam optio eius.</p>
-        <Link to={`/rooms`}>
+        <Link to={`/explore`}>
           <button>Enter</button>
         </Link>
         
