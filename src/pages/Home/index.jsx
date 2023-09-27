@@ -25,7 +25,7 @@ export default function Home() {
         <OrbitControls makeDefault />
       </Canvas>
       <div id='centre-button'>
-        <Link to={`/rooms`}>
+        <Link to={`/explore`}>
           <button>Enter</button>
         </Link>
         
