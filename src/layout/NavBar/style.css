@@ -1,0 +1,67 @@
+
+.nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #ffffff;
+    padding: 5px;
+
+    
+}
+
+/* .nav-row h2{
+    font-size: 2rem;
+    color: #009688;
+    margin-left: 50px;
+    
+} */
+
+.nav-row ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-row li{
+    list-style: none;
+}
+
+.nav-row li:nth-child(3){
+    margin-right: 60%;
+}
+
+.nav-row a{
+    font-size: 0.7rem;
+    text-decoration: none;
+    margin-right: 60px;
+    outline: solid 2px var(--outline);
+    padding: 12px 60px;
+    border-radius: 100px;
+}
+
+.nav-row a:hover{
+    cursor: pointer;
+    background-color: var(--outline);
+    outline: solid 2px var(--outlinefocus);
+    
+}
+
+.nav-row a:visited{
+    color: #009688;
+
+}
+
+#logo{
+    
+    max-width:250px ;
+    max-height: 300px;
+    
+
+}
+
+
+/* styling for the three-container - this is the canvas it sits on the page, not the page layout  */
+
+
+

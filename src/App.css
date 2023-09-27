@@ -1,0 +1,128 @@
+
+:root{
+    --bg: hsl(263, 67%, 2%);
+    --fg: hsl(244, 11%, 50%);
+    --outline: rgba(25,23,30);
+    --outlinefocus: rgba(170,171,172);
+    font-size: 24px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+}
+
+
+
+/* styling for the page component - this is on the page where the room lives */
+.room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 70px);
+}
+
+/* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
+.point {
+  position: absolute;
+    top: 50%;
+    left: 50%
+}
+
+/* hovering over marker text */
+.point:hover .text {
+    opacity: 1;
+}
+
+/* styling of the label - this is the number it is */
+.point .label {
+ position: absolute;
+ top: -20px;
+ left: -20px;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: #00000077;
+color: #ffffff;
+font-family: Arial, Helvetica, sans-serif;
+text-align: center;
+line-height: 40px;
+font-weight: 100;
+font-size: 18px;
+}
+
+/* styling of the text itself (when hovered on) */
+.point .text {
+    /* display: none; */
+    position: absolute;
+    top: 30px;
+    left: -120px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 4px;
+    background: #00000077;
+    color: #ffffff;
+    line-height: 1.3em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: 100;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+
+.like-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+/* opacity of text when visibible - regarding the useState in the marker component  */
+.text.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.environment-map-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); 
+  gap: 5px;
+  justify-content: center;
+ margin-top: 30px;
+}
+
+/* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
+.arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.arrow-button.left {
+    left: 10px;
+}
+
+.arrow-button.right {
+    right: 10px;
+}
+
+/* new styling for separate grid items - in environment map component and styling of the map itself */
+.environment-map {
+  min-width: 1600px; 
+  min-height: 1200px;
+  display: flex;
+    
+}
+
+

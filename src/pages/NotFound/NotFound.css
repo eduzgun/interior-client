@@ -1,0 +1,23 @@
+#location {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	color: #009688 ;
+	line-height: 1;
+	font-weight: 900;
+}
+
+#h1 {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	color: #ffffff;
+	line-height: 1;
+	font-weight: 900;
+    margin-top: 100px;
+    padding: 20px 30px;
+}
