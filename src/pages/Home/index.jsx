@@ -13,23 +13,29 @@ const cyl = new THREE.CylinderGeometry(1, 1, 2, 20)
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3)
 
 export default function Home() {
-  return (
-    <div id='home-container'>
-      <Canvas shadows camera={{ position: [-15, 10, 15], fov: 25 }}>
-        <House 
-          boxGeometry={box}
-          triGeometry={tri}
-          clyGeometry={cyl}
-        />
-        <Environment />
-        <OrbitControls makeDefault />
-      </Canvas>
-      <div id='centre-button'>
+    return (
+      <div id='home-container'>
+        <div id='centre-button'>
+          <h3>Welcome</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+            ab soluta ullam optio eius.</p>
         <Link to={`/rooms`}>
           <button>Enter</button>
         </Link>
         
       </div>
+        <Canvas shadows camera={{ position: [-15, 10, 15], fov: 25 }}>
+            <House
+              scale={1}
+              boxGeometry={box}
+              triGeometry={tri}
+              clyGeometry={cyl}
+            />
+        <Environment />
+        <OrbitControls makeDefault />
+      </Canvas>
+      
+      
       
     </div>
     
