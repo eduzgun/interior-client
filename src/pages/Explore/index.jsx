@@ -1,5 +1,5 @@
 import React from 'react'
- import { ExploreItems } from '../../components'
+ import { ExploreItems } from '../../components/'
 import "../../App.css"
 
 const Explore = () => {
