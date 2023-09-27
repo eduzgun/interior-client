@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import  Marker  from '../Marker';
+import Heart from "react-animated-heart";
+
+import { AiOutlineComment } from 'react-icons/ai'
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
+  const [isClick, setClick] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -112,7 +116,15 @@ gui
     <>
   <div ref={containerRef} className="environment-map" />
   {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
+  <div className='like-bar'>
+        <p className='favourites'>Add to favourites</p>
+         <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
+
+         <p></p>
+         <button className='comments-button'>Comments <AiOutlineComment /></button>
+      </div>
   </>
+  
   );
 };
 

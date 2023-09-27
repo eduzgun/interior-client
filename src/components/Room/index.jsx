@@ -1,8 +1,8 @@
 import React, {useState}  from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
-import Heart from "react-animated-heart";
+// import Heart from "react-animated-heart";
 
-import { AiOutlineComment } from 'react-icons/ai'
+// import { AiOutlineComment } from 'react-icons/ai'
 
 const Room = () => {
   const [isClick, setClick] = useState(false);
@@ -26,13 +26,7 @@ const Room = () => {
       {maps.map((mapUrls, index) => (
         <EnvironmentMap key={index} mapUrls={mapUrls} />
       ))}
-      <div className='like-bar'>
-        <p className='favourites'>Add to favourites</p>
-         <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
-
-         <p></p>
-         <button className='comments-button'>Comments <AiOutlineComment /></button>
-      </div>
+      
     </div>
   );
 };
