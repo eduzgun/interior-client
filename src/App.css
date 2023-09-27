@@ -125,4 +125,35 @@ font-size: 18px;
     
 }
 
+.favourites {
+    margin-top: 33px;
+    margin-left: 20px;
+}
+
+
+.like-bar {
+    display: flex;
+    flex-wrap: wrap;
+    color: white; 
+}
+
+.comments-button {
+    width: 300px;
+    height: 50px;
+    margin-top: 24px;
+    font-size: 0.7rem;
+    text-decoration: none;
+    margin-right: 60px;
+    outline: solid 2px var(--outline);
+    padding: 12px 60px;
+    border-radius: 100px;
+}
+
+.comments-button:hover{
+    cursor: pointer;
+    background-color: #009688;
+    outline: solid 2px var(--outlinefocus);
+    
+}
+
 

@@ -111,7 +111,7 @@ gui
   return (
     <>
   <div ref={containerRef} className="environment-map" />
-  <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" />
+  {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
   </>
   );
 };
