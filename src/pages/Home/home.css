@@ -1,5 +1,5 @@
 #home-container {
-    height: 88vh;
+    height: 86.6vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -47,6 +47,9 @@
         /* position: relative;
         bottom: 6rem; */
     }
+    #home-container {
+        height: 91.65vh;
+    }
 }
 
 @media only screen and (max-width:1400px) {
@@ -61,5 +64,8 @@
         width: 50vw;
         /* position: relative;
         bottom: 3.3rem; */
+    }
+    #home-container {
+        height: 86.6vh;
     }
 }
