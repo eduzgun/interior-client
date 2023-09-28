@@ -15,6 +15,7 @@ const GenerateRoom = () => {
     const [dimensions,setDimensions] = useState("")
     const [description,setDescription] = useState("")
     const [theme, setTheme] = useState("")
+    const [dropdown,setDropdown] = useState(true)
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
@@ -31,6 +32,7 @@ const GenerateRoom = () => {
     const submitRef = useRef()
     const homeBtnRef = useRef()
     const completedRef = useRef()
+    const questionRef = useRef()
 
     const navigate = useNavigate()
     
@@ -380,6 +382,15 @@ const GenerateRoom = () => {
         setTheme(e.target.value)
     }
 
+    function toggleDrop(){
+        setDropdown(!dropdown)
+        if(dropdown){
+            questionRef.current.style.display = "block"
+        }else{
+            questionRef.current.style.display = "none"
+        }
+    }
+
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -402,6 +413,19 @@ const GenerateRoom = () => {
     return (
         <div id="wrapper">
             <div className="generator-container">
+                <div id="questions">
+                    <p id='qmark' onClick={toggleDrop}>?</p>
+                    <div ref={questionRef} id="qbox">
+                        <h3>What do I do here?</h3>
+                        <p>
+                            You see the button that says: "Choose File" over there? <br/><br />
+                            You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+                        </p>
+                        <details><summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>
+                        <img id="example-panoramic" src="./src/pages/GenerateRoom/Living-Room-Panorama.jpg" alt="" />
+                        </details>
+                    </div>
+                </div>
                 {/* <input type="file" onChange={convertImage}/> */}
                 <div id="cubemap" style={cubeMapStyle}>
                     <output id="faces" ref={facesRef} ></output>
