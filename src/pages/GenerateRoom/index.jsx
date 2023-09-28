@@ -2,11 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { loadImage } from "canvas"
 import "./style.css"
 import { useAuth } from '../../contexts'
+import axios from "axios"
 
 const GenerateRoom = () => {
-
-    const { setCubeMap } = useAuth()
-
     const [fileState,setFileState] = useState()
     const [context,setContext] = useState("")
 
@@ -19,7 +17,7 @@ const GenerateRoom = () => {
     const [exportData,setExportData] = useState([])
     const [mapName, setMapName] = useState("temp")
 
-
+    const positions = ["pz","nz","px","nx","py","ny"]
 
     const cubeMapStyle = {
         "width": "800px",
@@ -194,45 +192,6 @@ const GenerateRoom = () => {
     if(imageArrayData.length > 6){
         setImageArrayData([])
     }
-
-    // if(imageArrayData.length == 6){
-
-
-    //     const canvas2 = document.createElement("canvas")
-    //     const cvctx = canvas2.getContext("2d")
-
-    //     for(let i=0;i < imageArrayData.length;i++){
-    //         const imgEx = imageArrayData[i]
-
-    //         document.body.appendChild(canvas2)
-    //         canvas2.width = imgEx.width
-    //         canvas2.height = imgEx.height
-
-    //         switch (i){
-    //             case 0:
-    //                 pzRef.name = `pz${mapName}`
-    //                 pzRef.src = canvas2.toDataURL()
-    //             case 1:
-    //                 nzRef.name = `nz${mapName}`
-    //                 nzRef.src = canvas2.toDataURL()
-    //             case 2:
-    //                 pxRef.name = `px${mapName}`
-    //                 pxRef.src = canvas2.toDataURL()
-    //             case 3:
-    //                 nxRef.name = `nx${mapName}`
-    //                 nxRef.src = canvas2.toDataURL()
-    //             case 4:
-    //                 pyRef.name = `py${mapName}`
-    //                 pyRef.src = canvas2.toDataURL()
-    //             case 5:
-    //                 nyRef.name = `ny${mapName}`
-    //                 nyRef.src = canvas2.toDataURL()
-    //         }
-        
-    //         cvctx.clearRect(0,0,canvas2.width,canvas2.height)
-    //     }
-       
-    // }
   };
 
   worker.onmessage = setPreview;
@@ -250,14 +209,71 @@ const GenerateRoom = () => {
     }
 
 
+    async function uploadBlobFromHrefToCloudinary(blobHref,count) {
+        // Fetch the Blob content from the href
+        const response = await fetch(blobHref);
+        const blob = await response.blob();
+      
+        const formData = new FormData();
+        formData.append('file', blob, `${positions[count]}${mapName}.png`); // Add a file name (e.g., 'image.png')
+        formData.append('upload_preset', 'interiorLAP4'); // Replace with your actual upload preset
+        formData.append("tags",`${mapName}-${positions[count]}`)
+      
+        try {
+          const response = await axios.post(
+            'https://api.cloudinary.com/v1_1/de2nposrf/image/upload',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+          );
+      
+          return response.data;
+        } catch (error) {
+          console.log('Error uploading image:', error);
+        }
+      }
 
-    function handleCubeMapSubmit(e){
+    async function handleCubeMapSubmit(e){
         e.preventDefault()
-        console.log(imageArrayData)
-        // setCubeMap(imageArrayData)
+    
+        try {
+            const imgs = facesRef.current.children
+            console.log(imgs)
+            let count = 0
+
+
+            for(let img of imgs){
+                const imgHref = img.href 
+                uploadBlobFromHrefToCloudinary(imgHref,count).then(resp => {
+                console.log("Upload Successful", resp);
+                count += 1
+            }
+        )}
+                
+
+
+            // const blobHref = facesRef.current.children[0].href       
+            
+
+        } catch (error) {
+            console.error(error);
+        }
     }
+    // https://api.cloudinary.com/v1_1/de2nposrf/image/upload
+
 
 ///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         setContext(canvas.current.getContext("2d"))
