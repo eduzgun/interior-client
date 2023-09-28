@@ -16,8 +16,8 @@ export default function Home() {
     return (
       <div id='home-container'>
         <div id='centre-button'>
-          <h3>Welcome</h3>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+          <h3 role='heading'>Welcome</h3>
+          <p role='paragraph'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
             ab soluta ullam optio eius.</p>
         <Link to={`/rooms`}>
           <button>Enter</button>

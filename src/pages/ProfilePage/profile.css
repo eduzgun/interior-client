@@ -3,10 +3,11 @@
 }
 #container {
     display: flex;
+    color: aliceblue;
 }
 
 #container div {
-    height: 100vh;
+    /* height: 70vh; */
     padding: 2rem;
 }
 
@@ -31,6 +32,10 @@
     background-color: var(--bg);
     border: none;
     color: var(--fg);
+}
+
+#main-content h2, #main-content h3 {
+    padding: 20px 0;
 }
 
 #sidebar-likes {
@@ -63,4 +68,17 @@
 #sidebar-heading:hover {
     outline: none;
     background-color: var(--bg)
+}
+
+#profile-icon {
+    padding: 50px;
+    font-size: 5rem;
+    border: 1.5px solid white;
+    border-radius: 100px;
+}
+
+#profile-icon-container {
+    display: flex;
+    width: 70vw;
+    align-items: left;
 }
