@@ -22,9 +22,9 @@ const Profile = () => {
           <h3 id='likes' role='heading4'>Likes</h3>
           
         </div>
-        <div role='profile-icon' id='profile-icon-container'>
+        {/* <div role='profile-icon' id='profile-icon-container'>
           <FontAwesomeIcon id='profile-icon'  icon={faUser} />
-        </div>
+        </div> */}
         
       </div>
     </>
