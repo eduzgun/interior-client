@@ -3,6 +3,7 @@ import { loadImage } from "canvas"
 import "./style.css"
 import { useAuth } from '../../contexts'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const GenerateRoom = () => {
 
@@ -17,15 +18,21 @@ const GenerateRoom = () => {
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
-    const [exportData,setExportData] = useState([])
-    const [mapName, setMapName] = useState("temp")
     const [complete,setComplete] = useState(false)
 
-
+    const formRef = useRef()
     const canvas = useRef()
     const imageInputRef = useRef()
     const facesRef = useRef()
     const filenameInputRef = useRef()
+    const dimRef = useRef()
+    const descRef=  useRef()
+    const themeRef = useRef()
+    const submitRef = useRef()
+    const homeBtnRef = useRef()
+    const completedRef = useRef()
+
+    const navigate = useNavigate()
     
 
 
@@ -244,7 +251,6 @@ const GenerateRoom = () => {
               }
             }
           );
-      
           return response.data;
         } catch (error) {
           console.log('Error uploading image:', error);
@@ -277,7 +283,7 @@ const GenerateRoom = () => {
 
     async function handleCubeMapSubmit(e){
         e.preventDefault()
-        
+        disableForm(true)
         if(complete){
             try {
                 postToRoomTable().then(resp => {
@@ -287,11 +293,14 @@ const GenerateRoom = () => {
                         for(let i=0;i<imgs.length;i++){
                             const imgHref = imgs[i].href 
                             uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
-                            console.log("Upload Successful", resp);
+                                submitRef.current.style.display = "none"
+                                homeBtnRef.current.style.display = "block"
+                                completedRef.current.style.display = "block"
+                                clearFields()
+                                console.log("Upload Successful", resp);
                             
                             })
                         } 
-                    
                     } catch (error) {
                         console.error(error);
                     }
@@ -326,6 +335,27 @@ const GenerateRoom = () => {
         }
     }
 
+    function clearFields(){
+        imageInputRef.current.value = ""
+        filenameInputRef.current.value = ""
+        dimRef.current.value = ""
+        descRef.current.value = ""
+        themeRef.current.value = ""
+        submitRef.current.value = ""
+    }
+
+    function disableForm(truthy){
+        imageInputRef.current.disabled = truthy
+        filenameInputRef.current.disabled = truthy
+        dimRef.current.disabled = truthy
+        descRef.current.disabled = truthy
+        themeRef.current.disabled = truthy
+        submitRef.current.disabled = truthy
+    }
+
+    function goHome(){
+        navigate("/")
+    }
 
     function handleFile(e){
         const files = Array.from(e.target.files)
@@ -361,6 +391,7 @@ const GenerateRoom = () => {
     },[])
 
     useEffect(() => {
+        disableForm(false)
         try {
             loadImage()
         } catch (error) {
@@ -376,31 +407,32 @@ const GenerateRoom = () => {
                     <output id="faces" ref={facesRef} ></output>
                 </div>
                 <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
-                <form onSubmit={handleCubeMapSubmit}>
+                <form ref={formRef} onSubmit={handleCubeMapSubmit}>
                     <input placeholder=">" ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile} required/>
 
                     <div className="inputs" id='filename-input'>
                         <label htmlFor="filename">Filename</label>
-                        <input placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                        <input ref={filenameInputRef} placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
                     </div>
 
                     <div className="inputs" id='dimensions-input'>
                         <label htmlFor="dimensions">Dimensions</label>
-                        <input placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
+                        <input ref={dimRef} placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
                     </div>
 
                     <div className="inputs" id='description-input'>
                         <label htmlFor="description">Description</label>
-                        <textarea maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
+                        <textarea ref={descRef} maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
                     </div>
 
                     <div className="inputs" id='theme-input'>
                         <label htmlFor="theme">Themes</label>
-                        <input placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                        <input ref={themeRef} placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
                     </div>
-
-                    <button id="submit-btn" type='submit'>Create</button>
+                    <button ref={submitRef} id="submit-btn" type='submit'>Create</button>
                 </form>
+                <p ref={completedRef} id='createdP'>File Created!</p>
+                <button ref={homeBtnRef} onClick={goHome} id='home-btn'>Return Home</button>
             </div>
         </div>
 

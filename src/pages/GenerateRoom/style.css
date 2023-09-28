@@ -42,7 +42,8 @@
 }
 
 .form-input::file-selector-button,
-#submit-btn{
+#submit-btn,
+#home-btn{
     font-size: 0.8rem;
     border: 2px solid var(--outline);
     padding: 10px 25px;
@@ -55,7 +56,8 @@
 }
 
 .form-input::file-selector-button:hover,
-#submit-btn:hover{
+#submit-btn:hover,
+#home-btn:hover{
     background-color: var(--bg);
     border: 2px solid var(--outlinefocus);
 
@@ -88,9 +90,29 @@
     resize: none;
 }
 
-#submit-btn{
+#submit-btn,
+#home-btn{
     margin-top: 25px;
     font-size: 1.3rem;
     padding: 20px 40px;
     border-radius: 50px;
+}
+
+input[type="text"]:disabled,
+#submit-btn:disabled,
+textarea:disabled,
+.form-input:disabled::file-selector-button{
+    color: var(--outlinefocus);
+    background-color: var(--outline);
+    cursor: default;
+}
+
+#submit-btn:disabled:hover,
+.form-input:disabled::file-selector-button:hover{
+    border: solid 2px var(--outline);
+}
+
+#home-btn,
+#createdP{
+    display: none;
 }
