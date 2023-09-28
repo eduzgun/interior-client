@@ -90,11 +90,12 @@ font-size: 18px;
 
 
 .environment-map-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr); 
-  gap: 5px;
+  display: block;
   justify-content: center;
- margin-top: 30px;
+  text-align: center;
+  align-items: center;
+ margin-top: 0px;
+ 
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -159,4 +160,35 @@ font-size: 18px;
     
 }
 
+
+
+.left-arrow,
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 100px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  background: none;
+cursor: pointer;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.center-page-room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; 
+    width: 100vw; 
+}
 
