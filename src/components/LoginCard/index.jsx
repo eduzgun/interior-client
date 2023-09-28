@@ -52,10 +52,28 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
             const resp = await fetch("http://localhost:5000/auth/login",options)
 
             if(resp.status == 204){
-                setUser(username)
-                setUsername("")
-                setPassword("")
-                navigate("/")
+                // setUser(username)
+
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                try {
+                    const resp2 = await fetch(`http://localhost:5000/users/${username}`,options)
+
+                    const data = await resp2.json()
+                    setUser(data.data.id)
+                    setUsername("")
+                    setPassword("")
+                    navigate("/")
+                    
+                } catch (err) {
+                    console.log(err)
+                }
+
             }else{
                 alert("You messed up.")
             }
