@@ -12,18 +12,47 @@ import { AiOutlineComment } from 'react-icons/ai'
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+
+            const token = localStorage.getItem('token');
+        
+            const response = await axios.get('http://localhost:5000/auth/login-check', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')
+                }`
+                }
+            });
+            setUser(response.data);
+            
+    } catch (error) {
+       console.error('Error Fetching user:', error.response ? error.response.data : error.message);
+    }
+    }
+
+    fetchUser();
+  }, []);
 
   const handleLike = async () => {
+    
+    
     setClick(prev => !prev);
 
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
-        user_id: 2,
+        user_id: user.id,
         room_id: 2
     };
 
     try {
-        const response = await axios.post('http://localhost:5000/likes', likeData);
+        const response = await axios.post('http://localhost:5000/likes', likeData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         console.log('Like created', response.data);
     } catch (error) {
         console.error('Error creating like:', error);
