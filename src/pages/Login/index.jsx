@@ -35,9 +35,6 @@ const Login = () => {
 
         <SignupCard cardHeight={cardHeight} toggleSwitch={toggleSwitch} focusStyle={focusStyle} setToggleSwitch={setToggleSwitch}/>
 
-        {/* <div className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outline)"})}>
-
-        </div> */}
     </div>
   )
 }

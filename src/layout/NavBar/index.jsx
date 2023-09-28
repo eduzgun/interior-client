@@ -1,8 +1,11 @@
 import React from 'react'
 import { NavLink, Outlet } from "react-router-dom"
 import "./style.css"
+import { useAuth } from '../../contexts'
 
 const NavBar = () => {
+
+  const { user } = useAuth()
 
   const activeStyle = {
     "outline": "solid 2px var(--outlinefocus)",
@@ -18,7 +21,13 @@ const NavBar = () => {
             <ul>
                 <li><NavLink to="/" style={navActive}>Home</NavLink></li>
                 <li><NavLink to="/explore" style={navActive}>Explore</NavLink></li>
-                <li><NavLink to="/login" style={navActive}>Login</NavLink></li>
+                <div className="login-nav">
+                
+                  {user 
+                    ? <li><NavLink to="/profile" style={navActive}>Profile</NavLink></li>
+                    : <li><NavLink to="/login" style={navActive}>Login</NavLink></li>
+                  }
+                </div>
             </ul>
         </nav>
         <Outlet />
