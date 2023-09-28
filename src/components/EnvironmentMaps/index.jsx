@@ -105,11 +105,14 @@ gui
     window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(tick);  
-      window.removeEventListener('resize', onResize); 
-      controls.dispose();  
-      renderer.dispose();  
-    };
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  cancelAnimationFrame(tick);
+  window.removeEventListener('resize', onResize);
+  controls.dispose();
+  renderer.dispose();
+};
   }, [mapUrls]);
 
   return (
