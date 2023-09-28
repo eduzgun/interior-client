@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
@@ -22,14 +22,33 @@ const bedroomImages = [
 ];
 
 function BedroomPage() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseClick = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="kitchen-page">
       {bedroomImages.map((image, index) => (
-        <img key={index} className='kitchen__item' src={image.src} alt={image.alt} />
+        <img key={index} className='kitchen__item' src={image.src} alt={image.alt} onClick={() => handleImageClick(image)} />
       ))}
+
+      {selectedImage && (
+        <div className="fullscreen-div">
+          <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
+          <div className="description">{selectedImage.description}</div>
+          <button className="close-button" onClick={handleCloseClick}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default BedroomPage;
 
