@@ -16,15 +16,12 @@
     "@react-three/fiber": "^8.14.3",
     "@react-three/postprocessing": "^2.15.1",
     "axios": "^1.5.1",
-<<<<<<< HEAD
     "cors": "^2.8.5",
-=======
 
 
     "cloudinary": "^1.41.0",
     "cloudinary-react": "^1.8.1",
 
->>>>>>> 6f6ec571aecb71ec25ae9cc6202122abba3d5d71
     "jest": "^29.7.0",
     "leva": "^0.9.35",
     "lil-gui": "^0.18.2",
