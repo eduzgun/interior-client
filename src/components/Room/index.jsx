@@ -32,7 +32,8 @@ const Room = () => {
     <div className="environment-map-grid">
       <button className='left-arrow' onClick={prevMap}>←</button>  
       <EnvironmentMap mapUrls={maps[currentMapIndex]} />
-      <button className='right-arrow' onClick={nextMap}>→</button>  
+      <button className='right-arrow' onClick={nextMap}>→</button> 
+     
     </div>
   );
 };

@@ -192,3 +192,61 @@ cursor: pointer;
     width: 100vw; 
 }
 
+.kitchen-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+.kitchen__item {
+    margin-top: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 20px;
+}
+
+.kitchen__item:hover {
+  transform: scale(1.05);
+}
+
+.fullscreen-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Optional: semi-transparent background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensures the div appears on top of other content */
+}
+
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 80%; /* Adjust this value to leave room for the description and button */
+    object-fit: contain;
+}
+
+.description {
+    margin: 10px 0;
+    color: white; /* Optional: set text color to white */
+}
+
+.close-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
