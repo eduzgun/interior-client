@@ -1,3 +1,96 @@
+#wrapper{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
 .generator-container{
     color: whitesmoke;
+    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%);
+    min-width: 45%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 25px;
+    border: 1px solid var(--outlinefocus);
+}
+
+#cubemap{
+    border-radius: 25px;
+}
+
+.generator-container>form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-input{
+    align-self: flex-start;
+    font-size: 0.8rem;
+    font-family: inherit;
+    margin-bottom: 50px;
+}
+
+.form-input::file-selector-button,
+#submit-btn{
+    font-size: 0.8rem;
+    border: 2px solid var(--outline);
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #009688;
+    font-family: inherit;
+    margin-right: 10px;
+}
+
+.form-input::file-selector-button:hover,
+#submit-btn:hover{
+    background-color: var(--bg);
+    border: 2px solid var(--outlinefocus);
+
+}
+
+.inputs{
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inputs>input,
+.inputs>textarea{
+    width: 350px;
+    min-width: 100px;
+    border: none;
+    outline: solid 1px var(--outlinefocus);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    border-radius: 25px;
+    padding: 15px;
+    padding-left: 20px;
+    background-color: var(--bg);
+    color: whitesmoke;
+
+}
+
+#description-field{
+    resize: none;
+}
+
+#submit-btn{
+    margin-top: 25px;
+    font-size: 1.3rem;
+    padding: 20px 40px;
+    border-radius: 50px;
 }

@@ -369,38 +369,41 @@ const GenerateRoom = () => {
     },[fileState])
 
     return (
-        <div className="generator-container">
-            {/* <input type="file" onChange={convertImage}/> */}
-            <div id="cubemap" style={cubeMapStyle}>
-                <output id="faces" ref={facesRef} ></output>
+        <div id="wrapper">
+            <div className="generator-container">
+                {/* <input type="file" onChange={convertImage}/> */}
+                <div id="cubemap" style={cubeMapStyle}>
+                    <output id="faces" ref={facesRef} ></output>
+                </div>
+                <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
+                <form onSubmit={handleCubeMapSubmit}>
+                    <input placeholder=">" ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile} required/>
+
+                    <div className="inputs" id='filename-input'>
+                        <label htmlFor="filename">Filename</label>
+                        <input placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                    </div>
+
+                    <div className="inputs" id='dimensions-input'>
+                        <label htmlFor="dimensions">Dimensions</label>
+                        <input placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
+                    </div>
+
+                    <div className="inputs" id='description-input'>
+                        <label htmlFor="description">Description</label>
+                        <textarea maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
+                    </div>
+
+                    <div className="inputs" id='theme-input'>
+                        <label htmlFor="theme">Themes</label>
+                        <input placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                    </div>
+
+                    <button id="submit-btn" type='submit'>Create</button>
+                </form>
             </div>
-            <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
-            <form onSubmit={handleCubeMapSubmit}>
-                <input ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile}/>
-
-                <div className="inputs" id='filename-input'>
-                    <label htmlFor="filename">Filename</label>
-                    <input ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
-                </div>
-
-                <div className="inputs" id='dimensions-input'>
-                    <label htmlFor="dimensions">Dimensions</label>
-                    <input type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
-                </div>
-
-                <div className="inputs" id='description-input'>
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
-                </div>
-
-                <div className="inputs" id='theme-input'>
-                    <label htmlFor="theme">Themes</label>
-                    <input type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
-                </div>
-
-                <button type='submit'>Create</button>
-            </form>
         </div>
+
     )
 }
 
