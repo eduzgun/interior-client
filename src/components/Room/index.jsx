@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState}  from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
+// import Heart from "react-animated-heart";
+
+// import { AiOutlineComment } from 'react-icons/ai'
 
 const Room = () => {
-  
+  const [isClick, setClick] = useState(false);
   const maps = [
  ['../../src/assets/environmentMaps/0/px.png',
     '../../src/assets/environmentMaps/0/nx.png',

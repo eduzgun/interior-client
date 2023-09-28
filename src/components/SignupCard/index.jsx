@@ -37,9 +37,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
         setConfPassword(e.target.value)
     }
 
-    function sendRegisterRequest(e){
-        e.preventDefault()
-
+    function verifyPassword(){
         let equal = false
         let numbers = false
         let specialCharacter = false
@@ -65,7 +63,36 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
             setEmail("")
             setPassword("")
             setConfPassword("")
-            setToggleSwitch(!setToggleSwitch)
+
+            return true
+        }
+    }
+
+    const sendRegisterRequest = async (e) => {
+        e.preventDefault()
+        const confirm = verifyPassword
+        if(confirm){
+            const form = new FormData(e.target)
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    password: password,
+                }),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const resp = await fetch("http://localhost:5000/auth/register",options)
+
+            if(resp.status === 201){
+                setToggleSwitch(!toggleSwitch)
+            }else{
+                alert("Failed to register")
+            }
         }
     }
 
