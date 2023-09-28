@@ -23,8 +23,6 @@ export default function App() {
   useEffect(() => {
     if(!user){
       handleRefresh()
-    }else{
-      console.log(user)
     }
   },[user])
 
