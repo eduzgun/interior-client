@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavLink, Outlet } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import "./style.css"
 
 const NavBar = () => {
@@ -19,7 +21,9 @@ const NavBar = () => {
                 <li><NavLink to="/" style={navActive}>Home</NavLink></li>
                 <li><NavLink to="/explore" style={navActive}>Explore</NavLink></li>
                 <li><NavLink to="/login" style={navActive}>Login</NavLink></li>
+                <li><NavLink to="/profile" style={navActive}>Profile</NavLink></li>
             </ul>
+            
         </nav>
         <Outlet />
     </>
