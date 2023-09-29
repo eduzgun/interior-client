@@ -3,8 +3,9 @@ import { Room } from '../../components'
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 1' },
+  
   { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
    { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1' },
