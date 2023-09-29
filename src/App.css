@@ -192,7 +192,7 @@ cursor: pointer;
     width: 100vw; 
 }
 
-.kitchen-page, .bedroom-page {
+.kitchen-page, .bedroom-page, .bathroom-page {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 20px;
@@ -207,7 +207,7 @@ cursor: pointer;
   }
 }
 
-.kitchen__item, .bedroom__item {
+.kitchen__item, .bedroom__item, .bathroom__item {
     margin-top: 10px;
   width: 100%;
   height: 100%;
@@ -216,7 +216,7 @@ cursor: pointer;
   border-radius: 20px;
 }
 
-.kitchen__item:hover, .bedroom__item:hover {
+.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover {
   transform: scale(1.05);
 }
 
