@@ -1,61 +1,41 @@
 import React, { useState } from 'react';
 
-
-const Comment = ({ author, text }) => (
-  <div className="comment">
-    <h5>{author}</h5>
-    <p>{text}</p>
-  </div>
-);
-
-
-const CommentsList = ({ comments }) => (
-  <div className="comments-list">
-    {comments.map((comment, index) => (
-      <Comment key={index} {...comment} />
-    ))}
-  </div>
-);
-
-
 const Comments = () => {
   const [comments, setComments] = useState([
-    { author: 'Alice', text: 'Love this room' },
-    { author: 'Bob', text: 'Not sure I would choose this style but its an interesting room.' },
+    'I love this room it seems like such a relaxing place to be',
+    'Hmmmm not sure about this room at all tbh',
   ]);
 
-  const [newComment, setNewComment] = useState({ author: '', text: '' });
+  const [newComment, setNewComment] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewComment({ ...newComment, [name]: value });
+  const handleCommentChange = (event) => {
+    setNewComment(event.target.value);
   };
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    setComments([...comments, newComment]);
-    setNewComment({ author: '', text: '' });
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    if (newComment) {
+      setComments(prevComments => [...prevComments, newComment]);
+      setNewComment('');
+    }
   };
 
   return (
     <div className="comments-section">
-      <CommentsList comments={comments} />
       <form onSubmit={handleCommentSubmit}>
         <input
           type="text"
-          name="author"
-          placeholder="Your name"
-          value={newComment.author}
-          onChange={handleInputChange}
+          value={newComment}
+          onChange={handleCommentChange}
+          placeholder="Enter your comment"
         />
-        <textarea
-          name="text"
-          placeholder="Your comment"
-          value={newComment.text}
-          onChange={handleInputChange}
-        ></textarea>
-        <button className='submit-comment-button' type="submit">Submit Comment</button>
+        <button type="submit">Submit</button>
       </form>
+      <div className="comments-list">
+        {comments.map((comment, index) => (
+          <div className="comment" key={index}>{comment}</div>
+        ))}
+      </div>
     </div>
   );
 };

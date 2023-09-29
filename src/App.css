@@ -307,6 +307,9 @@ cursor: pointer;
 
 .comments-list {
   margin-bottom: 2em;
+  max-height: 200px; 
+  overflow-y: auto; 
+  padding-right: 10px;
   color: white;
 }
 
@@ -320,10 +323,10 @@ cursor: pointer;
 .comments-section textarea {
   margin-bottom: 1em;
   padding: 0.5em;
-   color: white;
+   color: black;
 }
 
 .comments-section button {
   padding: 0.5em 1em;
-   color: white;
+   color: black;
 }
