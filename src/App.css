@@ -246,7 +246,7 @@ cursor: pointer;
     align-items: center;
     justify-content: center;
     z-index: 100; 
-overflow-y: visible;
+    overflow-y: visible;
 }
 
 
