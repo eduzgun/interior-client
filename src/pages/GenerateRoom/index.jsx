@@ -411,8 +411,8 @@ const GenerateRoom = () => {
     },[fileState])
 
     return (
-        <div id="wrapper">
-            <div className="generator-container">
+        <div id="wrapper" data-testid={"wrapper"} >
+            <div className="generator-container" data-testid={"generator-container"}>
                 <div id="questions">
                     <p id='qmark' onClick={toggleDrop}>?</p>
                     <div ref={questionRef} id="qbox">
@@ -436,7 +436,7 @@ const GenerateRoom = () => {
 
                     <div className="inputs" id='filename-input'>
                         <label htmlFor="filename">Filename</label>
-                        <input ref={filenameInputRef} placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                        <input ref={filenameInputRef} placeholder=">" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
                     </div>
 
                     <div className="inputs" id='dimensions-input'>

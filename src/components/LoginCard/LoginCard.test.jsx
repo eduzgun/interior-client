@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { screen, render, cleanup } from '@testing-library/react';
+import { AuthProvider } from '../../contexts';
 
 import * as matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
@@ -11,9 +12,12 @@ import LoginCard from '.';
 describe('LoginCard component', () => {
     beforeEach(() => {
         render(
-            <BrowserRouter>
-                <LoginCard cardHeight={"600px"} toggleSwitch={true} focusStyle={{}} setToggleSwitch={false}/>
-            </BrowserRouter>
+            <AuthProvider>
+                <BrowserRouter>
+                    <LoginCard cardHeight={"600px"} toggleSwitch={true} focusStyle={{}} setToggleSwitch={false}/>
+                </BrowserRouter>
+            </AuthProvider>
+
         );
     });
 

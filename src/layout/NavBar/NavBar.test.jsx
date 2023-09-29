@@ -1,6 +1,7 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { screen, render, cleanup } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react'
+import { AuthProvider } from '../../contexts';
 
 import { MemoryRouter } from 'react-router-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
@@ -11,9 +12,13 @@ import NavBar from '.';
 
 describe('NavBar Component', () => { 
     beforeEach(() => {
-        render(<MemoryRouter>
-            <NavBar />
-        </MemoryRouter>)
+        render(
+            <AuthProvider>
+                <MemoryRouter>
+                    <NavBar/>
+                </MemoryRouter>
+            </AuthProvider>
+        )
     })
 
     afterEach(() => {
@@ -34,7 +39,7 @@ describe('NavBar Component', () => {
         const nav = screen.getAllByRole("link")
         var truthy = true;
         nav.forEach(a => {
-            if(!(["Home","Rooms","Login"].includes(a.innerHTML))){
+            if(!(["Home","Explore","Login"].includes(a.innerHTML))){
                 truthy = false
             }
         })
