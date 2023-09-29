@@ -24,25 +24,28 @@ const bedroomImages = [
 
 function BedroomPage() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image, index) => {
     setSelectedImage(image);
+    setSelectedImageIndex(index);
   };
 
   const handleCloseClick = () => {
     setSelectedImage(null);
+    setSelectedImageIndex(null)
   };
 
   return (
     <div className="bedroom-page">
       {bedroomImages.map((image, index) => (
-        <img key={index} className='bedroom__item' src={image.src} alt={image.alt} onClick={() => handleImageClick(image)} />
+        <img key={index} className='bedroom__item' src={image.src} alt={image.alt} onClick={() => handleImageClick(image, index)} />
       ))}
 
       {selectedImage && (
         <div className="fullscreen-div">
           {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-          <div className="description">{selectedImage.description}</div> */} <Room mapSet="bedroom"/>
+          <div className="description">{selectedImage.description}</div> */} <Room mapSet="bedroom" initialMapIndex={selectedImageIndex}/>
           <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
       )}

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
 
 
-const Room = ( {mapSet} ) => {
-  const [currentMapIndex, setCurrentMapIndex] = useState(0);
+const Room = ( {mapSet, initialMapIndex = 0} ) => {
+  const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
 
   const mapSets = {
     bedroom: [
@@ -12,7 +12,13 @@ const Room = ( {mapSet} ) => {
         '../../src/assets/environmentMaps/0/py.png',
         '../../src/assets/environmentMaps/0/ny.png',
       '../../src/assets/environmentMaps/0/pz.png',
-        '../../src/assets/environmentMaps/0/nz.png']
+        '../../src/assets/environmentMaps/0/nz.png'],
+        ['../../src/assets/environmentMaps/0/1/px.png',
+       '../../src/assets/environmentMaps/0/1/nx.png',
+        '../../src/assets/environmentMaps/0/1/py.png',
+        '../../src/assets/environmentMaps/0/1/ny.png',
+      '../../src/assets/environmentMaps/0/1/pz.png',
+        '../../src/assets/environmentMaps/0/1/nz.png']
     ],
     studio: [
       ['../../src/assets/environmentMaps/2/px.png',
