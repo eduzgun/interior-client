@@ -1,4 +1,5 @@
 import React from 'react'
+import sound from "../../assets/audio/lightswitch.wav"
 import "./style.css"
 
 const LightSwitch = ({ changeState, toggleSwitch }) => {
@@ -21,9 +22,14 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
         "transform": "rotateX(-40deg)"
     }
 
+    function playAudio() {
+        new Audio(sound).play()
+    }
+
+
   return (
     <div data-testid={"container"} className="switch-container">
-        <div className="switch" onClick={changeState}>
+        <div className="switch" onClick={() => {changeState();playAudio()}}>
             <div id="toggle">
                 <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
                 <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
