@@ -33,9 +33,10 @@ const EnvironmentMap = ({ mapUrls }) => {
 
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
-        user_id: user_id,
-        room_id: 1
+        user_id: user,
+        room_id: 3
     };
+    console.log(likeData)
 
     
     try {
