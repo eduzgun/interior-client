@@ -90,11 +90,12 @@ font-size: 18px;
 
 
 .environment-map-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr); 
-  gap: 5px;
+  display: block;
   justify-content: center;
- margin-top: 30px;
+  text-align: center;
+  align-items: center;
+ margin-top: 0px;
+ 
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -119,10 +120,75 @@ font-size: 18px;
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
 .environment-map {
-  min-width: 1600px; 
-  min-height: 1200px;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 1800px; 
+  height: 1100px;
   display: flex;
     
 }
 
+.favourites {
+    margin-top: 33px;
+    margin-left: 20px;
+}
+
+
+.like-bar {
+    display: flex;
+    flex-wrap: wrap;
+    color: white; 
+    margin-left: 30px;
+}
+
+.comments-button {
+    width: 300px;
+    height: 50px;
+    margin-top: 24px;
+    font-size: 0.7rem;
+    text-decoration: none;
+    margin-right: 60px;
+    outline: solid 2px var(--outline);
+    padding: 12px 60px;
+    border-radius: 100px;
+}
+
+.comments-button:hover{
+    cursor: pointer;
+    background-color: #009688;
+    outline: solid 2px var(--outlinefocus);
+    
+}
+
+
+
+.left-arrow,
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 100px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  background: none;
+cursor: pointer;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.center-page-room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; 
+    width: 100vw; 
+}
 

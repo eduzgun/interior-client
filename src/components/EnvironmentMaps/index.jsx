@@ -1,12 +1,68 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import  Marker  from '../Marker';
+import Heart from "react-animated-heart";
+import axios from 'axios'
+
+import { AiOutlineComment } from 'react-icons/ai'
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
+  const [isClick, setClick] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+
+            const token = localStorage.getItem('token');
+        
+            const response = await axios.get('http://localhost:5000/auth/login-check', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')
+                }`
+                }
+            });
+            setUser(response.data);
+            
+    } catch (error) {
+       console.error('Error Fetching user:', error.response ? error.response.data : error.message);
+    }
+    }
+
+    fetchUser();
+  }, []);
+
+  const handleLike = async () => {
+    
+    
+    setClick(prev => !prev);
+
+    //I will change this to the actual user logged in just wanted to check that it works first
+    const likeData = {
+        user_id: user.id,
+        room_id: 2
+    };
+
+    try {
+        const response = await axios.post('http://localhost:5000/likes', likeData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        console.log('Like created', response.data);
+    } catch (error) {
+        console.error('Error creating like:', error);
+
+       
+        setClick(prev => !prev);  
+    }
+}
+
+  
 
   useEffect(() => {
     const container = containerRef.current;
@@ -17,7 +73,7 @@ const EnvironmentMap = ({ mapUrls }) => {
     const textureLoader = new THREE.TextureLoader();
 
   
-    const gui = new dat.GUI();
+    // const gui = new dat.GUI();
     const global = {};
 
     const canvas = document.createElement('canvas');
@@ -61,16 +117,16 @@ const updateAllMaterials = () =>
  scene.backgroundBlurriness = 0 
 scene.backgroundIntensity = 1 
 
-gui.add(scene, 'backgroundBlurriness').min(0).max(1).step(0.001)
-gui.add(scene, 'backgroundIntensity').min(0).max(10).step(0.001)
+// gui.add(scene, 'backgroundBlurriness').min(0).max(1).step(0.001)
+// gui.add(scene, 'backgroundIntensity').min(0).max(10).step(0.001)
 
-global.envMapIntensity = 1
-gui
-    .add(global, 'envMapIntensity')
-    .min(0)
-    .max(10)
-    .step(0.001)
-    .onChange(updateAllMaterials)
+// global.envMapIntensity = 1
+// gui
+//     .add(global, 'envMapIntensity')
+//     .min(0)
+//     .max(10)
+//     .step(0.001)
+//     .onChange(updateAllMaterials)
 
 
     const environmentMap = new THREE.CubeTextureLoader().load(mapUrls);
@@ -101,18 +157,31 @@ gui
     window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(tick);  
-      window.removeEventListener('resize', onResize); 
-      controls.dispose();  
-      renderer.dispose();  
-    };
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  cancelAnimationFrame(tick);
+  window.removeEventListener('resize', onResize);
+  controls.dispose();
+  renderer.dispose();
+};
   }, [mapUrls]);
+
+  
 
   return (
     <>
   <div ref={containerRef} className="environment-map" />
-  <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" />
+  {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
+  <div className='like-bar'>
+        <p className='favourites'>Add to favourites</p>
+         <Heart isClick={isClick} onClick={handleLike} />
+
+         
+         <button className='comments-button'>Comments <AiOutlineComment /></button>
+      </div>
   </>
+  
   );
 };
 

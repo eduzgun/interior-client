@@ -1,10 +1,15 @@
 import React,{ useState } from 'react'
 import "./style.css"
+import { useAuth } from "../../contexts"
+import { useNavigate } from 'react-router-dom'
 
 const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
+    const { setUser } = useAuth()
+
+    const navigate = useNavigate()
 
     const activeStyle = {
       "border": "1px solid var(--outline)",
@@ -27,11 +32,55 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         setPassword(e.target.value)
     }
     
-    function sendLoginRequest(e){
+    const sendLoginRequest = async (e) => {
         e.preventDefault()
-        console.log(username,password)
-        setUsername("")
-        setPassword("")
+        
+        const form = new FormData(e.target)
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }
+
+        try{
+            const resp = await fetch("http://localhost:5000/auth/login",options)
+
+            if(resp.status == 204){
+                // setUser(username)
+
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                try {
+                    const resp2 = await fetch(`http://localhost:5000/users/${username}`,options)
+
+                    const data = await resp2.json()
+                    setUser(data.data.id)
+                    setUsername("")
+                    setPassword("")
+                    navigate("/")
+                    
+                } catch (err) {
+                    console.log(err)
+                }
+
+            }else{
+                alert("You messed up.")
+            }
+        }catch(err){
+            console.log("Error logging in. ",err)
+        }
+
     }
 
   return (
