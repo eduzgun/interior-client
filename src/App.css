@@ -95,8 +95,7 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
- /* overflow-y: scroll; */
- 
+ overflow-y: hidden;
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -127,7 +126,6 @@ font-size: 18px;
   height: 1100px;
   display: flex;
   overflow-y: auto;
-
 }
 
 .favourites {
@@ -333,6 +331,7 @@ overflow-y: auto;
   display: flex;
   flex-direction: column;
   color: white;
+  margin-left: 50px;
 }
 
 .comments-section input,
@@ -340,9 +339,16 @@ overflow-y: auto;
   margin-bottom: 1em;
   padding: 0.5em;
    color: black;
+   width: 400px;
 }
 
 .comments-section button {
   padding: 0.5em 1em;
    color: black;
+   font-family: 'Space Grotesk', sans-serif;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: solid 2px var(--outline);
+    border-radius: 100px;
 }

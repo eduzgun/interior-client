@@ -9,7 +9,7 @@
 
 .explore-item {
   position: relative;
-  overflow: hidden; 
+  overflow: auto; 
   transition: transform 0.2s ease-in-out;
 }
 
