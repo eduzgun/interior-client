@@ -38,7 +38,9 @@ export default function App() {
           <Route path='garden' element={<Pages.Garden/>}/>
           <Route path='living' element={<Pages.Living/>}/>
           <Route path='Login' element={<Pages.Login />}/>
-          <Route path="generate" element={ <Pages.GenerateRoom /> }/>
+          <Route path='generate' element={<ProtectedRoute redirectTo="/Login"/>}>
+            <Route index element={ <Pages.GenerateRoom /> }/>
+          </Route>
           <Route path='*' element={<Pages.NotFound/>}/>
           <Route path='profile' element={<ProtectedRoute redirectTo="/Login" />}>
             <Route index element={<Pages.ProfilePage/>} />
