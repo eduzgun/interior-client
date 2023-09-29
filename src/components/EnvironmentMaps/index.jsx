@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import  Marker  from '../Marker';
 import Heart from "react-animated-heart";
 import axios from 'axios'
+import { Canvas } from '@react-three/fiber';
 
 import { AiOutlineComment } from 'react-icons/ai'
 

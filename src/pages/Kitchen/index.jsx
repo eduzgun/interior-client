@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Room } from '../../components'
 
 const kitchenImages = [
   { src: '../../src/assets/environmentMaps/kitchen/1.png', alt: 'Image 1' },
@@ -32,8 +33,9 @@ function KitchenPage() {
 
         {selectedImage && (
             <div className="fullscreen-div">
-                <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-                <div className="description">{selectedImage.description}</div>
+                {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
+                <div className="description">{selectedImage.description}</div> */}
+                <Room mapSet="kitchen" />
                 <button className="close-button" onClick={handleCloseClick}>Close</button>
             </div>
         )}

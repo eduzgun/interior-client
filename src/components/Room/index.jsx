@@ -2,23 +2,29 @@ import React, { useState } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
 
 
-const Room = () => {
+const Room = ( {mapSet} ) => {
   const [currentMapIndex, setCurrentMapIndex] = useState(0);
-  
-  const maps = [
-    ['../../src/assets/environmentMaps/0/px.png',
-      '../../src/assets/environmentMaps/0/nx.png',
-      '../../src/assets/environmentMaps/0/py.png',
-      '../../src/assets/environmentMaps/0/ny.png',
+
+  const mapSets = {
+    bedroom: [
+      ['../../src/assets/environmentMaps/0/px.png',
+       '../../src/assets/environmentMaps/0/nx.png',
+        '../../src/assets/environmentMaps/0/py.png',
+        '../../src/assets/environmentMaps/0/ny.png',
       '../../src/assets/environmentMaps/0/pz.png',
-      '../../src/assets/environmentMaps/0/nz.png'],
-    ['../../src/assets/environmentMaps/2/px.png',
-      '../../src/assets/environmentMaps/2/nx.png',
-      '../../src/assets/environmentMaps/2/py.png',
-      '../../src/assets/environmentMaps/2/ny.png',
+        '../../src/assets/environmentMaps/0/nz.png']
+    ],
+    kitchen: [
+      ['../../src/assets/environmentMaps/2/px.png',
+       '../../src/assets/environmentMaps/2/nx.png',
+        '../../src/assets/environmentMaps/2/py.png',
+        '../../src/assets/environmentMaps/2/ny.png',
       '../../src/assets/environmentMaps/2/pz.png',
-      '../../src/assets/environmentMaps/2/nz.png'],
-  ];
+        '../../src/assets/environmentMaps/2/nz.png'],
+    ]
+  }
+
+  const maps = mapSets[mapSet] || mapSets.bedroom;
 
   const prevMap = () => {
     setCurrentMapIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maps.length - 1));
@@ -39,6 +45,23 @@ const Room = () => {
 };
 
 export default Room;
+
+
+
+  // const maps = useBedroomMaps ? [
+  //   ['../../src/assets/environmentMaps/0/px.png',
+  //     '../../src/assets/environmentMaps/0/nx.png',
+  //     '../../src/assets/environmentMaps/0/py.png',
+  //     '../../src/assets/environmentMaps/0/ny.png',
+  //     '../../src/assets/environmentMaps/0/pz.png',
+  //     '../../src/assets/environmentMaps/0/nz.png'],
+  //   ['../../src/assets/environmentMaps/2/px.png',
+  //     '../../src/assets/environmentMaps/2/nx.png',
+  //     '../../src/assets/environmentMaps/2/py.png',
+  //     '../../src/assets/environmentMaps/2/ny.png',
+  //     '../../src/assets/environmentMaps/2/pz.png',
+  //     '../../src/assets/environmentMaps/2/nz.png'],
+  // ];
 
 
 
