@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
+import { AuthProvider } from '../../contexts';
 
 
 const Room = ( {mapSet, initialMapIndex = 0} ) => {
@@ -79,7 +80,11 @@ const Room = ( {mapSet, initialMapIndex = 0} ) => {
   return (
     <div className="environment-map-grid">
       <button className='left-arrow' onClick={prevMap}>←</button>  
+      <AuthProvider>
+    
+
       <EnvironmentMap mapUrls={maps[currentMapIndex]} />
+      </AuthProvider>
       <button className='right-arrow' onClick={nextMap}>→</button> 
      
     </div>

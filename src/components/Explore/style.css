@@ -9,11 +9,11 @@
 
 .explore-item {
   position: relative;
-  overflow: auto; 
+  overflow: hidden;
   transition: transform 0.2s ease-in-out;
 }
 
-.explore-imagse {
+.explore-image {
   margin-top: 10px;
   width: 100%;
   height: 100%;
@@ -21,6 +21,7 @@
   transition: transform 0.2s ease-in-out;
   border-radius: 20px; 
    transition: transform 0.2s ease-in-out;
+   
 }
 
 .explore-image:hover {
@@ -38,6 +39,7 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
    transform: scale(1.05);
+   
 }
 
 .title {

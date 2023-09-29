@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -10,6 +10,7 @@ import { Canvas } from '@react-three/fiber';
 import Comments from '../Comments';
 
 import { AiOutlineComment } from 'react-icons/ai'
+import { useAuth } from '../../contexts/index.jsx';
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
@@ -19,6 +20,8 @@ const EnvironmentMap = ({ mapUrls }) => {
     setShowComments(prevShowComments => !prevShowComments);
   };
 
+  const { user } = useAuth();
+
 
 
 
@@ -26,15 +29,15 @@ const EnvironmentMap = ({ mapUrls }) => {
     
     
     setClick(prev => !prev);
+    console.log(user)
 
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
-        user_id: 2,
-        room_id: 2
+        user_id: user_id,
+        room_id: 1
     };
 
     
-
     try {
         const response = await axios.post('http://localhost:5000/likes', likeData);
         console.log('Like created', response.data);
@@ -57,7 +60,7 @@ const EnvironmentMap = ({ mapUrls }) => {
     const textureLoader = new THREE.TextureLoader();
 
   
-    // const gui = new dat.GUI();
+    
     const global = {};
 
     const canvas = document.createElement('canvas');
@@ -96,21 +99,8 @@ const updateAllMaterials = () =>
     })
 }
 
-
-
  scene.backgroundBlurriness = 0 
 scene.backgroundIntensity = 1 
-
-// gui.add(scene, 'backgroundBlurriness').min(0).max(1).step(0.001)
-// gui.add(scene, 'backgroundIntensity').min(0).max(10).step(0.001)
-
-// global.envMapIntensity = 1
-// gui
-//     .add(global, 'envMapIntensity')
-//     .min(0)
-//     .max(10)
-//     .step(0.001)
-//     .onChange(updateAllMaterials)
 
 
     const environmentMap = new THREE.CubeTextureLoader().load(mapUrls);
@@ -156,7 +146,7 @@ scene.backgroundIntensity = 1
   return (
     <>
       <div ref={containerRef} className="environment-map" />
-      {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
+      
       <div className='like-bar'>
         <p className='favourites'>Add to favourites</p>
         <Heart isClick={isClick} onClick={handleLike} />
