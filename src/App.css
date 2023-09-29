@@ -268,3 +268,18 @@ cursor: pointer;
     background-color: #009688;
     outline: solid 2px var(--outlinefocus);
 }
+
+
+.bedroom__item-container {
+  position: relative;
+  display: inline-block;
+}
+
+.bedroom__item-caption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* optional: for better readability */
+  color: white;
+  width: 100%;
+  text-align: center;
+}

@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import { Room } from '../../components'
 
 const bedroomImages = [
-  { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', caption: "Art Decor" },
   { src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
-  
   { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
    { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1' },
@@ -40,13 +39,17 @@ function BedroomPage() {
   return (
     <div className="bedroom-page">
       {bedroomImages.map((image, index) => (
-        <img key={index} className='bedroom__item' src={image.src} alt={image.alt} onClick={() => handleImageClick(image, index)} />
+        <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
+          <img className='bedroom__item' src={image.src} alt={image.alt} />
+          <div className="bedroom__item-caption">{image.caption}</div>
+        </div>
       ))}
 
       {selectedImage && (
         <div className="fullscreen-div">
           {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-          <div className="description">{selectedImage.description}</div> */} <Room mapSet="bedroom" initialMapIndex={selectedImageIndex}/>
+          <div className="description">{selectedImage.description}</div> */}
+          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
           <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
       )}
@@ -54,26 +57,5 @@ function BedroomPage() {
   );
 }
 
-
 export default BedroomPage;
 
-
-
-
-
-
-// import React from 'react';
-// import { Room } from '../../components'
-
-// const Bedroom = () => {
-//   return (
-//     <div>
-//         <div className='center-page-room'>
-//       <Room />
-//       </div>
-      
-//     </div>
-//   );
-// };
-
-// export default Bedroom;
