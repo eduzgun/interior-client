@@ -95,7 +95,8 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
- overflow-y: hidden;
+ overflow-y: scroll;
+
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -233,7 +234,7 @@ cursor: pointer;
 
 .fullscreen-div {
     margin-top: 50px;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     width: 100%;  
@@ -245,7 +246,7 @@ cursor: pointer;
     align-items: center;
     justify-content: center;
     z-index: 100; 
-overflow-y: auto;
+overflow-y: visible;
 }
 
 
@@ -255,6 +256,7 @@ overflow-y: auto;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    overflow-y: visible;
 }
 
 .description {
