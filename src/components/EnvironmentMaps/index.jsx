@@ -7,12 +7,17 @@ import  Marker  from '../Marker';
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
+import Comments from '../Comments';
 
 import { AiOutlineComment } from 'react-icons/ai'
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
+   const [showComments, setShowComments] = useState(false); 
+   const handleCommentsToggle = () => {
+    setShowComments(prevShowComments => !prevShowComments);
+  };
 
 
 
@@ -27,6 +32,8 @@ const EnvironmentMap = ({ mapUrls }) => {
         user_id: 2,
         room_id: 2
     };
+
+    
 
     try {
         const response = await axios.post('http://localhost:5000/likes', likeData);
@@ -148,17 +155,15 @@ scene.backgroundIntensity = 1
 
   return (
     <>
-  <div ref={containerRef} className="environment-map" />
-  {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
-  <div className='like-bar'>
+      <div ref={containerRef} className="environment-map" />
+      {/* <Marker label="1" text="Information text and liking will go here !!!!! Have to make other components" /> */}
+      <div className='like-bar'>
         <p className='favourites'>Add to favourites</p>
-         <Heart isClick={isClick} onClick={handleLike} />
-
-         
-         <button className='comments-button'>Comments <AiOutlineComment /></button>
+        <Heart isClick={isClick} onClick={handleLike} />
+        <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
       </div>
-  </>
-  
+      {showComments && <Comments />}  {/* Conditionally render Comments component */}
+    </>
   );
 };
 

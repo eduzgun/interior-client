@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { Room } from '../../components'
+import { Comments, Room } from '../../components'
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', caption: "Art Decor" },
-  { src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1', caption: "Minimal" },
   { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
    { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
@@ -37,11 +37,12 @@ function BedroomPage() {
   };
 
   return (
-    <div className="bedroom-page">
+    <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
       {bedroomImages.map((image, index) => (
         <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
           <img className='bedroom__item' src={image.src} alt={image.alt} />
           <div className="bedroom__item-caption">{image.caption}</div>
+    
         </div>
       ))}
 
@@ -50,6 +51,7 @@ function BedroomPage() {
           {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
           <div className="description">{selectedImage.description}</div> */}
           <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
+          
           <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
       )}

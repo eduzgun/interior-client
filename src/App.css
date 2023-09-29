@@ -198,6 +198,7 @@ cursor: pointer;
   grid-gap: 20px;
   margin-left: 15px;
   margin-right: 15px;
+  row-gap: 25px;
 }
 
 @media screen and (max-width: 767px) {
@@ -214,6 +215,7 @@ cursor: pointer;
   object-fit: cover;
   transition: transform 0.2s ease-in-out;
   border-radius: 20px;
+ 
 }
 
 .kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover {
@@ -278,8 +280,50 @@ cursor: pointer;
 .bedroom__item-caption {
   position: absolute;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* optional: for better readability */
+  background: rgba(0, 0, 0, 0.5); 
   color: white;
   width: 100%;
   text-align: center;
+}
+
+.bedroom-page.dimmed .bedroom__item, 
+.bedroom-page.dimmed .bedroom__item-caption {
+  opacity: 0.1;
+}
+
+.bedroom-page.dimmed .bedroom__item-container {
+  pointer-events: none; 
+}
+
+ 
+
+
+.comment {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin: 1em 0;
+   color: white;
+}
+
+.comments-list {
+  margin-bottom: 2em;
+  color: white;
+}
+
+.comments-section form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.comments-section input,
+.comments-section textarea {
+  margin-bottom: 1em;
+  padding: 0.5em;
+   color: white;
+}
+
+.comments-section button {
+  padding: 0.5em 1em;
+   color: white;
 }

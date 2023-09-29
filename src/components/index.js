@@ -7,3 +7,5 @@ export {default as ExploreItems} from "./Explore"
 export {default as Marker} from "./Marker"
 export {default as Gallery} from "./Gallery"
 
+export { default as Comments} from "./Comments"
+
