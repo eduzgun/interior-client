@@ -162,7 +162,7 @@ scene.backgroundIntensity = 1
         <Heart isClick={isClick} onClick={handleLike} />
         <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
       </div>
-      {showComments && <Comments />}  {/* Conditionally render Comments component */}
+      {showComments && <Comments />} 
     </>
   );
 };

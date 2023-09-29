@@ -95,6 +95,7 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
+ /* overflow-y: scroll; */
  
 }
 
@@ -125,7 +126,8 @@ font-size: 18px;
   width: 1800px; 
   height: 1100px;
   display: flex;
-    
+  overflow-y: auto;
+
 }
 
 .favourites {
@@ -222,20 +224,34 @@ cursor: pointer;
   transform: scale(1.05);
 }
 
+.fullscreen-content {
+    height: 100%;
+    overflow-y: auto;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .fullscreen-div {
+    margin-top: 50px;
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 80vmin;  
-    height: 80vmin;
+    width: 100%;  
+    height: 100;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8); 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 1000; 
+    z-index: 100; 
+overflow-y: auto;
 }
+
+
+
 
 .fullscreen-image {
     width: 100%;

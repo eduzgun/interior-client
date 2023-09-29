@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Comments, Room } from '../../components'
 
 const bedroomImages = [
@@ -36,6 +36,26 @@ function BedroomPage() {
     setSelectedImageIndex(null)
   };
 
+  useEffect(() => {
+  const handleScroll = (e) => {
+    const fullscreenDiv = document.querySelector('.fullscreen-div');
+    if (fullscreenDiv) {
+      fullscreenDiv.scrollTop += e.deltaY;
+      e.preventDefault();
+    }
+  };
+
+  if (selectedImage) {
+    window.addEventListener('wheel', handleScroll);
+  } else {
+    window.removeEventListener('wheel', handleScroll);
+  }
+
+  return () => {
+    window.removeEventListener('wheel', handleScroll);
+  };
+}, [selectedImage]);
+
   return (
     <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
       {bedroomImages.map((image, index) => (
@@ -48,12 +68,14 @@ function BedroomPage() {
 
       {selectedImage && (
         <div className="fullscreen-div">
-          {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-          <div className="description">{selectedImage.description}</div> */}
-          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-          
-          <button className="close-button" onClick={handleCloseClick}>Close</button>
+        <div className="fullscreen-content">
+            {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
+            <div className="description">{selectedImage.description}</div> */}
+            <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
+            
+            <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
+    </div>
       )}
     </div>
   );
