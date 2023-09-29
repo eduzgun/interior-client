@@ -3,19 +3,40 @@ import { loadImage } from "canvas"
 import "./style.css"
 import { useAuth } from '../../contexts'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const GenerateRoom = () => {
+
+    const { user } = useAuth()
+
     const [fileState,setFileState] = useState()
+
+    const [filename,setFilename] = useState("")
+    const [dimensions,setDimensions] = useState("")
+    const [description,setDescription] = useState("")
+    const [theme, setTheme] = useState("")
+    const [dropdown,setDropdown] = useState(true)
+
     const [context,setContext] = useState("")
+    const [imageArrayData,setImageArrayData] = useState([])
+    const [complete,setComplete] = useState(false)
 
+    const formRef = useRef()
     const canvas = useRef()
-
     const imageInputRef = useRef()
     const facesRef = useRef()
+    const filenameInputRef = useRef()
+    const dimRef = useRef()
+    const descRef=  useRef()
+    const themeRef = useRef()
+    const submitRef = useRef()
+    const homeBtnRef = useRef()
+    const completedRef = useRef()
+    const questionRef = useRef()
+
+    const navigate = useNavigate()
     
-    const [imageArrayData,setImageArrayData] = useState([])
-    const [exportData,setExportData] = useState([])
-    const [mapName, setMapName] = useState("temp")
+
 
     const positions = ["pz","nz","px","nx","py","ny"]
 
@@ -97,7 +118,12 @@ const GenerateRoom = () => {
     };
 
     async function loadImage() {
-        const file = fileState[0];
+        let file=""
+        try{
+            file = fileState[0];
+        }catch(err){
+            console.log("")
+        }
 
         if (!file) {
             return;
@@ -172,6 +198,7 @@ const GenerateRoom = () => {
             if (finished === 6) {
                 finished = 0;
                 workers = [];
+                setComplete(true)
         }
     };
 
@@ -203,22 +230,19 @@ const GenerateRoom = () => {
   workers.push(worker);
 }
 
-    function handleFile(e){
-        const files = Array.from(e.target.files)
-        setFileState(files)
-    }
+    // async function getRoomID
 
-
-    async function uploadBlobFromHrefToCloudinary(blobHref,count) {
+    async function uploadBlobFromHrefToCloudinary(blobHref,count,room_id) {
         // Fetch the Blob content from the href
         const response = await fetch(blobHref);
         const blob = await response.blob();
       
         const formData = new FormData();
-        formData.append('file', blob, `${positions[count]}${mapName}.png`); // Add a file name (e.g., 'image.png')
+        formData.append('file', blob,`${room_id}__${positions[count]}__${filename}.png`); // Add a file name (e.g., 'image.png')
         formData.append('upload_preset', 'interiorLAP4'); // Replace with your actual upload preset
-        formData.append("tags",`${mapName}-${positions[count]}`)
-      
+        formData.append("public_id",`${room_id}__${positions[count]}__${filename}`)
+    
+
         try {
           const response = await axios.post(
             'https://api.cloudinary.com/v1_1/de2nposrf/image/upload',
@@ -229,48 +253,146 @@ const GenerateRoom = () => {
               }
             }
           );
-      
           return response.data;
         } catch (error) {
           console.log('Error uploading image:', error);
         }
       }
 
-    async function handleCubeMapSubmit(e){
-        e.preventDefault()
-    
+    async function postToRoomTable(){
+        const data = {
+            name:filename,
+            dimensions:dimensions,
+            description:description,
+            theme:theme,
+            user_id:user
+        }
+
+        const jsonData = JSON.stringify(data)
+
         try {
-            const imgs = facesRef.current.children
-            console.log(imgs)
-            let count = 0
-
-
-            for(let img of imgs){
-                const imgHref = img.href 
-                uploadBlobFromHrefToCloudinary(imgHref,count).then(resp => {
-                console.log("Upload Successful", resp);
-                count += 1
-            }
-        )}
-                
-
-
-            // const blobHref = facesRef.current.children[0].href       
+            const newRoom = await axios.post("http://localhost:5000/rooms",jsonData,{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            return newRoom.data
             
-
         } catch (error) {
-            console.error(error);
+            console.log("hella",error)
         }
     }
-    // https://api.cloudinary.com/v1_1/de2nposrf/image/upload
+
+    async function handleCubeMapSubmit(e){
+        e.preventDefault()
+        disableForm(true)
+        if(complete){
+            try {
+                postToRoomTable().then(resp => {
+                    const room_id = resp.data.id
+                    try {
+                        const imgs = facesRef.current.children            
+                        for(let i=0;i<imgs.length;i++){
+                            const imgHref = imgs[i].href 
+                            uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
+                                submitRef.current.style.display = "none"
+                                homeBtnRef.current.style.display = "block"
+                                completedRef.current.style.display = "block"
+                                clearFields()
+                                console.log("Upload Successful", resp);
+                            
+                            })
+                        } 
+                    } catch (error) {
+                        console.error(error);
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+            }
+            
+
+
+        }else{
+            await getUserData()
+            console.log(user,"Not done yet")
+        }
+
+
+    }
+
+
+    const getUserData = async () => {
+        try {
+            const resp = await axios.get(`http://localhost:5000/users/${user}`,{
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const data = await resp.data.data
+            console.log(data)
+        } catch (error) {
+            console.log("Whoopsie",error)
+        }
+    }
+
+    function clearFields(){
+        imageInputRef.current.value = ""
+        filenameInputRef.current.value = ""
+        dimRef.current.value = ""
+        descRef.current.value = ""
+        themeRef.current.value = ""
+        submitRef.current.value = ""
+    }
+
+    function disableForm(truthy){
+        imageInputRef.current.disabled = truthy
+        filenameInputRef.current.disabled = truthy
+        dimRef.current.disabled = truthy
+        descRef.current.disabled = truthy
+        themeRef.current.disabled = truthy
+        submitRef.current.disabled = truthy
+    }
+
+    function goHome(){
+        navigate("/")
+    }
+
+    function handleFile(e){
+        const files = Array.from(e.target.files)
+        setFileState(files)
+        setFilename(files[0].name.split(".")[0])
+        filenameInputRef.current.value = files[0].name.split(".")[0]
+    }
+
+    function handleFilename(e){
+        setFilename(e.target.value)
+    }
+
+    function handleDimensions(e){
+        setDimensions(e.target.value)
+    }
+
+    function handleDescription(e){
+        setDescription(e.target.value)
+    }
+
+    function handleTheme(e){
+        setTheme(e.target.value)
+    }
+
+    function toggleDrop(){
+        setDropdown(!dropdown)
+        if(dropdown){
+            questionRef.current.style.display = "block"
+        }else{
+            questionRef.current.style.display = "none"
+        }
+    }
 
 
 ///////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 
@@ -280,6 +402,7 @@ const GenerateRoom = () => {
     },[])
 
     useEffect(() => {
+        disableForm(false)
         try {
             loadImage()
         } catch (error) {
@@ -288,18 +411,55 @@ const GenerateRoom = () => {
     },[fileState])
 
     return (
-        <div className="generator-container">
-            {/* <input type="file" onChange={convertImage}/> */}
-            <form onSubmit={handleCubeMapSubmit}>
-                <input ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile}/>
-                <button type='submit'>Create</button>
-            </form>
-            <div id="cubemap" style={cubeMapStyle}>
-                <output id="faces" ref={facesRef} ></output>
-            </div>
-            <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
+        <div id="wrapper">
+            <div className="generator-container">
+                <div id="questions">
+                    <p id='qmark' onClick={toggleDrop}>?</p>
+                    <div ref={questionRef} id="qbox">
+                        <h3>What do I do here?</h3>
+                        <p>
+                            You see the button that says: "Choose File" over there? <br/><br />
+                            You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+                        </p>
+                        <details><summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>
+                        <img id="example-panoramic" src="./src/pages/GenerateRoom/Living-Room-Panorama.jpg" alt="" />
+                        </details>
+                    </div>
+                </div>
+                {/* <input type="file" onChange={convertImage}/> */}
+                <div id="cubemap" style={cubeMapStyle}>
+                    <output id="faces" ref={facesRef} ></output>
+                </div>
+                <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
+                <form ref={formRef} onSubmit={handleCubeMapSubmit}>
+                    <input placeholder=">" ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile} required/>
 
+                    <div className="inputs" id='filename-input'>
+                        <label htmlFor="filename">Filename</label>
+                        <input ref={filenameInputRef} placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                    </div>
+
+                    <div className="inputs" id='dimensions-input'>
+                        <label htmlFor="dimensions">Dimensions</label>
+                        <input ref={dimRef} placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
+                    </div>
+
+                    <div className="inputs" id='description-input'>
+                        <label htmlFor="description">Description</label>
+                        <textarea ref={descRef} maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
+                    </div>
+
+                    <div className="inputs" id='theme-input'>
+                        <label htmlFor="theme">Themes</label>
+                        <input ref={themeRef} placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                    </div>
+                    <button ref={submitRef} id="submit-btn" type='submit'>Create</button>
+                </form>
+                <p ref={completedRef} id='createdP'>File Created!</p>
+                <button ref={homeBtnRef} onClick={goHome} id='home-btn'>Return Home</button>
+            </div>
         </div>
+
     )
 }
 
