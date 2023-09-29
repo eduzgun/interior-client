@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest run --reporter verbose"
+    "test": "vitest run --reporter verbose",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@react-three/csg": "^3.0.0",
@@ -16,9 +17,9 @@
     "@react-three/fiber": "^8.14.3",
     "@react-three/postprocessing": "^2.15.1",
     "axios": "^1.5.1",
-    "cors": "^2.8.5",
     "cloudinary": "^1.41.0",
     "cloudinary-react": "^1.8.1",
+    "cors": "^2.8.5",
     "jest": "^29.7.0",
     "leva": "^0.9.35",
     "lil-gui": "^0.18.2",
@@ -29,6 +30,7 @@
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",
     "react-spring": "^9.7.3",
+    "resize-observer-polyfill": "^1.5.1",
     "three": "^0.156.1"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "@vitest/coverage-c8": "^0.33.0",
+    "@vitest/coverage-v8": "^0.34.6",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
