@@ -95,7 +95,8 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
- 
+ overflow-y: scroll;
+
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -125,7 +126,7 @@ font-size: 18px;
   width: 1800px; 
   height: 1100px;
   display: flex;
-    
+  overflow-y: auto;
 }
 
 .favourites {
@@ -192,3 +193,164 @@ cursor: pointer;
     width: 100vw; 
 }
 
+.kitchen-page, .bedroom-page, .bathroom-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  row-gap: 25px;
+}
+
+@media screen and (max-width: 767px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+.kitchen__item, .bedroom__item, .bathroom__item {
+    margin-top: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 20px;
+ 
+}
+
+.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover {
+  transform: scale(1.05);
+}
+
+.fullscreen-content {
+    height: 100%;
+    overflow-y: auto;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-div {
+    margin-top: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;  
+    height: 100;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; 
+    overflow-y: visible;
+}
+
+
+
+
+.fullscreen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    overflow-y: visible;
+}
+
+.description {
+    margin: 10px 0;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;  
+}
+
+.close-button {
+    font-family: 'Space Grotesk', sans-serif;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: solid 2px var(--outline);
+    border-radius: 100px;
+}
+
+.close-button:hover {
+    cursor: pointer;
+    background-color: #009688;
+    outline: solid 2px var(--outlinefocus);
+}
+
+
+.bedroom__item-container {
+  position: relative;
+  display: inline-block;
+}
+
+.bedroom__item-caption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); 
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.bedroom-page.dimmed .bedroom__item, 
+.bedroom-page.dimmed .bedroom__item-caption {
+  opacity: 0.1;
+}
+
+.bedroom-page.dimmed .bedroom__item-container {
+  pointer-events: none; 
+}
+
+ 
+
+
+.comment {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin: 1em 0;
+   color: white;
+}
+
+.comments-list {
+  margin-bottom: 2em;
+  max-height: 200px; 
+  overflow-y: auto; 
+  padding-right: 10px;
+  color: white;
+}
+
+.comments-section form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-left: 50px;
+}
+
+.comments-section input,
+.comments-section textarea {
+  margin-bottom: 1em;
+  padding: 0.5em;
+   color: black;
+   width: 400px;
+}
+
+.comments-section button {
+  padding: 0.5em 1em;
+   color: black;
+   font-family: 'Space Grotesk', sans-serif;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: solid 2px var(--outline);
+    border-radius: 100px;
+}

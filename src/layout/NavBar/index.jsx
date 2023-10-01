@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <>
         <nav className='nav-row'>
-            <img src="./src/assets/images/logo.png" alt="logo" id='logo' />
+            <img src="./src/assets/images/logo2.png" alt="logo" id='logo' />
             <ul>
                 <li><NavLink to="/" style={navActive}>Home</NavLink></li>
                 <li><NavLink to="/explore" style={navActive}>Explore</NavLink></li>
