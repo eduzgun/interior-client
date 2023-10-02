@@ -17,7 +17,7 @@ export const getComments = async () => {
     {
       id: "2",
       body: "Second comment",
-      username: "John",
+      username: "Franki",
       userId: "2",
       parentId: null,
       createdAt: formattedDate,
@@ -25,7 +25,7 @@ export const getComments = async () => {
     {
       id: "3",
       body: "First comment first child",
-      username: "John",
+      username: "Franki",
       userId: "2",
       parentId: "1",
       createdAt: formattedDate,
@@ -33,7 +33,7 @@ export const getComments = async () => {
     {
       id: "4",
       body: "Second comment second child",
-      username: "John",
+      username: "Franki",
       userId: "2",
       parentId: "2",
       createdAt: formattedDate,
