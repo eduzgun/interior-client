@@ -314,7 +314,7 @@ cursor: pointer;
  
 
 
-.comment {
+/* .comment {
   border: 1px solid #ccc;
   padding: 1em;
   margin: 1em 0;
@@ -353,4 +353,4 @@ cursor: pointer;
     cursor: pointer;
     outline: solid 2px var(--outline);
     border-radius: 100px;
-}
+} */
