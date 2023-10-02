@@ -20,8 +20,3 @@ export { default as Bathroom } from "./Bathroom"
 export { default as Garden } from "./Garden"
 
 export { default as Living } from "./Living"
-
-// export { default as Gallery } from "./Gallery"
-
-
-
