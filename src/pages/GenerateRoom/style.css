@@ -85,6 +85,10 @@
     align-items: center;
 }
 
+.generator-container>form label{
+    max-width: 150px;
+}
+
 .form-input{
     align-self: flex-start;
     font-size: 0.8rem;
@@ -119,6 +123,7 @@
     margin-top: 15px;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
 }
 
 .inputs>input,
