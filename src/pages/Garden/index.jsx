@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Room, StylesComponent } from '../../components'
 
 const gardenImages = [
-  { src: '../../src/assets/environmentMaps/garden/1.webp', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/garden/1.png', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/garden/2.jpeg', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/garden/3.jpeg', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/garden/4.jpeg', alt: 'Image 1' },
@@ -10,6 +10,7 @@ const gardenImages = [
   { src: '../../src/assets/environmentMaps/garden/6.jpeg', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/garden/7.jpeg', alt: 'Image 1' },
   { src: '../../src/assets/environmentMaps/garden/8.webp', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/garden/9.webp', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/garden/9.png', alt: 'Image 1' },
   
 ];
