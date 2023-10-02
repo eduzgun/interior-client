@@ -26,15 +26,50 @@ const House = ({ scrollY, ...props }) => {
 
     // VERTICAL ANIMATION
     tl.current.to(
-      csg.current.position,
+      csg.current.rotation.x,
       {
-        duration: 2,
+        duration: 5,
         y: -5,
       },
       0
     );
+    tl.current.to(
+      csg.current.children[0].children[3].material.color,
+      {
+        duration: 1,
+        r: 1,
+        g: 0.5,
+        b: 0.2,
+        delay: 2,
+        onUpdate: () => {
+          csg.current.children[0].children[3].material.color.r = 1;
+          csg.current.children[0].children[3].material.color.g = 0.5;
+          csg.current.children[0].children[3].material.color.b = 0.2;
+          csg.current.children[0].children[3].material.needsUpdate = true; // Explicitly update the material
+        },
+      }
+    );
+    
+
+    tl.current.to(
+      csg.current.children[0].children[3].material.color,
+      {
+        duration: 1,
+        r: 0.7,
+        g: 0.2,
+        b: 0.9,
+        delay: 4, // Change at 4 seconds into the animation
+        onUpdate: () => {
+          csg.current.children[0].children[3].material.color.r = 0.2;
+          csg.current.children[0].children[3].material.color.g = 0.5;
+          csg.current.children[0].children[3].material.color.b = 0.9;
+          csg.current.children[0].children[3].material.needsUpdate = true; // Explicitly update the material
+        },
+      }
+    );
     });
   
+    
   return (
     <>
       <mesh scale={0.3} ref={csg} {...props}>
