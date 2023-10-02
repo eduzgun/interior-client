@@ -11,6 +11,7 @@ const Door = (props) => {
             <Base geometry={box} scale={[1, 2, 1]} />
             <Addition geometry={cyl} scale={0.5} rotation={[Math.PI / 2, 0, 0]} position={[0, 1, 0]} />
             </Geometry>
+             
         </Subtraction>
     )
     

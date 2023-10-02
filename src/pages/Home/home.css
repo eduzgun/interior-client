@@ -8,11 +8,12 @@
 }
 
 #centre-button button {
+    padding: 0.60rem 2rem;
     font-size: 0.7rem;
     text-decoration: none;
-    background-color: var(--outline);
+    background-color: #009688;
     outline: solid 1px var(--outlinefocus);
-    color: aliceblue;
+    color: aliceblblue;
     font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
