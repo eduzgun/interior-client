@@ -436,7 +436,7 @@ const GenerateRoom = () => {
 
                     <div className="inputs" id='filename-input'>
                         <label htmlFor="filename">Filename</label>
-                        <input ref={filenameInputRef} placeholder=">" ref={filenameInputRef} type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                        <input ref={filenameInputRef} placeholder=">" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
                     </div>
 
                     <div className="inputs" id='dimensions-input'>

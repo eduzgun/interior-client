@@ -1,4 +1,5 @@
 import React, { Children } from 'react';
+import { AuthProvider } from '../../contexts/index';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { screen, render, cleanup } from '@testing-library/react';
 
@@ -11,9 +12,11 @@ import NavBar from '.';
 
 describe('NavBar Component', () => { 
     beforeEach(() => {
-        render(<MemoryRouter>
+        render(
+        <AuthProvider>
+        <MemoryRouter>
             <NavBar />
-        </MemoryRouter>)
+        </MemoryRouter> </AuthProvider>)
     })
 
     afterEach(() => {
@@ -34,7 +37,7 @@ describe('NavBar Component', () => {
         const nav = screen.getAllByRole("link")
         var truthy = true;
         nav.forEach(a => {
-            if(!(["Home","Rooms","Login"].includes(a.innerHTML))){
+            if(!(["Home","Explore","Login"].includes(a.innerHTML))){
                 truthy = false
             }
         })

@@ -1,23 +1,124 @@
-#location {
-    
-    display: flex;
+#section {
+  height: 50vh;
+  /* scroll-snap-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+  #section {
+    height: 200vh;
+  }
+}
+
+#container {
+  height: 100%;
+  /* scroll-snap-align: center; */
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+  #container {
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-	color: #009688 ;
-	line-height: 1;
-	font-weight: 900;
+  }
+}
+
+#left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #left {
+    flex: 1;
+    align-items: center;
+  }
 }
 
 #h1 {
+  font-size: 74px;
+  color: #ffffff;
+}
 
-    display: flex;
+@media only screen and (max-width: 768px) {
+    h1 {
+        
+        text-align: center;
+    }
+  }
+
+#p {
+  font-size: 24px;
+  color: lightgray;
+  padding: 20px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    #p {
+        padding: 20px;
+    text-align: center;
+  }
+
+}
+
+#button_notfound {
+  background-color: #009688;
+  color: white;
+  font-weight: 400;
+  width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+/* @media only screen and (max-width: 768px) {
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-	color: #ffffff;
-	line-height: 1;
-	font-weight: 900;
+  } */
+#right {
+  /* height: 100%; */
+  /* scroll-snap-align: center; */
+  margin-right: 100px;
+  width: 1000px;
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+#img2 {
+  width: 800px;
+  height: 600px;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  bottom: 20;
+  left: 100;
+  right: 0;
+  margin: auto;
+  border-radius: 100px;
+  /* float: right;
+    
     margin-top: 100px;
-    padding: 20px 30px;
+    margin-right: 150px; */
+  animation: animate 2s infinite ease alternate;
+}
+
+@keyframes animate {
+  to {
+    transform: translateY(10px);
+  }
 }
