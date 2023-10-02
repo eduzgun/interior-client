@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Room } from '../../components'
+import React, {useState, useEffect} from 'react';
+import { Room, StylesComponent } from '../../components'
 
 const bathroomImages = [
   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
@@ -23,32 +23,72 @@ const bathroomImages = [
 ];
 
 
-const Bathroom = () => {
+function BathroomPage() {
+    const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image, index) => {
     setSelectedImage(image);
+    setSelectedImageIndex(index);
   };
 
   const handleCloseClick = () => {
     setSelectedImage(null);
+    setSelectedImageIndex(null)
   };
 
+ useEffect(() => {
+
+    const newImagesWithStyles = bathroomImages.map((image, index) => ({
+        ...image,
+        style: <StylesComponent seed={index + 3} />,
+    }));
+    setImagesWithStyles(newImagesWithStyles);
+}, []);
+
+
+  useEffect(() => {
+  const handleScroll = (e) => {
+    const fullscreenDiv = document.querySelector('.fullscreen-div');
+    if (fullscreenDiv) {
+      fullscreenDiv.scrollTop += e.deltaY;
+      e.preventDefault();
+    }
+  };
+
+  if (selectedImage) {
+    window.addEventListener('wheel', handleScroll);
+  } else {
+    window.removeEventListener('wheel', handleScroll);
+  }
+
+  return () => {
+    window.removeEventListener('wheel', handleScroll);
+  };
+}, [selectedImage]);
+
   return (
-    <div className="bathroom-page">
-      {bathroomImages.map((image, index) => (
-        <img key={index} className='bedroom__item' src={image.src} alt={image.alt} onClick={() => handleImageClick(image)} />
-      ))}
+    <div className={`bathroom-page${selectedImage ? ' dimmed' : ''}`}>
+      {imagesWithStyles.map((image, index) => (
+  <div className="bathroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
+    <img className='bathroom__item' src={image.src} alt={image.alt} />
+    <div className="bathroom__item-caption">{image.style}</div>
+  </div>
+))}
 
       {selectedImage && (
         <div className="fullscreen-div">
-          {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-          <div className="description">{selectedImage.description}</div> */} <Room mapSet="bathroom"/>
-          <button className="close-button" onClick={handleCloseClick}>Close</button>
+        <div className="fullscreen-content">
+            
+            <Room mapSet="bathroom" initialMapIndex={selectedImageIndex} />
+            
+            <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
+    </div>
       )}
     </div>
   );
-};
+}
 
-export default Bathroom;
+export default BathroomPage;
