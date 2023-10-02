@@ -4,6 +4,7 @@ import "./style.css"
 import { useAuth } from '../../contexts'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { QuestionHelp } from '../../components'
 
 const GenerateRoom = () => {
 
@@ -15,7 +16,7 @@ const GenerateRoom = () => {
     const [dimensions,setDimensions] = useState("")
     const [description,setDescription] = useState("")
     const [theme, setTheme] = useState("")
-    const [dropdown,setDropdown] = useState(true)
+    const [select,setSelect] = useState("Bedroom")
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
@@ -32,7 +33,6 @@ const GenerateRoom = () => {
     const submitRef = useRef()
     const homeBtnRef = useRef()
     const completedRef = useRef()
-    const questionRef = useRef()
 
     const navigate = useNavigate()
     
@@ -48,14 +48,6 @@ const GenerateRoom = () => {
         "background": "#eee",
         "marginTop": "15px"
       }
-
-
-    // const pzRef = useRef()
-    // const nzRef = useRef()
-    // const pxRef = useRef()
-    // const nxRef = useRef()
-    // const pyRef = useRef()
-    // const nyRef = useRef()
 
     let finished = 0;
     let workers = [];
@@ -265,6 +257,7 @@ const GenerateRoom = () => {
             dimensions:dimensions,
             description:description,
             theme:theme,
+            category:select,
             user_id:user
         }
 
@@ -382,14 +375,11 @@ const GenerateRoom = () => {
         setTheme(e.target.value)
     }
 
-    function toggleDrop(){
-        setDropdown(!dropdown)
-        if(dropdown){
-            questionRef.current.style.display = "block"
-        }else{
-            questionRef.current.style.display = "none"
-        }
+    function handleCategory(e){
+        setSelect(e.target.value)
     }
+
+    
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -411,22 +401,13 @@ const GenerateRoom = () => {
     },[fileState])
 
     return (
-        <div id="wrapper">
-            <div className="generator-container">
-                <div id="questions">
-                    <p id='qmark' onClick={toggleDrop}>?</p>
-                    <div ref={questionRef} id="qbox">
-                        <h3>What do I do here?</h3>
-                        <p>
-                            You see the button that says: "Choose File" over there? <br/><br />
-                            You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
-                        </p>
-                        <details><summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>
-                        <img id="example-panoramic" src="./src/pages/GenerateRoom/Living-Room-Panorama.jpg" alt="" />
-                        </details>
-                    </div>
-                </div>
-                {/* <input type="file" onChange={convertImage}/> */}
+        <div id="wrapper" data-testid={"wrapper"} >
+            <div className="generator-container" data-testid={"generator-container"}>
+                <QuestionHelp title={"What do I do here?"} content={<p>
+                     You see the button that says: "Choose File" over there? <br/><br />
+                    You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+                </p>} drop_down={<summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>}/>
+                
                 <div id="cubemap" style={cubeMapStyle}>
                     <output id="faces" ref={facesRef} ></output>
                 </div>
@@ -436,22 +417,33 @@ const GenerateRoom = () => {
 
                     <div className="inputs" id='filename-input'>
                         <label htmlFor="filename">Filename</label>
-                        <input ref={filenameInputRef} placeholder=">" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                        <input ref={filenameInputRef} placeholder="> file" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
                     </div>
 
                     <div className="inputs" id='dimensions-input'>
-                        <label htmlFor="dimensions">Dimensions</label>
-                        <input ref={dimRef} placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
+                        <label htmlFor="dimensions">Room Dimensions</label>
+                        <input ref={dimRef} placeholder="> 12m x 12m" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
                     </div>
 
                     <div className="inputs" id='description-input'>
                         <label htmlFor="description">Description</label>
-                        <textarea ref={descRef} maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
+                        <textarea ref={descRef} maxLength={100} placeholder="> Fun description" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
                     </div>
 
                     <div className="inputs" id='theme-input'>
                         <label htmlFor="theme">Themes</label>
-                        <input ref={themeRef} placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                        <input ref={themeRef} placeholder="> Modern, minimalist" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                    </div>
+                    <div className="inputs" id="category-input">
+                        <label htmlFor="category">Category</label>
+                        <select name="category-dropdown" id="category-dropdown" value={select} onChange={handleCategory}>
+                            <option value="Bedroom">Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Garden">Garden</option>
+                            <option value="Bathroom">Bathroom</option>
+                            <option value="Living Room">Living Room</option>
+                            <option value="Studio">Studio</option>
+                        </select>
                     </div>
                     <button ref={submitRef} id="submit-btn" type='submit'>Create</button>
                 </form>

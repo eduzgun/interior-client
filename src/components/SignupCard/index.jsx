@@ -1,5 +1,6 @@
-import React,{ useState } from 'react'
+import React,{ useRef, useState } from 'react'
 import "./style.css"
+import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
 
@@ -8,9 +9,13 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
     const [password,setPassword] = useState("")
     const [confPassword,setConfPassword] = useState("")
 
+    const passwordRef = useRef()
+    const confPasswordRef = useRef()
+
     const activeStyle = {
         "border": "1px solid var(--outline)",
-        "color": "var(--outline)"
+        "color": "var(--outline)",
+        "backgroundColor":"var(--outline)"
     }
 
     const showLight = {
@@ -58,7 +63,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
         if(equal && numbers && specialCharacter && capital){
             console.log("valid")
             // do post request here
-
+            
             setUsername("")
             setEmail("")
             setPassword("")
@@ -70,7 +75,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
 
     const sendRegisterRequest = async (e) => {
         e.preventDefault()
-        const confirm = verifyPassword
+        const confirm = verifyPassword()
         if(confirm){
             const form = new FormData(e.target)
             const options = {
@@ -102,21 +107,27 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
             <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
         </div>
+        <QuestionHelp active={toggleSwitch} title={"Signing Up"} content={<p>Not sure how to register? In each box enter the required content.<br /><br />Make sure your passwords contain at least one:<br/><ul>
+            <li>Uppercase Letter</li>
+            <li>Digit</li>
+            <li>Special Character .,*&^!"</li>
+            </ul></p>}
+            orientation={"left"}/>
         <header>
             <h2>Register</h2>
         </header>
         <form onSubmit={sendRegisterRequest} data-testid="signup-form">
             <label htmlFor="username">username</label>
-            <input data-testid={"input"} type="text" name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} type="text" className={"signup-input"} name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="email">email</label>
-            <input data-testid={"input"} type="text" name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} type="text" className={"signup-input"} name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="password">password</label>
-            <input data-testid={"input"} type="password" name="password" id="reg-password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} ref={passwordRef} className={"signup-input"} type="password" name="password" id="reg-password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="confpassword">confirm password</label>
-            <input data-testid={"input"} type="password" name="confpassword" id="conf-password-input" value={confPassword} placeholder='>' onChange={handleConfirmPassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"input"} ref={confPasswordRef} className={"signup-input"} type="password" name="confpassword" id="conf-password-input" value={confPassword} placeholder='>' onChange={handleConfirmPassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <button type="submit" id='register-btn' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}}>Join</button>
         </form>
