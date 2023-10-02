@@ -297,12 +297,12 @@ cursor: pointer;
 }
 
 
-.bedroom__item-container {
+.bedroom__item-container, .kitchen__item-container {
   position: relative;
   display: inline-block;
 }
 
-.bedroom__item-caption {
+.bedroom__item-caption, .kitchen__item-caption {
   position: absolute;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); 
@@ -312,11 +312,12 @@ cursor: pointer;
 }
 
 .bedroom-page.dimmed .bedroom__item, 
-.bedroom-page.dimmed .bedroom__item-caption {
+.bedroom-page.dimmed .bedroom__item-caption, .kitchen-page.dimmed .kitchen, 
+.kitchen-page.dimmed .kitchen-caption {
   opacity: 0.1;
 }
 
-.bedroom-page.dimmed .bedroom__item-container {
+.bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container {
   pointer-events: none; 
 }
 
@@ -325,43 +326,4 @@ cursor: pointer;
  
 
 
-/* .comment {
-  border: 1px solid #ccc;
-  padding: 1em;
-  margin: 1em 0;
-   color: white;
-}
 
-.comments-list {
-  margin-bottom: 2em;
-  max-height: 200px; 
-  overflow-y: auto; 
-  padding-right: 10px;
-  color: white;
-}
-
-.comments-section form {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  margin-left: 50px;
-}
-
-.comments-section input,
-.comments-section textarea {
-  margin-bottom: 1em;
-  padding: 0.5em;
-   color: black;
-   width: 400px;
-}
-
-.comments-section button {
-  padding: 0.5em 1em;
-   color: black;
-   font-family: 'Space Grotesk', sans-serif;
-    width: 200px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: solid 2px var(--outline);
-    border-radius: 100px;
-} */

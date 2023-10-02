@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Comments, Room, StylesComponent } from '../../components'
+import { Room, StylesComponent } from '../../components'
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
