@@ -7,7 +7,11 @@ import  Marker  from '../Marker';
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
-import Comments from '../Comments';
+// import Comments from '../Comments';
+// import Comments from '../NestedComments';
+
+import Comments from "../nestedComments/Comments";
+import Comment from "../nestedComments/Comment";
 
 import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
@@ -153,7 +157,8 @@ scene.backgroundIntensity = 1
         <Heart isClick={isClick} onClick={handleLike} />
         <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
       </div>
-      {showComments && <Comments />} 
+      {showComments && <Comments commentsUrl="http://localhost:3004/comments"
+        currentUserId="1" />} 
     </>
   );
 };
