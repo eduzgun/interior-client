@@ -20,7 +20,7 @@ overflow-y: scroll;
   margin-top: 40px;
   overflow-y: scroll;
   background-color: white; 
-  
+  border-radius: 20px;
 }
 
 .comment-form-title {
@@ -72,12 +72,14 @@ overflow-y: scroll;
 }
 
 .comment-image-container {
-  margin-right: 12px;
+  margin-right: 5px;
+  margin-left: 12px;
   
 }
 
 .comment-image-container img {
   border-radius: 50px;
+  /* margin-le: 5px; */
   
 }
 

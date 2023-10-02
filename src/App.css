@@ -199,7 +199,7 @@ cursor: pointer;
     /* overflow-y: auto; */
 }
 
-.kitchen-page, .bedroom-page, .bathroom-page {
+.kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 20px;
@@ -216,7 +216,7 @@ cursor: pointer;
   }
 }
 
-.kitchen__item, .bedroom__item, .bathroom__item {
+.kitchen__item, .bedroom__item, .bathroom__item, .garden__item, .studio__item, .living__item {
     margin-top: 10px;
   width: 100%;
   height: 100%;
@@ -226,7 +226,7 @@ cursor: pointer;
  
 }
 
-.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover {
+.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover, .garden__item:hover, .bathroom__item:hover, .studio__item:hover, .living__item:hover {
   transform: scale(1.05);
 }
 
@@ -297,12 +297,12 @@ cursor: pointer;
 }
 
 
-.bedroom__item-container {
+.bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
   position: relative;
   display: inline-block;
 }
 
-.bedroom__item-caption {
+.bedroom__item-caption, .kitchen__item-caption, .garden__item-caption, .bathroom__item-caption, .studio__item-caption, .living__item-caption  {
   position: absolute;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); 
@@ -312,56 +312,46 @@ cursor: pointer;
 }
 
 .bedroom-page.dimmed .bedroom__item, 
-.bedroom-page.dimmed .bedroom__item-caption {
+.bedroom-page.dimmed .bedroom__item-caption, .kitchen-page.dimmed .kitchen__item
+.kitchen-page.dimmed .kitchen-caption, .garden-page.dimmed .garden__item 
+.garden-page.dimmed .garden-caption, .bathroom-page.dimmed .bathroom__item 
+.bathroom-page.dimmed .bathroom-caption, .studio-page.dimmed .studio__item, 
+.studio-page.dimmed .studio-caption, .living-page.dimmed .living__item, 
+.living-page.dimmed .living-caption {
   opacity: 0.1;
 }
 
-.bedroom-page.dimmed .bedroom__item-container {
+.bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container, .garden-page.dimmed .garden-container, .bathroom-page.dimmed .bathroom-container, .studio-page.dimmed .studio-container, .living-page.dimmed .living-container {
   pointer-events: none; 
 }
 
+.title-section {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.room-title {
+  color:white;
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-bottom: 10px
+}
+
+.back-to-button {
+  margin-top: 30px;
+  margin-right: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #009688;
+}
+
+.back-to-button:hover {
+    color: #005f5f;
+}
 
 
  
 
 
-/* .comment {
-  border: 1px solid #ccc;
-  padding: 1em;
-  margin: 1em 0;
-   color: white;
-}
 
-.comments-list {
-  margin-bottom: 2em;
-  max-height: 200px; 
-  overflow-y: auto; 
-  padding-right: 10px;
-  color: white;
-}
-
-.comments-section form {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  margin-left: 50px;
-}
-
-.comments-section input,
-.comments-section textarea {
-  margin-bottom: 1em;
-  padding: 0.5em;
-   color: black;
-   width: 400px;
-}
-
-.comments-section button {
-  padding: 0.5em 1em;
-   color: black;
-   font-family: 'Space Grotesk', sans-serif;
-    width: 200px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: solid 2px var(--outline);
-    border-radius: 100px;
-} */
