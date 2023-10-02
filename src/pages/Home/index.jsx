@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { Canvas } from "@react-three/fiber"
 import Environment from '../../components/Homepage/Environment'
 import "./home.css"
@@ -12,7 +12,6 @@ const cyl = new THREE.CylinderGeometry(1, 1, 2, 20)
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3)
 
 export default function Home() {
-
 
     return (
       <div id='home-container'>
@@ -31,6 +30,7 @@ export default function Home() {
               boxGeometry={box}
               triGeometry={tri}
               clyGeometry={cyl}
+              position={[0, -0.45, 0]}
             />
         <Environment />
         <OrbitControls makeDefault />

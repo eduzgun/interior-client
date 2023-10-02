@@ -27,7 +27,7 @@
     list-style: none;
 }
 
-.nav-row li:nth-child(4){
+.nav-row li:nth-child(3){
     margin-right: 60%;
 }
 
@@ -58,11 +58,6 @@
     max-height: 300px;
     
 
-}
-
-
-#profile-icon-2 {
-    color: var(--bg);
 }
 
 /* styling for the three-container - this is the canvas it sits on the page, not the page layout  */

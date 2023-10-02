@@ -1,28 +1,34 @@
 import React, { useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { useAuth } from '../../contexts';
 import { UserProfile } from '../../components';
 import './profile.css'
 
 const Profile = () => {
-  const [profileImage, setProfileImage] = useState(null)
-  const [user, setUser] = useState([])
-    const {id} = useParams()
-    useEffect(() => {
-        async function displayUser() {
-            const res = await fetch(`https://lap-4-project.onrender.com/users/1`)
-            const data = await res.json()
-            setUser(data)
-            console.log(data)
-        }
-        displayUser()
-    }, [])
+  const { usersUsername } = useAuth()
+  // const { user } = useAuth()
 
-  
+  const [userData, setUserData] = useState('')
+  const [likes, setLikes] = useState(null)
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+      async function displayUser() {
+          const res = await fetch(`https://lap-4-project.onrender.com/users/${usersUsername}`)
+          const data = await res.json()
+          setUserData(data.data)
+
+          // const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/1`)
+          const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/${data.data.id}`)
+          const data2 = await res2.json()
+          setLikes(data2.data)
+          
+          setLoading(false)
+      }
+      displayUser()
+  }, [])
+
   return (
     <>
-      <UserProfile user={user} />
+      <UserProfile loading={loading} user={userData} likes={likes} />
     </>
     
   )

@@ -8,6 +8,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
     const { setUser } = useAuth()
+    const { setUsersUsername }  = useAuth()
 
     const navigate = useNavigate()
 
@@ -49,13 +50,32 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         }
 
         try{
-            const resp = await fetch("http://localhost:5000/auth/login",options)
+            const resp = await fetch("https://lap-4-project.onrender.com/auth/login",options)
 
             if(resp.status == 204){
-                setUser(username)
-                setUsername("")
-                setPassword("")
-                navigate("/")
+                // setUser(username)
+
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                try {
+                    const resp2 = await fetch(`https://lap-4-project.onrender.com/users/${username}`,options)
+
+                    const data = await resp2.json()
+                    setUser(data.data.id)
+                    setUsersUsername(data.data.username)
+                    setUsername("")
+                    setPassword("")
+                    navigate("/")
+                    
+                } catch (err) {
+                    console.log(err)
+                }
+
             }else{
                 alert("You messed up.")
             }

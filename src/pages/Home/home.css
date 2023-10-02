@@ -8,7 +8,6 @@
 }
 
 #centre-button button {
-    padding: 0.75rem 5rem;
     font-size: 0.7rem;
     text-decoration: none;
     background-color: var(--outline);
@@ -23,8 +22,9 @@
 }
 
 #centre-button button:hover {
+    color: #009688;
     cursor: pointer;
-    background-color: var(--outlinefocus);
+    background-color: aliceblue;
 }
 
 #centre-button h3 {
@@ -50,6 +50,9 @@
     #home-container {
         height: 91.65vh;
     }
+    #centre-button button {
+        padding: 0.75rem 5rem;
+    }
 }
 
 @media only screen and (max-width:1400px) {
@@ -67,5 +70,8 @@
     }
     #home-container {
         height: 86.6vh;
+    }
+    #centre-button button {
+    padding: 0.75rem 4rem;
     }
 }
