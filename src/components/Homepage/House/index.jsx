@@ -7,14 +7,18 @@ import Chimney from '../Chimney';
 import Door from '../Door';
 import * as THREE from 'three'; // Import THREE library
 
-const House = (props) => {
+const House = ({ scrollY, ...props }) => {
   const csg = useRef();
-
+  
   // Add rotation
   useFrame(() => {
+
     csg.current.rotation.y += 0.02;
+    const newYPosition = -scrollY  * 0.1; // Adjust as needed
+  csg.current.rotation.y = newYPosition;
   });
 
+  
   return (
     <>
       <mesh scale={0.3} ref={csg} {...props}>
