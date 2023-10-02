@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest run --reporter verbose"
+    "test": "vitest run --reporter verbose",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@react-three/csg": "^3.0.0",
@@ -29,6 +30,7 @@
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",
     "react-spring": "^9.7.3",
+    "resize-observer-polyfill": "^1.5.1",
     "three": "^0.156.1"
   },
   "devDependencies": {

@@ -31,7 +31,7 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
     <>
         <div data-testid={"container"} className="switch-container">
             {/* <h4 id='login-label'>Login</h4> */}
-            <div className="switch" onClick={() => {changeState(); }}>
+            <div className="switch" onClick={() => {changeState();playAudio()}}>
                 <div id="toggle">
                     <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
                     <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
