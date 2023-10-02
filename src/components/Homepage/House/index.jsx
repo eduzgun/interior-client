@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect} from 'react';
 import { useRef } from 'react';
 import { Geometry, Base, Subtraction, Addition } from '@react-three/csg';
 import { useFrame } from '@react-three/fiber';
@@ -7,17 +7,33 @@ import Chimney from '../Chimney';
 import Door from '../Door';
 import * as THREE from 'three'; // Import THREE library
 
+import gsap from 'gsap';
+
 const House = ({ scrollY, ...props }) => {
   const csg = useRef();
-  
+  const tl = useRef();
   // Add rotation
   useFrame(() => {
-
     csg.current.rotation.y += 0.02;
-    const newYPosition = -scrollY  * 0.1; // Adjust as needed
-  csg.current.rotation.y = newYPosition;
+    const newYPosition = -scrollY * 0.1; // Adjust as needed
+    csg.current.rotation.y = newYPosition;
+    tl.current.seek(scroll.offset * tl.current.duration());
   });
 
+
+  useLayoutEffect(() => {
+    tl.current = gsap.timeline();
+
+    // VERTICAL ANIMATION
+    tl.current.to(
+      csg.current.position,
+      {
+        duration: 2,
+        y: -5,
+      },
+      0
+    );
+    });
   
   return (
     <>
