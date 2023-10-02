@@ -1,19 +1,25 @@
-
-
+* {
+    font-family: 'Space Grotesk',
+}
 
 .comments {
   margin-top: 20px;
   color: white;
   /* border: solid 2px green; */
+overflow-y: scroll;
+
 }
 
 .comments-title {
+    color: white;
   font-size: 30px;
   margin-bottom: 20px;
 }
 
 .comments-container {
   margin-top: 40px;
+  overflow-y: scroll;
+  background-color: white; 
   
 }
 
@@ -28,6 +34,7 @@
   margin-bottom: 8px;
   margin-top: 8px;
   /* border: 1px solid rgb(107, 114, 12); */
+  
 }
 
 .comment-form-button {
@@ -36,6 +43,7 @@
   background: #009688;
   border-radius: 8px;
   color: white;
+  
 }
 
 .comment-form-button:hover:enabled {
@@ -51,44 +59,53 @@
 
 .comment-form-cancel-button {
   margin-left: 10px;
-  border: solid 2px green;
+  border: solid 2px #009699;
   color: white;
 }
 
 .comment {
   display: flex;
   margin-bottom: 28px;
-  color: white;
+  color: black;
+  margin-bottom: 30px;
+  
 }
 
 .comment-image-container {
   margin-right: 12px;
+  
 }
 
 .comment-image-container img {
   border-radius: 50px;
+  
 }
 
 .comment-right-part {
   width: 100%;
+  margin-left: 30px;
   
 }
 
 .comment-content {
   display: flex;
+
   /* border: solid 2px yellow; */
 }
 
 .comment-author {
   margin-right: 8px;
-  font-size: 20px;
-  color: green;
+  margin-bottom: 5px;
+  font-size: 25px;
+  color: #009699;
   
 }
 
 .comment-text {
-  font-size: 18px;
+  font-size: 20px;
+ text-align: start;
   /* border: solid 2px green; */
+  
 }
 
 .comment-actions {
@@ -101,19 +118,22 @@
 }
 
 .comment-action {
+    font-size: 15px;
   margin-right: 8px;
-  color: white;
+  color: black;
+  
   /* border: solid 2px green; */
 }
 
 .comment-action:hover {
   text-decoration: underline;
-  color: white;
+  color: #B50109;
   /* border: solid 2px green; */
 }
 
 .replies {
   margin-top: 20px;
-  color: white;
+  color: black;
+  border-bottom: solid black 2px;
   /* border: solid 2px red; */
 }

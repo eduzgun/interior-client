@@ -7,14 +7,11 @@ import  Marker  from '../Marker';
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
-// import Comments from '../Comments';
-// import Comments from '../NestedComments';
-
 import Comments from "../nestedComments/Comments";
-import Comment from "../nestedComments/Comment";
-
 import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
+
+//need to add use auth here to enable comments and likes with user in return statement at the bottom:--)
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
@@ -149,6 +146,7 @@ scene.backgroundIntensity = 1
   
 
   return (
+    
     <>
       <div ref={containerRef} className="environment-map" />
       
@@ -159,6 +157,7 @@ scene.backgroundIntensity = 1
       </div>
       {showComments && <Comments commentsUrl="http://localhost:3004/comments"
         currentUserId="1" />} 
+    
     </>
   );
 };
