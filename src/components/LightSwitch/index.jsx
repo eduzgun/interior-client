@@ -28,14 +28,22 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
 
 
   return (
-    <div data-testid={"container"} className="switch-container">
-        <div className="switch" onClick={() => {changeState();playAudio()}}>
-            <div id="toggle">
-                <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
-                <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
+    <>
+        <div data-testid={"container"} className="switch-container">
+            <h4 id='login-label'>Click To Switch</h4>
+            <div className="switch" onClick={() => {changeState();playAudio()}}>
+                <div id="toggle">
+                    <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
+                    <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
+                </div>
+            </div>
+            <div id='register-label' className="spacebar-graphic">
+                <p>Or Press Space</p>
+                <div className="spacebar"></div>
             </div>
         </div>
-    </div>
+    </>
+
   )
 }
 
