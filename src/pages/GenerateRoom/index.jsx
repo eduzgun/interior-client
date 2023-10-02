@@ -17,6 +17,7 @@ const GenerateRoom = () => {
     const [description,setDescription] = useState("")
     const [theme, setTheme] = useState("")
     const [select,setSelect] = useState("Bedroom")
+    const [files, setFiles] = useState([])
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
@@ -30,6 +31,7 @@ const GenerateRoom = () => {
     const dimRef = useRef()
     const descRef=  useRef()
     const themeRef = useRef()
+    const dropdownRef = useRef()
     const submitRef = useRef()
     const homeBtnRef = useRef()
     const completedRef = useRef()
@@ -252,25 +254,67 @@ const GenerateRoom = () => {
       }
 
     async function postToRoomTable(){
-        const data = {
-            name:filename,
-            dimensions:dimensions,
-            description:description,
-            theme:theme,
-            // category:select,
-            user_id:user
-        }
 
-        const jsonData = JSON.stringify(data)
+        const imgs = facesRef.current.children         
+
+        const formData = new FormData()
+
+        for(let i=0;i<imgs.length;i++){
+            const imgHref = imgs[i].href 
+
+            const response = await fetch(imgHref);
+            const blob = await response.blob();
+
+            // const f = new File([blob], `file${i}`, { type: "image/jpeg", });
+
+            formData.append(`file${i}`,blob)
+
+            // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
+            //     submitRef.current.style.display = "none"
+            //     homeBtnRef.current.style.display = "block"
+            //     completedRef.current.style.display = "block"
+            //     console.log("Upload Successful", resp);
+            
+            // })
+        } 
+        
+        
+
+        formData.append("name",filename)
+        formData.append("dimensions",dimensions)
+        formData.append("description",description)
+        formData.append("theme",theme)
+        formData.append("category",select)
+        formData.append("user_id",user)
+
+        console.log([...formData.entries()])
+
+        // const data = {
+        //     name:filename,
+        //     dimensions:dimensions,
+        //     description:description,
+        //     theme:theme,
+        //     category:select,
+        //     user_id:user
+        // }
+
+        // const jsonData = JSON.stringify(data)
 
         try {
-            const newRoom = await axios.post("http://localhost:5000/rooms",jsonData,{
+            const newRoom = await axios.post('http://localhost:5000/rooms', formData, {
                 headers: {
-                    'Content-Type': 'application/json'
+                  'Content-Type': 'multipart/form-data'
                 }
-            })
-            return newRoom.data
+              })
+              .then(response => {
+                console.log('Response:', response.data);
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
             
+            return newRoom
+            // console.log(newRoom.data)
         } catch (error) {
             console.log("hella",error)
         }
@@ -282,24 +326,26 @@ const GenerateRoom = () => {
         if(complete){
             try {
                 postToRoomTable().then(resp => {
-                    const room_id = resp.data.id
-                    try {
-                        const imgs = facesRef.current.children            
-                        for(let i=0;i<imgs.length;i++){
-                            const imgHref = imgs[i].href 
-                            uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
-                                submitRef.current.style.display = "none"
-                                homeBtnRef.current.style.display = "block"
-                                completedRef.current.style.display = "block"
-                                clearFields()
-                                console.log("Upload Successful", resp);
+                    const room_id = resp})
+                    // try {
+                    //     // const imgs = facesRef.current.children            
+                    //     // for(let i=0;i<imgs.length;i++){
+                    //     //     const imgHref = imgs[i].href 
+
+                    //     //     setFiles(files.push(imgHref))
+                    //         // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
+                    //         //     submitRef.current.style.display = "none"
+                    //         //     homeBtnRef.current.style.display = "block"
+                    //         //     completedRef.current.style.display = "block"
+                    //         clearFields()
+                    //         //     console.log("Upload Successful", resp);
                             
-                            })
-                        } 
-                    } catch (error) {
-                        console.error(error);
-                    }
-                })
+                    //         })
+                    // } catch (error) {
+                    //     console.error(error);
+                
+                // })
+                console.log("line309",files)
             } catch (error) {
                 console.log(error)
             }
@@ -336,6 +382,7 @@ const GenerateRoom = () => {
         dimRef.current.value = ""
         descRef.current.value = ""
         themeRef.current.value = ""
+        dropdownRef.current.value = ""
         submitRef.current.value = ""
     }
 
@@ -345,6 +392,7 @@ const GenerateRoom = () => {
         dimRef.current.disabled = truthy
         descRef.current.disabled = truthy
         themeRef.current.disabled = truthy
+        dropdownRef.current.disabled = truthy
         submitRef.current.disabled = truthy
     }
 
@@ -436,7 +484,7 @@ const GenerateRoom = () => {
                     </div>
                     <div className="inputs" id="category-input">
                         <label htmlFor="category">Category</label>
-                        <select name="category-dropdown" id="category-dropdown" value={select} onChange={handleCategory}>
+                        <select ref={dropdownRef} name="category-dropdown" id="category-dropdown" value={select} onChange={handleCategory}>
                             <option value="Bedroom">Bedroom</option>
                             <option value="Kitchen">Kitchen</option>
                             <option value="Garden">Garden</option>
