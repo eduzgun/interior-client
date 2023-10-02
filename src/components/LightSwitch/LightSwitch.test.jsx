@@ -9,10 +9,11 @@ expect.extend(matchers);
 import LightSwitch from '.';
 
 describe('LightSwitch component', () => {
+ 
     beforeEach(() => {
         render(
             <BrowserRouter>
-                <LightSwitch changeState={true} toggleSwitch={true}/>
+                <LightSwitch changeState={() => {}} toggleSwitch={true}/>
             </BrowserRouter>
         );
     });
@@ -21,6 +22,8 @@ describe('LightSwitch component', () => {
         const container = screen.getByTestId("container");
         expect(container).toBeTruthy()
     });
+
+
 
     afterEach(() => {
         cleanup();
