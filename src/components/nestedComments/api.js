@@ -1,3 +1,9 @@
+const timestamp = Date.now();
+const date = new Date(timestamp);
+const formattedDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} on ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
+console.log(formattedDate);
+
 export const getComments = async () => {
   return [
     {
@@ -6,7 +12,7 @@ export const getComments = async () => {
       username: "Jack",
       userId: "1",
       parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: formattedDate,
     },
     {
       id: "2",
@@ -14,7 +20,7 @@ export const getComments = async () => {
       username: "John",
       userId: "2",
       parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: formattedDate,
     },
     {
       id: "3",
@@ -22,7 +28,7 @@ export const getComments = async () => {
       username: "John",
       userId: "2",
       parentId: "1",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: formattedDate,
     },
     {
       id: "4",
@@ -30,7 +36,7 @@ export const getComments = async () => {
       username: "John",
       userId: "2",
       parentId: "2",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: formattedDate,
     },
   ];
 };
