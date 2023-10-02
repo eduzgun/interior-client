@@ -1,11 +1,12 @@
 import React from 'react';
-import { Room } from '../../components'
+import { Gallery, Room } from '../../components'
 
 const Garden = () => {
   return (
     <div>
         <div className='center-page-room'>
-      <Room />
+            <Gallery />
+      {/* <Room /> */}
       </div>
       
     </div>
