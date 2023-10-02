@@ -44,3 +44,32 @@
     background: linear-gradient(0deg, rgb(69, 67, 71) 0%, rgba(170,171,172,1) 81%);
     transform: rotateX(55deg);
 }
+
+#login-label,
+#register-label{
+    position: absolute;
+    font-size: 1.6rem;
+}
+
+#login-label{
+    top: -50px;
+}
+
+#register-label{
+    bottom: -50px;
+}
+
+.spacebar-graphic{
+    position: absolute;
+    bottom: -180px;
+    text-align: center;
+}
+
+.spacebar{
+    width: 350px;
+    height: 50px;
+    margin: 5px;
+    background: linear-gradient(90deg, rgb(70, 70, 70) 4%, rgb(147, 154, 160) 66%);
+    border-radius: 5px;
+    box-shadow: inset 3px -3px 0px 5px rgb(180, 186, 199);
+}

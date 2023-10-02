@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import "./style.css"
 import { useAuth } from "../../contexts"
 import { useNavigate } from 'react-router-dom'
+import { QuestionHelp } from '../../components'
 
 const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
@@ -13,7 +14,8 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
     const activeStyle = {
       "border": "1px solid var(--outline)",
-      "color": "var(--outline)"
+      "color": "var(--outline)",
+      "backgroundColor":"var(--outline)"
     }
 
     const showLight = {
@@ -89,9 +91,10 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
             <img src="./src/assets/images/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
             <div id="llight" style={!toggleSwitch ? showLight : {}}></div>
         </div>
+        <QuestionHelp active={toggleSwitch} title={"Logging In"} content={<p>Made an account? Then please enter your username and password in the entries below.<br /><br />Haven't made one? Hit the switch in the center!</p>}/>
         <header>
             <h2>Log In</h2>
-            <p>*placeholder text*</p>
+            {/* <p>*placeholder text*</p> */}
         </header>
         <form data-testid={"login-form"} onSubmit={sendLoginRequest}>
             <label htmlFor="username">username</label>

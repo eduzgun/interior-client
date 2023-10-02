@@ -1,5 +1,6 @@
 import React,{ useRef, useState } from 'react'
 import "./style.css"
+import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
 
@@ -13,7 +14,8 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
 
     const activeStyle = {
         "border": "1px solid var(--outline)",
-        "color": "var(--outline)"
+        "color": "var(--outline)",
+        "backgroundColor":"var(--outline)"
     }
 
     const showLight = {
@@ -105,6 +107,12 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
             <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
         </div>
+        <QuestionHelp active={toggleSwitch} title={"Signing Up"} content={<p>Not sure how to register? In each box enter the required content.<br /><br />Make sure your passwords contain at least one:<br/><ul>
+            <li>Uppercase Letter</li>
+            <li>Digit</li>
+            <li>Special Character .,*&^!"</li>
+            </ul></p>}
+            orientation={"left"}/>
         <header>
             <h2>Register</h2>
         </header>

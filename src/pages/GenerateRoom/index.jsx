@@ -4,6 +4,7 @@ import "./style.css"
 import { useAuth } from '../../contexts'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { QuestionHelp } from '../../components'
 
 const GenerateRoom = () => {
 
@@ -15,7 +16,6 @@ const GenerateRoom = () => {
     const [dimensions,setDimensions] = useState("")
     const [description,setDescription] = useState("")
     const [theme, setTheme] = useState("")
-    const [dropdown,setDropdown] = useState(true)
     const [select,setSelect] = useState("Bedroom")
 
     const [context,setContext] = useState("")
@@ -33,7 +33,6 @@ const GenerateRoom = () => {
     const submitRef = useRef()
     const homeBtnRef = useRef()
     const completedRef = useRef()
-    const questionRef = useRef()
 
     const navigate = useNavigate()
     
@@ -380,14 +379,7 @@ const GenerateRoom = () => {
         setSelect(e.target.value)
     }
 
-    function toggleDrop(){
-        setDropdown(!dropdown)
-        if(dropdown){
-            questionRef.current.style.display = "block"
-        }else{
-            questionRef.current.style.display = "none"
-        }
-    }
+    
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -411,20 +403,11 @@ const GenerateRoom = () => {
     return (
         <div id="wrapper" data-testid={"wrapper"} >
             <div className="generator-container" data-testid={"generator-container"}>
-                <div id="questions">
-                    <p id='qmark' onClick={toggleDrop}>?</p>
-                    <div ref={questionRef} id="qbox">
-                        <h3>What do I do here?</h3>
-                        <p>
-                            You see the button that says: "Choose File" over there? <br/><br />
-                            You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
-                        </p>
-                        <details><summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>
-                        <img id="example-panoramic" src="./src/pages/GenerateRoom/Living-Room-Panorama.jpg" alt="" />
-                        </details>
-                    </div>
-                </div>
-                {/* <input type="file" onChange={convertImage}/> */}
+                <QuestionHelp title={"What do I do here?"} content={<p>
+                     You see the button that says: "Choose File" over there? <br/><br />
+                    You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+                </p>} drop_down={<summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>}/>
+                
                 <div id="cubemap" style={cubeMapStyle}>
                     <output id="faces" ref={facesRef} ></output>
                 </div>
