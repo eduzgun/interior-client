@@ -41,7 +41,7 @@ const Login = () => {
   },[])
 
   return (
-    <div id='login-page' onKeyPress={keyboardSwitch} tabIndex={0} aria-label='Press space to switch between login and register'>
+    <div id='login-page' onKeyDown={keyboardSwitch} tabIndex={0} aria-label='Press space to switch between login and register'>
         <LoginCard cardHeight={cardHeight} toggleSwitch={toggleSwitch} focusStyle={focusStyle} />
 
         <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/>
