@@ -40,7 +40,7 @@ Inspire My Space is built using the following technologies - make sure are avail
 ### Explore Environments
 Dive into a world of possibilities with our Explore page, featuring Environment Maps of various room types, including kitchens, bedrooms, living rooms, and more. Each Environment Map offers a vivid, immersive experience that lets you step into your dream space.
 
-### Like and Save
+### Like, Comment and Save
 Love what you see? Now you can like and save your favorite designs right in your user profile. Easily revisit and draw inspiration from the designs that captivate you the most.
 
 ### Designer Contact
