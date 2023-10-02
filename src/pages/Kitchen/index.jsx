@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent } from '../../components'
+
+import { Room, StylesComponent, BackButton } from '../../components'
 
 const kitchenImages = [
   { src: '../../src/assets/environmentMaps/kitchen/1.png', alt: 'Image 1' },
@@ -60,6 +61,11 @@ function KitchenPage() {
 }, [selectedImage]);
 
   return (
+    <>
+    <div className='title-section'>
+      <h1 className='room-title'>Kitchen Inspiration</h1>
+      <BackButton backTo="/explore" label="Back to Explore" />
+      </div>
     <div className={`kitchen-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
   <div className="kitchen__item-container" key={index} onClick={() => handleImageClick(image, index)}>
@@ -71,8 +77,7 @@ function KitchenPage() {
       {selectedImage && (
         <div className="fullscreen-div">
         <div className="fullscreen-content">
-            {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-            <div className="description">{selectedImage.description}</div> */}
+
             <Room mapSet="kitchen" initialMapIndex={selectedImageIndex} />
             
             <button className="close-button" onClick={handleCloseClick}>Close</button>
@@ -80,6 +85,7 @@ function KitchenPage() {
     </div>
       )}
     </div>
+    </>
   );
 }
 

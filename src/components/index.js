@@ -13,8 +13,6 @@ export {default as QuestionHelp} from "./QuestionHelp"
 
 export { default as StylesComponent } from "./Styles"
 
-// export { default as CommentForm} from "./NestedComments"
+export { default as BackButton } from "./BackButton"
 
-// export { default as Comment} from "./NestedComments"
 
-// export { default as Comments} from "./NestedComments"

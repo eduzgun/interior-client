@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent } from '../../components'
+import { Room, StylesComponent, BackButton } from '../../components'
+import { Link } from 'react-router-dom';
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
@@ -68,25 +69,32 @@ function BedroomPage() {
 }, [selectedImage]);
 
   return (
+    <div>
+        <div className='title-section'>
+      <h1 className='room-title'>Bedroom Inspiration</h1>
+      <BackButton backTo="/explore" label="Back to Explore" />
+      </div>
+    
     <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
   <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
     <img className='bedroom__item' src={image.src} alt={image.alt} />
     <div className="bedroom__item-caption">{image.style}</div>
   </div>
+  
 ))}
 
       {selectedImage && (
         <div className="fullscreen-div">
         <div className="fullscreen-content">
-            {/* <img src={selectedImage.src} alt={selectedImage.alt} className="fullscreen-image" />
-            <div className="description">{selectedImage.description}</div> */}
+          
             <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
             
             <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
     </div>
       )}
+    </div>
     </div>
   );
 }

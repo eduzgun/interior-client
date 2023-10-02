@@ -325,6 +325,30 @@ cursor: pointer;
   pointer-events: none; 
 }
 
+.title-section {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.room-title {
+  color:white;
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-bottom: 10px
+}
+
+.back-to-button {
+  margin-top: 30px;
+  margin-right: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #009688;
+}
+
+.back-to-button:hover {
+    color: #005f5f;
+}
 
 
  

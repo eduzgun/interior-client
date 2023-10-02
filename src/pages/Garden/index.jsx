@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent } from '../../components'
+import { Room, StylesComponent, BackButton } from '../../components'
+
+import { Link } from 'react-router-dom'
 
 const gardenImages = [
   { src: '../../src/assets/environmentMaps/garden/1.png', alt: 'Image 1' },
@@ -61,6 +63,11 @@ function GardenPage() {
 }, [selectedImage]);
 
   return (
+    <>
+    <div className='title-section'>
+      <h1 className='room-title'>Garden Inspiration</h1>
+      <BackButton backTo="/explore" label="Back to Explore" />
+      </div>
     <div className={`garden-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
   <div className="garden__item-container" key={index} onClick={() => handleImageClick(image, index)}>
@@ -80,6 +87,7 @@ function GardenPage() {
     </div>
       )}
     </div>
+    </>
   );
 }
 

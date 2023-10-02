@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent } from '../../components'
+import { Room, StylesComponent, BackButton } from '../../components'
+import { Link } from 'react-router-dom';
 
 const bathroomImages = [
   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
@@ -69,6 +70,11 @@ function BathroomPage() {
 }, [selectedImage]);
 
   return (
+    <>
+    <div className='title-section'>
+      <h1 className='room-title'>Bathroom Inspiration</h1>
+      <BackButton backTo="/explore" label="Back to Explore" />
+      </div>
     <div className={`bathroom-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
   <div className="bathroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
@@ -88,6 +94,7 @@ function BathroomPage() {
     </div>
       )}
     </div>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent } from '../../components'
+import { Room, StylesComponent, BackButton } from '../../components'
+
 
 const livingImages = [
   { src: '../../src/assets/environmentMaps/living/1.png', alt: 'Image 1' },
@@ -60,6 +61,11 @@ function LivingPage() {
 }, [selectedImage]);
 
   return (
+    <>
+    <div className='title-section'>
+      <h1 className='room-title'>Living Inspiration</h1>
+      <BackButton backTo="/explore" label="Back to Explore" />
+      </div>
     <div className={`living-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
   <div className="living__item-container" key={index} onClick={() => handleImageClick(image, index)}>
@@ -79,6 +85,7 @@ function LivingPage() {
     </div>
       )}
     </div>
+    </>
   );
 }
 
