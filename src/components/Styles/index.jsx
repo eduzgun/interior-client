@@ -21,24 +21,25 @@ const stylesList = [
     'Mediterranean'
 ];
 
-function getRandomStyle() {
-  const randomIndex = Math.floor(Math.random() * stylesList.length);
+function getSeededRandom(seed) {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
+
+function getRandomStyle(seed) {
+  const randomIndex = Math.floor(getSeededRandom(seed) * stylesList.length);
   return stylesList[randomIndex];
 }
 
-const StylesComponent = () => {
+const StylesComponent = ({ seed }) => {
   
-    const [currentStyle, setCurrentStyle] = useState(getRandomStyle());
+    const [currentStyle, setCurrentStyle] = useState(() => getRandomStyle(seed));
 
-    const pickRandomStyle = () => {
-    setCurrentStyle(getRandomStyle());
-  };
-
-  return (
-    
-    <div>{currentStyle}</div>
-   
-  )
+    return (
+        <div>
+            {currentStyle}
+        </div>
+    );
 }
 
 export default StylesComponent;

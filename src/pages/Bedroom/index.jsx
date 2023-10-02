@@ -37,14 +37,14 @@ function BedroomPage() {
     setSelectedImageIndex(null)
   };
 
-  useEffect(() => {
-   
-    const newImagesWithStyles = bedroomImages.map(image => ({
-      ...image,
-      style: <StylesComponent />,
+ useEffect(() => {
+    
+    const newImagesWithStyles = bedroomImages.map((image, index) => ({
+        ...image,
+        style: <StylesComponent seed={index} />,
     }));
     setImagesWithStyles(newImagesWithStyles);
-  }, []);
+}, []);
 
 
   useEffect(() => {
