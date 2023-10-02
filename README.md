@@ -52,6 +52,17 @@ Immerse yourself in your designs like never before with our panoramic view featu
 ### User Signup and Login
 Our robust login and registration system ensures that only legitimate users have access to the platform. Your information is protected, and you can confidently engage with others in the community.
 
+## Wins and Challenges
+
+### Wins
+- Successfully implemented a user-friendly and visually appealing interface
+- Integrated authentication features like login and sign up using JWT tokens
+
+
+### Challenges
+- Working with Github Actions
+- Vitest and Pytest setup
+
 
 # Contributors
 -Barbara Fajardo
