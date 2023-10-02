@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Comments, Room } from '../../components'
+import { Comments, Room, StylesComponent } from '../../components'
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', caption: "Art Decor" },
@@ -23,6 +23,7 @@ const bedroomImages = [
 ];
 
 function BedroomPage() {
+    const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
@@ -35,6 +36,16 @@ function BedroomPage() {
     setSelectedImage(null);
     setSelectedImageIndex(null)
   };
+
+  useEffect(() => {
+   
+    const newImagesWithStyles = bedroomImages.map(image => ({
+      ...image,
+      style: <StylesComponent />,
+    }));
+    setImagesWithStyles(newImagesWithStyles);
+  }, []);
+
 
   useEffect(() => {
   const handleScroll = (e) => {
@@ -58,13 +69,12 @@ function BedroomPage() {
 
   return (
     <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
-      {bedroomImages.map((image, index) => (
-        <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
-          <img className='bedroom__item' src={image.src} alt={image.alt} />
-          <div className="bedroom__item-caption">{image.caption}</div>
-    
-        </div>
-      ))}
+      {imagesWithStyles.map((image, index) => (
+  <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
+    <img className='bedroom__item' src={image.src} alt={image.alt} />
+    <div className="bedroom__item-caption">{image.style}</div>
+  </div>
+))}
 
       {selectedImage && (
         <div className="fullscreen-div">
