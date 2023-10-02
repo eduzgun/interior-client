@@ -1,17 +1,31 @@
 .explore-container {
+    margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 10px; 
+ grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .explore-item {
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
 }
 
 .explore-image {
+  margin-top: 10px;
   width: 100%;
-  display: block; 
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 20px; 
+   transition: transform 0.2s ease-in-out;
+   
+}
+
+.explore-image:hover {
+  transform: scale(1.05);
 }
 
 .overlay {
@@ -23,7 +37,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
+   transform: scale(1.05);
+   
 }
 
 .title {
