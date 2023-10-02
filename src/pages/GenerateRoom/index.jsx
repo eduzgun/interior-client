@@ -257,7 +257,7 @@ const GenerateRoom = () => {
             dimensions:dimensions,
             description:description,
             theme:theme,
-            category:select,
+            // category:select,
             user_id:user
         }
 
