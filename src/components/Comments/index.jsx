@@ -6,6 +6,8 @@ const Comments = () => {
     'Hmmmm not sure about this room at all tbh',
   ]);
 
+
+
   const [newComment, setNewComment] = useState('');
 
   const handleCommentChange = (event) => {
