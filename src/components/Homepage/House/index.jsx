@@ -14,6 +14,7 @@ const House = (props) => {
     })
     return (
         <>
+        
         <mesh scale={0.3} ref={csg}  {...props}>
         <Geometry  rotation-y={Math.PI * 0.25} computeVertexNormals>
             <Base name="base" geometry={props.boxGeometry} scale={[3, 3, 3]} />

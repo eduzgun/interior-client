@@ -11,6 +11,7 @@ const Window = (props) => {
             <Subtraction geometry={box} scale={[0.05, 1, 1]} />
             <Subtraction geometry={box} scale={[1, 0.05, 1]} />
             </Geometry>
+            
         </Subtraction>
     )
     

@@ -9,3 +9,4 @@ export {default as Gallery} from "./Gallery"
 
 export { default as Comments} from "./Comments"
 
+export { default as StylesComponent } from "./Styles"
