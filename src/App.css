@@ -25,6 +25,7 @@ body{
     align-items: center;
     width: 100%;
     height: calc(100vh - 70px);
+
 }
 
 /* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
@@ -97,7 +98,7 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
- overflow-y: scroll;
+ overflow-y: auto;
 
 }
 
@@ -115,10 +116,12 @@ font-size: 18px;
 
 .arrow-button.left {
     left: 10px;
+    
 }
 
 .arrow-button.right {
     right: 10px;
+    
 }
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
@@ -193,6 +196,7 @@ cursor: pointer;
     text-align: center;
     height: 100vh; 
     width: 100vw; 
+    /* overflow-y: auto; */
 }
 
 .kitchen-page, .bedroom-page, .bathroom-page {
@@ -202,6 +206,7 @@ cursor: pointer;
   margin-left: 15px;
   margin-right: 15px;
   row-gap: 25px;
+  
 }
 
 @media screen and (max-width: 767px) {
@@ -232,6 +237,7 @@ cursor: pointer;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .fullscreen-div {
@@ -240,15 +246,15 @@ cursor: pointer;
     top: 50%;
     left: 50%;
     width: 100%;  
-    height: 100;
+    height: 100%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8); 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 100; 
-    overflow-y: visible;
+    z-index: 100;
+    overflow-y: scroll;
 }
 
 
@@ -258,7 +264,8 @@ cursor: pointer;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    overflow-y: visible;
+    overflow-y: auto;
+
 }
 
 .description {
@@ -312,6 +319,8 @@ cursor: pointer;
 .bedroom-page.dimmed .bedroom__item-container {
   pointer-events: none; 
 }
+
+
 
  
 

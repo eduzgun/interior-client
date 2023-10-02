@@ -1,10 +1,9 @@
 
-
-
 .comments {
   margin-top: 20px;
   color: white;
   /* border: solid 2px green; */
+overflow-y: scroll;
 }
 
 .comments-title {
@@ -14,6 +13,8 @@
 
 .comments-container {
   margin-top: 40px;
+  overflow-y: scroll;
+  /* background-color: white; */
   
 }
 
