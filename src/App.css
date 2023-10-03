@@ -4,6 +4,7 @@
     --fg: hsl(244, 11%, 50%);
     --outline: rgba(25,23,30);
     --outlinefocus: rgba(170,171,172);
+    --font : #009688;
     font-size: 24px;
     font-family: 'Space Grotesk', sans-serif;
 }
@@ -12,6 +13,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: var(--bg);
+    /* overflow: hidden; */
 }
 
 
@@ -23,6 +25,7 @@ body{
     align-items: center;
     width: 100%;
     height: calc(100vh - 70px);
+
 }
 
 /* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
@@ -95,7 +98,7 @@ font-size: 18px;
   text-align: center;
   align-items: center;
  margin-top: 0px;
- overflow-y: scroll;
+ overflow-y: auto;
 
 }
 
@@ -113,10 +116,12 @@ font-size: 18px;
 
 .arrow-button.left {
     left: 10px;
+    
 }
 
 .arrow-button.right {
     right: 10px;
+    
 }
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
@@ -191,15 +196,22 @@ cursor: pointer;
     text-align: center;
     height: 100vh; 
     width: 100vw; 
+    /* overflow-y: auto; */
 }
 
-.kitchen-page, .bedroom-page, .bathroom-page {
+.kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-gap: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+  grid-gap: 30px;
+  margin-left: 80px;
+  margin-right: 80px;
   row-gap: 25px;
+  grid-auto-rows: 500px;
+
+}
+
+.bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
+  grid-row-end: span 2; 
 }
 
 @media screen and (max-width: 767px) {
@@ -209,7 +221,7 @@ cursor: pointer;
   }
 }
 
-.kitchen__item, .bedroom__item, .bathroom__item {
+.kitchen__item, .bedroom__item, .bathroom__item, .garden__item, .studio__item, .living__item {
     margin-top: 10px;
   width: 100%;
   height: 100%;
@@ -219,7 +231,7 @@ cursor: pointer;
  
 }
 
-.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover {
+.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover, .garden__item:hover, .bathroom__item:hover, .studio__item:hover, .living__item:hover {
   transform: scale(1.05);
 }
 
@@ -230,6 +242,7 @@ cursor: pointer;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .fullscreen-div {
@@ -238,15 +251,15 @@ cursor: pointer;
     top: 50%;
     left: 50%;
     width: 100%;  
-    height: 100;
+    height: 100%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8); 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 100; 
-    overflow-y: visible;
+    z-index: 100;
+    overflow-y: scroll;
 }
 
 
@@ -256,7 +269,8 @@ cursor: pointer;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    overflow-y: visible;
+    overflow-y: auto;
+
 }
 
 .description {
@@ -288,69 +302,87 @@ cursor: pointer;
 }
 
 
-.bedroom__item-container {
+.bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
   position: relative;
   display: inline-block;
 }
 
-.bedroom__item-caption {
+.bedroom__item-caption, .kitchen__item-caption, .garden__item-caption, .bathroom__item-caption, .studio__item-caption, .living__item-caption  {
   position: absolute;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); 
   color: white;
   width: 100%;
-  text-align: center;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+ 
 }
 
 .bedroom-page.dimmed .bedroom__item, 
-.bedroom-page.dimmed .bedroom__item-caption {
+.bedroom-page.dimmed .bedroom__item-caption, .kitchen-page.dimmed .kitchen__item
+.kitchen-page.dimmed .kitchen-caption, .garden-page.dimmed .garden__item 
+.garden-page.dimmed .garden-caption, .bathroom-page.dimmed .bathroom__item 
+.bathroom-page.dimmed .bathroom-caption, .studio-page.dimmed .studio__item, 
+.studio-page.dimmed .studio-caption, .living-page.dimmed .living__item, 
+.living-page.dimmed .living-caption {
   opacity: 0.1;
 }
 
-.bedroom-page.dimmed .bedroom__item-container {
+.bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container, .garden-page.dimmed .garden-container, .bathroom-page.dimmed .bathroom-container, .studio-page.dimmed .studio-container, .living-page.dimmed .living-container {
   pointer-events: none; 
 }
 
- 
-
-
-.comment {
-  border: 1px solid #ccc;
-  padding: 1em;
-  margin: 1em 0;
-   color: white;
+.title-section {
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
-.comments-list {
-  margin-bottom: 2em;
-  max-height: 200px; 
-  overflow-y: auto; 
-  padding-right: 10px;
-  color: white;
+.room-title {
+  color:white;
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-bottom: 10px
 }
 
-.comments-section form {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  margin-left: 50px;
+.back-to-button {
+  margin-top: 30px;
+  margin-right: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #009688;
 }
 
-.comments-section input,
-.comments-section textarea {
-  margin-bottom: 1em;
-  padding: 0.5em;
-   color: black;
-   width: 400px;
+.back-to-button:hover {
+    color: #005f5f;
 }
 
-.comments-section button {
-  padding: 0.5em 1em;
-   color: black;
-   font-family: 'Space Grotesk', sans-serif;
-    width: 200px;
-    font-size: 16px;
+/* .heart-container, .click-count {
+    margin: 0;
+    padding: 0;
+} */
+
+
+.heart-container {
+  size: 60px;
+    position: absolute;
+    top: 0px;  
+    right: 1px;
     cursor: pointer;
-    outline: solid 2px var(--outline);
-    border-radius: 100px;
+    z-index: 10; 
+}
+
+
+.click-count {
+    position: absolute;
+    top: 25px;   
+    right: 74px;  
+    cursor: pointer;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    background: rgb(240, 240, 240, 0.1);
+    z-index: 10; 
+    font-family: Arial, Helvetica, sans-serif;
 }

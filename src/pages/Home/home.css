@@ -1,78 +1,96 @@
 #home-container {
-    height: 86.6vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    z-index: 1;
-    /* background-color: rgb(214, 219, 224); */
+  display: flex;
+  justify-content: space-between; /* Space between left and right content */
+  align-items: flex-start; /* Align content to the top */
+  text-align: center;
 }
 
-#centre-button button {
+#left-content {
+  padding: 20px;
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-section {
+  margin-bottom: 500px; /* Add some margin for spacing between text sections */
+}
+  
+h3 {
+  font-size: 45px;
+}
+.text-section :nth-child(1) {
+  margin-top: 100px;
+}
+  #right-content {
+    width: 100%; /* Take up the full width of the container */
+    display: flex;
+    justify-content: center;
+    position: sticky; /* Make it sticky */
+    top: 0; /* Stick to the top of the viewport */
+    z-index: 1; /* Ensure it's above other content */
+  }
+  
+  /* Adjust button styling as needed */
+  #left-content button {
     padding: 0.60rem 2rem;
     font-size: 0.7rem;
     text-decoration: none;
     background-color: #009688;
     outline: solid 1px var(--outlinefocus);
-    color: aliceblblue;
+    color: aliceblue;
     font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
-    z-index: 1;
-    margin: 30px;
-    /* font-weight: bold; */
-}
-
-#centre-button button:hover {
+    margin: 10px; /* Reduce the margin for spacing */
+  }
+  
+  #left-content button:hover {
     color: #009688;
     cursor: pointer;
-    background-color: aliceblue;
-}
-
-#centre-button h3 {
+    background-color: var(--outlinefocus);
+  }
+  
+  h3 {
     padding: 1rem;
-}
-
-#centre-button {
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: aliceblue;
-}
-
-@media only screen and (min-width: 1401px) {
-    #centre-button {
-        padding: 100px;
-        display: flex;
-        width: 50vw;
-        /* position: relative;
-        bottom: 6rem; */
-    }
+  }
+  
+  canvas {
+    height: 100vh; /* Set a fixed height to make it scrollable */
+    width: 100%; /* Take up the full width of the container */
+  }
+  
+  /* Media queries for responsiveness */
+  @media only screen and (min-width: 1401px) {
     #home-container {
-        height: 91.65vh;
+      flex-direction: row; /* Return to row direction on larger screens */
+      justify-content: flex-start;
+      align-items: flex-start; /* Align content to the top */
+    }
+  
+    #left-content {
+      padding: 100px;
     }
     #centre-button button {
         padding: 0.75rem 5rem;
     }
-}
-
-@media only screen and (max-width:1400px) {
-    #centre-button {
-        color: aliceblue;
-        padding: 50px;
-        display: flex;
-        text-align: center;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 50vw;
-        /* position: relative;
-        bottom: 3.3rem; */
+  }
+  
+  @media only screen and (max-width: 1400px) {
+    #left-content {
+      color: aliceblue;
+      padding: 50px;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 50vw;
     }
+  
     #home-container {
-        height: 86.6vh;
+      height: 2000px;
     }
-    #centre-button button {
-    padding: 0.75rem 4rem;
-    }
-}
+  }
+  

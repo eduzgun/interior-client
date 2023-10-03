@@ -12,7 +12,7 @@
 
 .card{
     /* background-color: ; */
-    width: 20%;
+    width: 30%;
     height: 55%;
     display: flex;
     flex-direction: column;
@@ -23,5 +23,5 @@
     border-radius: 20px;
     border: 2px solid var(--outline);
     z-index: 2;
+    perspective: 500px;
 }
-

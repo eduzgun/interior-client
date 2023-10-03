@@ -1,7 +1,7 @@
-import React, { Children } from 'react';
-import { AuthProvider } from '../../contexts/index';
+import React from 'react';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { screen, render, cleanup } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react'
+import { AuthProvider } from '../../contexts';
 
 import { MemoryRouter } from 'react-router-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
@@ -13,10 +13,12 @@ import NavBar from '.';
 describe('NavBar Component', () => { 
     beforeEach(() => {
         render(
-        <AuthProvider>
-        <MemoryRouter>
-            <NavBar />
-        </MemoryRouter> </AuthProvider>)
+            <AuthProvider>
+                <MemoryRouter>
+                    <NavBar/>
+                </MemoryRouter>
+            </AuthProvider>
+        )
     })
 
     afterEach(() => {

@@ -3,14 +3,15 @@ import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import  Marker  from '../Marker';
+ 
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
-import Comments from '../Comments';
-
+import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
+
+//need to add use auth here to enable comments and likes with user in return statement at the bottom:--)
 
 const EnvironmentMap = ({ mapUrls }) => {
   const containerRef = useRef(null);
@@ -22,8 +23,7 @@ const EnvironmentMap = ({ mapUrls }) => {
 
   const { user } = useAuth();
 
-
-
+  console.log(user)
 
   const handleLike = async () => {
     
@@ -34,7 +34,7 @@ const EnvironmentMap = ({ mapUrls }) => {
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
         user_id: user,
-        room_id: 3
+        room_id: 1
     };
     console.log(likeData)
 
@@ -145,6 +145,7 @@ scene.backgroundIntensity = 1
   
 
   return (
+    
     <>
       <div ref={containerRef} className="environment-map" />
       
@@ -153,7 +154,9 @@ scene.backgroundIntensity = 1
         <Heart isClick={isClick} onClick={handleLike} />
         <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
       </div>
-      {showComments && <Comments />} 
+      {showComments && <Comments commentsUrl="http://localhost:3004/comments"
+        currentUserId="1" />} 
+    
     </>
   );
 };

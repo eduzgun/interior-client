@@ -4,6 +4,7 @@ import "./style.css"
 import { useAuth } from '../../contexts'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { QuestionHelp } from '../../components'
 
 const GenerateRoom = () => {
 
@@ -15,7 +16,8 @@ const GenerateRoom = () => {
     const [dimensions,setDimensions] = useState("")
     const [description,setDescription] = useState("")
     const [theme, setTheme] = useState("")
-    const [dropdown,setDropdown] = useState(true)
+    const [select,setSelect] = useState("Bedroom")
+    const [files, setFiles] = useState([])
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
@@ -29,10 +31,10 @@ const GenerateRoom = () => {
     const dimRef = useRef()
     const descRef=  useRef()
     const themeRef = useRef()
+    const dropdownRef = useRef()
     const submitRef = useRef()
     const homeBtnRef = useRef()
     const completedRef = useRef()
-    const questionRef = useRef()
 
     const navigate = useNavigate()
     
@@ -48,14 +50,6 @@ const GenerateRoom = () => {
         "background": "#eee",
         "marginTop": "15px"
       }
-
-
-    // const pzRef = useRef()
-    // const nzRef = useRef()
-    // const pxRef = useRef()
-    // const nxRef = useRef()
-    // const pyRef = useRef()
-    // const nyRef = useRef()
 
     let finished = 0;
     let workers = [];
@@ -260,24 +254,67 @@ const GenerateRoom = () => {
       }
 
     async function postToRoomTable(){
-        const data = {
-            name:filename,
-            dimensions:dimensions,
-            description:description,
-            theme:theme,
-            user_id:user
-        }
 
-        const jsonData = JSON.stringify(data)
+        const imgs = facesRef.current.children         
+
+        const formData = new FormData()
+
+        for(let i=0;i<imgs.length;i++){
+            const imgHref = imgs[i].href 
+
+            const response = await fetch(imgHref);
+            const blob = await response.blob();
+
+            // const f = new File([blob], `file${i}`, { type: "image/jpeg", });
+
+            formData.append(`file${i}`,blob)
+
+            console.log(blob);
+
+            // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
+            //     submitRef.current.style.display = "none"
+            //     homeBtnRef.current.style.display = "block"
+            //     completedRef.current.style.display = "block"
+            //     console.log("Upload Successful", resp);
+            
+            // })
+        } 
+        
+        
+
+        formData.append("name",filename)
+        formData.append("dimensions",dimensions)
+        formData.append("description",description)
+        formData.append("theme",theme)
+        formData.append("category",select)
+        formData.append("user_id",user)
+
+        // const data = {
+        //     name:filename,
+        //     dimensions:dimensions,
+        //     description:description,
+        //     theme:theme,
+        //     category:select,
+        //     user_id:user
+        // }
+
+        // const jsonData = JSON.stringify(data)
 
         try {
-            const newRoom = await axios.post("http://localhost:5000/rooms",jsonData,{
+            const newRoom = await axios.post('http://localhost:5000/rooms', formData, {
                 headers: {
-                    'Content-Type': 'application/json'
+                  'Content-Type': 'multipart/form-data'
                 }
-            })
-            return newRoom.data
+              })
+              .then(response => {
+                console.log('Response:', response.data);
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
             
+            return newRoom
+            // console.log(newRoom.data)
         } catch (error) {
             console.log("hella",error)
         }
@@ -289,24 +326,26 @@ const GenerateRoom = () => {
         if(complete){
             try {
                 postToRoomTable().then(resp => {
-                    const room_id = resp.data.id
-                    try {
-                        const imgs = facesRef.current.children            
-                        for(let i=0;i<imgs.length;i++){
-                            const imgHref = imgs[i].href 
-                            uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
-                                submitRef.current.style.display = "none"
-                                homeBtnRef.current.style.display = "block"
-                                completedRef.current.style.display = "block"
-                                clearFields()
-                                console.log("Upload Successful", resp);
+                    const room_id = resp})
+                    // try {
+                    //     // const imgs = facesRef.current.children            
+                    //     // for(let i=0;i<imgs.length;i++){
+                    //     //     const imgHref = imgs[i].href 
+
+                    //     //     setFiles(files.push(imgHref))
+                    //         // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
+                    //         //     submitRef.current.style.display = "none"
+                    //         //     homeBtnRef.current.style.display = "block"
+                    //         //     completedRef.current.style.display = "block"
+                    //         clearFields()
+                    //         //     console.log("Upload Successful", resp);
                             
-                            })
-                        } 
-                    } catch (error) {
-                        console.error(error);
-                    }
-                })
+                    //         })
+                    // } catch (error) {
+                    //     console.error(error);
+                
+                // })
+                console.log("line309",files)
             } catch (error) {
                 console.log(error)
             }
@@ -343,6 +382,7 @@ const GenerateRoom = () => {
         dimRef.current.value = ""
         descRef.current.value = ""
         themeRef.current.value = ""
+        dropdownRef.current.value = ""
         submitRef.current.value = ""
     }
 
@@ -352,6 +392,7 @@ const GenerateRoom = () => {
         dimRef.current.disabled = truthy
         descRef.current.disabled = truthy
         themeRef.current.disabled = truthy
+        dropdownRef.current.disabled = truthy
         submitRef.current.disabled = truthy
     }
 
@@ -382,14 +423,11 @@ const GenerateRoom = () => {
         setTheme(e.target.value)
     }
 
-    function toggleDrop(){
-        setDropdown(!dropdown)
-        if(dropdown){
-            questionRef.current.style.display = "block"
-        }else{
-            questionRef.current.style.display = "none"
-        }
+    function handleCategory(e){
+        setSelect(e.target.value)
     }
+
+    
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -411,22 +449,13 @@ const GenerateRoom = () => {
     },[fileState])
 
     return (
-        <div id="wrapper">
-            <div className="generator-container">
-                <div id="questions">
-                    <p id='qmark' onClick={toggleDrop}>?</p>
-                    <div ref={questionRef} id="qbox">
-                        <h3>What do I do here?</h3>
-                        <p>
-                            You see the button that says: "Choose File" over there? <br/><br />
-                            You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
-                        </p>
-                        <details><summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>
-                        <img id="example-panoramic" src="./src/pages/GenerateRoom/Living-Room-Panorama.jpg" alt="" />
-                        </details>
-                    </div>
-                </div>
-                {/* <input type="file" onChange={convertImage}/> */}
+        <div id="wrapper" data-testid={"wrapper"} >
+            <div className="generator-container" data-testid={"generator-container"}>
+                <QuestionHelp title={"What do I do here?"} content={<p>
+                     You see the button that says: "Choose File" over there? <br/><br />
+                    You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+                </p>} drop_down={<summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>}/>
+                
                 <div id="cubemap" style={cubeMapStyle}>
                     <output id="faces" ref={facesRef} ></output>
                 </div>
@@ -436,22 +465,33 @@ const GenerateRoom = () => {
 
                     <div className="inputs" id='filename-input'>
                         <label htmlFor="filename">Filename</label>
-                        <input ref={filenameInputRef} placeholder=">" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
+                        <input ref={filenameInputRef} placeholder="> file" type="text" name='filename' id='filename-field' onChange={handleFilename} required/>
                     </div>
 
                     <div className="inputs" id='dimensions-input'>
-                        <label htmlFor="dimensions">Dimensions</label>
-                        <input ref={dimRef} placeholder=">" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
+                        <label htmlFor="dimensions">Room Dimensions</label>
+                        <input ref={dimRef} placeholder="> 12m x 12m" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
                     </div>
 
                     <div className="inputs" id='description-input'>
                         <label htmlFor="description">Description</label>
-                        <textarea ref={descRef} maxLength={100} placeholder=">" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
+                        <textarea ref={descRef} maxLength={100} placeholder="> Fun description" name="description" id="description-field" cols="50" rows="3" onChange={handleDescription} required></textarea>
                     </div>
 
                     <div className="inputs" id='theme-input'>
                         <label htmlFor="theme">Themes</label>
-                        <input ref={themeRef} placeholder=">" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                        <input ref={themeRef} placeholder="> Modern, minimalist" type="text" name='theme' id='theme-field' onChange={handleTheme} required/>
+                    </div>
+                    <div className="inputs" id="category-input">
+                        <label htmlFor="category">Category</label>
+                        <select ref={dropdownRef} name="category-dropdown" id="category-dropdown" value={select} onChange={handleCategory}>
+                            <option value="Bedroom">Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Garden">Garden</option>
+                            <option value="Bathroom">Bathroom</option>
+                            <option value="Living Room">Living Room</option>
+                            <option value="Studio">Studio</option>
+                        </select>
                     </div>
                     <button ref={submitRef} id="submit-btn" type='submit'>Create</button>
                 </form>

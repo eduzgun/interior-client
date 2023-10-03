@@ -1,5 +1,5 @@
 .switch-container{
-    width: 200px;
+    width: 300px;
     height: 300px;
     background-color: var(--outline);
     display: flex;
@@ -20,6 +20,7 @@
 #toggle{
     perspective: inherit;
     position: relative;
+    cursor: pointer;
 }
 
 #shadedbit{
@@ -43,4 +44,35 @@
     background: rgb(25,23,30);
     background: linear-gradient(0deg, rgb(69, 67, 71) 0%, rgba(170,171,172,1) 81%);
     transform: rotateX(55deg);
+}
+
+#login-label,
+#register-label{
+    position: absolute;
+    font-size: 1.4rem;
+    font-weight: normal;
+}
+
+#login-label{
+    top: -60px;
+    width: 300px;
+    text-align: center;
+}
+
+#register-label{
+    bottom: -120px;
+}
+
+.spacebar-graphic{
+    position: absolute;
+    text-align: center;
+}
+
+.spacebar{
+    width: 350px;
+    height: 50px;
+    margin: 5px;
+    background: linear-gradient(90deg, rgb(70, 70, 70) 4%, rgb(147, 154, 160) 66%);
+    border-radius: 5px;
+    box-shadow: inset 3px -3px 0px 5px rgb(180, 186, 199);
 }

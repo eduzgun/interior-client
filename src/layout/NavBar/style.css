@@ -40,7 +40,7 @@
     outline: solid 2px var(--outline);
     padding: 12px 60px;
     border-radius: 100px;
-    
+    color: var(--font);
 }
 
 .nav-row a:hover{

@@ -4,7 +4,7 @@ import "../../App.css"
 
 const Explore = () => {
   return (
-    <div className='explore'>
+    <div className='explore' style={{"overflow":"hidden"}}>
     <ExploreItems />  
   </div>
   )
