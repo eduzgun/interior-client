@@ -85,6 +85,9 @@ export default function Home() {
             <h3>Welcome</h3>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
               ab soluta ullam optio eius.</p>
+              <Link to={`/explore`}>
+                <button>Enter</button>
+              </Link>
           </div>
           <div class="text-section">
             <h3>About us</h3>
@@ -96,9 +99,7 @@ export default function Home() {
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
               ab soluta ullam optio eius.</p>
           </div>
-          <Link to={`/explore`}>
-            <button>Enter</button>
-          </Link>
+          
       </div>
 
       <div id='right-content'>

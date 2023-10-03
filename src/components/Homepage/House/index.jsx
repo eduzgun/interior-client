@@ -6,7 +6,7 @@ import Window from '../Window';
 import Chimney from '../Chimney';
 import Door from '../Door';
 import * as THREE from 'three'; // Import THREE library
-
+import { useGLTF, MeshWobbleMaterial } from '@react-three/drei';
 import gsap from 'gsap';
 
 const House = ({ scrollY, ...props }) => {
@@ -15,42 +15,34 @@ const House = ({ scrollY, ...props }) => {
 
   // Add rotation
   useFrame(() => {
-    csg.current.rotation.y += 0.02; // Adjust rotation as needed
-    tl.current.seek(scrollY * 0.1); // Adjust scroll sensitivity
+    csg.current.rotation.y -= 0.02  // Adjust rotation as needed
+    //tl.current.seek(scrollY * 0.01); // Adjust scroll sensitivity
   });
 
   useLayoutEffect(() => {
     tl.current = gsap.timeline();
 
     // VERTICAL ANIMATION
-    tl.current.to(
-      csg.current.rotation.x,
-      {
-        duration: 1,
-        y: -5, // Adjust this value as needed
-      },
-      0
-    );
+    
 
     // Define the initial color as brown
     const initialColor = { r: 1, g: 1, b: 1 };
 
     // Color changes based on the timeline's progress
-    const purpleColor = { r: 0.7, g: 0.2, b: 0.9 };
+    const purpleColor = { r: 0.2, g: 0.4, b: 0.6 };
     const greenColor = { r: 0.2, g: 0.7, b: 0.2 };
 
     // Determine the color based on the scrollY position
-    const sectionHeight = 600; // Height of each text section
+    const sectionHeight = 700; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
     const targetColor = sectionIndex === 0 ? initialColor : sectionIndex === 1 ? greenColor : purpleColor;
 
     // Set the initial color before the animation starts
-    csg.current.children[0].children[3].material.color.set(initialColor);
 
     tl.current.to(
       csg.current.children[0].children[3].material.color,
       {
-        duration: 3,
+        duration: 0.2,
         ...targetColor,
         onStart: () => {
           csg.current.children[0].children[3].material.needsUpdate = true;
@@ -61,7 +53,7 @@ const House = ({ scrollY, ...props }) => {
     tl.current.to(
       csg.current.children[0].children[1].material.color,
       {
-        duration: 3,
+        duration: 0.2,
         ...targetColor,
         onStart: () => {
           csg.current.children[0].children[1].material.needsUpdate = true;
@@ -71,6 +63,8 @@ const House = ({ scrollY, ...props }) => {
   }, [scrollY]);
     
   
+  const { nodes, materials } = useGLTF('../../src/assets/models/low_poly_cat/scene.gltf');
+
   return (
     <>
       <mesh scale={0.3} ref={csg} {...props}>
@@ -87,6 +81,19 @@ const House = ({ scrollY, ...props }) => {
           <Window position={[0, 0.25, 1.5]} scale={1.25} material={new THREE.MeshStandardMaterial({ color: 'white' })} />
           <Window rotation={[0, Math.PI / 2, 0]} position={[1.425, 0.25, 0]} scale={1.25} material={new THREE.MeshStandardMaterial({ color: 'white' })} />
           <Door rotation={[0, Math.PI / 2, 0]} position={[-1.425, -0.45, 0]} scale={[1, 0.9, 1]} material={new THREE.MeshStandardMaterial({ color: 'black' })} />
+
+          <primitive
+          object={nodes.CatMesh2_lambert1_0} // Use the mesh name
+          material={
+            new THREE.MeshStandardMaterial({
+              color: "#cc9149", 
+            })
+          }   
+          position={[-2, -1.5, 2]}
+          scale={0.12}  
+          rotation={[0,4.2,0]}
+          />
+
         </Geometry>
         <meshStandardMaterial envMapIntensity={0.25} />
       </mesh>
