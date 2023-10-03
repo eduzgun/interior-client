@@ -269,6 +269,8 @@ const GenerateRoom = () => {
 
             formData.append(`file${i}`,blob)
 
+            console.log(blob);
+
             // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
             //     submitRef.current.style.display = "none"
             //     homeBtnRef.current.style.display = "block"
@@ -286,8 +288,6 @@ const GenerateRoom = () => {
         formData.append("theme",theme)
         formData.append("category",select)
         formData.append("user_id",user)
-
-        console.log([...formData.entries()])
 
         // const data = {
         //     name:filename,

@@ -20,6 +20,8 @@
     "cloudinary": "^1.41.0",
     "cloudinary-react": "^1.8.1",
     "cors": "^2.8.5",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "leva": "^0.9.35",
     "lil-gui": "^0.18.2",
     "panorama-to-cubemap": "^1.0.2",
