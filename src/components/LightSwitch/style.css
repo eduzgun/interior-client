@@ -7,7 +7,7 @@
     align-items: center;
     border-radius: 15px;
     transform: translateY(-100px);
-    outline: solid 1px var(--outlinefocus);
+    outline: solid 1px #49475B;
 }
 
 .switch{
