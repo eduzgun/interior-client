@@ -75,44 +75,26 @@ export default function Home() {
     };
   }, []);
 
-  return (
-    <div id="home-container">
-      <div id="left-content">
-        <div class="text-section">
-          <h3>Welcome to Inspire My Space</h3>
-          <p>
-            Inspire My Space is a revolutionary interior design application
-            designed to elevate your decision-making process when it comes to
-            transforming your living spaces!
-          </p>
-
-      
-        </div>
-
-        <div class="text-section">
-          <h3>About us</h3>
-          <p>
-            At Inspire My Space, we are passionate about transforming the way
-            you envision and create your living spaces. Our revolutionary
-            interior design application is meticulously crafted to empower both
-            individuals and professional interior designers. With our visually
-            engaging platform, we provide the inspiration and tools you need to
-            bring your design visions to life. Join us on a journey where
-            creativity meets functionality, and let Inspire My Space elevate
-            your interior design experience.
-          </p>
-        </div>
-        <div class="text-section">
-          <h3>Demo</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia
-            aspernatur eaque accusamus dicta accusantium ab soluta ullam optio
-            eius.
-          </p>
-        </div>
-        <Link to={`/explore`}>
-          <button>Enter</button>
-        </Link>
+    return (
+      <div id='home-container'>
+        <div id='left-content'>
+          <div class="text-section">
+            <h3>Welcome to Inspire My Space</h3>
+            <p>Inspire My Space is a revolutionary interior design application designed to elevate your decision-making process when it comes to transforming your living spaces!</p>
+              <Link to={`/explore`}>
+                <button>Explore now</button>
+              </Link>
+          </div>
+          <div class="text-section">
+            <h3>About us</h3>
+            <p>At Inspire My Space, we are passionate about transforming the way you envision and create your living spaces. With our visually engaging platform, we provide the inspiration and tools you need to bring your design visions to life. Join us on a journey where creativity meets functionality, and let Inspire My Space elevate your interior design experience.</p>
+          </div>
+          <div class="text-section">
+            <h3>Demo</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+              ab soluta ullam optio eius.</p>
+          </div>
+          
       </div>
 
       <div id="right-content">
