@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Room, StylesComponent, BackButton } from '../../components'
 import { Link } from 'react-router-dom';
+import Heart from "react-animated-heart";
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
@@ -24,6 +25,9 @@ const bedroomImages = [
 ];
 
 function BedroomPage() {
+
+    const [likedImages, setLikedImages] = useState(new Array(bedroomImages.length).fill(false));
+
     const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -46,6 +50,12 @@ function BedroomPage() {
     }));
     setImagesWithStyles(newImagesWithStyles);
 }, []);
+
+const toggleLike = (index) => {
+    const newLikedImages = [...likedImages];
+    newLikedImages[index] = !newLikedImages[index];
+    setLikedImages(newLikedImages);
+};
 
 
   useEffect(() => {
@@ -80,6 +90,9 @@ function BedroomPage() {
   <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
     <img className='bedroom__item' src={image.src} alt={image.alt} />
     <div className="bedroom__item-caption">{image.style}</div>
+    <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
+      <Heart isClick={likedImages[index]} />
+    </div>
   </div>
   
 ))}
