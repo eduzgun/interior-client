@@ -308,7 +308,9 @@ cursor: pointer;
   background: rgba(0, 0, 0, 0.5); 
   color: white;
   width: 100%;
-  text-align: center;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+ 
 }
 
 .bedroom-page.dimmed .bedroom__item, 
@@ -356,9 +358,6 @@ align-items: center;
 }
 
 
-
-
-
 .heart-container {
   size: 60px;
     position: absolute;
@@ -377,6 +376,6 @@ align-items: center;
     border-radius: 50px;
     display: flex;
     align-items: center;
-    background: rgb(240, 240, 240, 0.5);
+    background: rgb(240, 240, 240, 0.1);
     z-index: 10; 
 }
