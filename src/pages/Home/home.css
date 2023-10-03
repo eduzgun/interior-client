@@ -14,7 +14,7 @@
 }
 
 .text-section {
-  margin-bottom: 500px; /* Add some margin for spacing between text sections */
+  margin-bottom: 400px; /* Add some margin for spacing between text sections */
 }
   
 h3 {
@@ -34,7 +34,7 @@ h3 {
   
   /* Adjust button styling as needed */
   #left-content button {
-    padding: 0.60rem 2rem;
+    padding: 0.60rem 1rem;
     font-size: 0.7rem;
     text-decoration: none;
     background-color: #009688;
@@ -43,7 +43,7 @@ h3 {
     font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
-    margin: 10px; /* Reduce the margin for spacing */
+    margin: 40px; /* Reduce the margin for spacing */
   }
   
   #left-content button:hover {
@@ -52,7 +52,10 @@ h3 {
   }
   
   h3 {
-    padding: 1rem;
+    padding: 2rem;
+    color: #3E8989;
+
+
   }
   
   canvas {
@@ -89,4 +92,6 @@ h3 {
       height: 2000px;
     }
   }
+  
+
   
