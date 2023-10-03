@@ -2,7 +2,7 @@ import React,{ useState, useEffect, useRef } from 'react'
 import { LoginCard, LightSwitch, SignupCard } from "../../components"
 import "./style.css"
 import sound from "../../assets/audio/lightswitch.wav"
-
+import { BlobToImage } from "../../components"
 
 const Login = () => {
 
@@ -47,7 +47,6 @@ const Login = () => {
         <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/>
 
         <SignupCard cardHeight={cardHeight} toggleSwitch={toggleSwitch} focusStyle={focusStyle} setToggleSwitch={setToggleSwitch}/>
-
     </div>
   )
 }
