@@ -3,7 +3,7 @@ import axios from 'axios';
 import JSZip from "jszip"
 import "./style.css"
 
-const BlobToImage = ({ image_id, refs, className=""}) => {
+const BlobToImage = ({ image_id, refs, className="", loadedFunc }) => {
   const [images, setImages] = useState([]);
 
     async function extractImages(zipData){
@@ -45,6 +45,7 @@ const BlobToImage = ({ image_id, refs, className=""}) => {
                 method:"POST"
             })
             console.log("FINISHED");
+            loadedFunc(true)
         } catch (error) {
             console.log(error);
         }

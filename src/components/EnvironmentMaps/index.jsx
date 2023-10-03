@@ -24,10 +24,9 @@ const EnvironmentMap = ({ mapUrls }) => {
   const { user } = useAuth();
 
 
-
+  
 
   const handleLike = async () => {
-    
     
     setClick(prev => !prev);
     console.log(user)

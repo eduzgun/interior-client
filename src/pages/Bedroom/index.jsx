@@ -27,10 +27,6 @@ const bedroomImages = [
 ];
 
 function BedroomPage() {
-
-
-    const pageRefs = useRef([React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),])
-
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
 
 
@@ -84,40 +80,42 @@ const toggleLike = (index) => {
     window.removeEventListener('wheel', handleScroll);
   }
 
-  for(let img of pageRefs.current){
-    console.log(img.current.src);
-  }
+  // for(let img of pageRefs.current){
+  //   console.log(img.current.src);
+  // }
 
   return () => {
     window.removeEventListener('wheel', handleScroll);
   };
 }, [selectedImage]);
 
+
+
   return (
     <div>
-        <BlobToImage image_id={4} refs={pageRefs}/>
-        <div className='title-section'>
-      <h1 className='room-title'>Bedroom Inspiration</h1>
-      <BackButton backTo="/explore" label="Back to Explore" />
+      
+      <div className='title-section'>
+        <h1 className='room-title'>Bedroom Inspiration</h1>
+        <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     
-    <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
-      {imagesWithStyles.map((image, index) => (
-  <div className="bedroom__item-container" 
-    key={index} 
-    onClick={() => handleImageClick(image, index)}
-    onMouseEnter={() => setHoveredImageIndex(index)}
-    onMouseLeave={() => setHoveredImageIndex(null)}
-  >
-    <img className='bedroom__item' src={image.src} alt={image.alt} />
-    <div className="bedroom__item-caption">{image.style}</div>
+      <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
+        {imagesWithStyles.map((image, index) => (
+          <div className="bedroom__item-container" 
+            key={index} 
+            onClick={() => handleImageClick(image, index)}
+            onMouseEnter={() => setHoveredImageIndex(index)}
+            onMouseLeave={() => setHoveredImageIndex(null)}
+          >
+          <img className='bedroom__item' src={image.src} alt={image.alt} />
+          <div className="bedroom__item-caption">{image.style}</div>
     
-    {hoveredImageIndex === index && (
-      <div className="icon-container">
-    
-        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
-          <Heart isClick={likedImages[index]} />
-        </div>
+          {hoveredImageIndex === index && (
+            <div className="icon-container">
+          
+              <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
+                <Heart isClick={likedImages[index]} />
+              </div>
         
         <div className="click-count">
           <AiFillEye />
@@ -131,9 +129,9 @@ const toggleLike = (index) => {
 
       {selectedImage && (
         <div className="fullscreen-div">
-        <div className="fullscreen-content">
+          <div className="fullscreen-content">
           
-            <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
+            <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} room_id={4}/>
             
             <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>

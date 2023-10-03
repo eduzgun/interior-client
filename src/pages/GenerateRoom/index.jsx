@@ -253,14 +253,37 @@ const GenerateRoom = () => {
         }
       }
 
+
     async function postToRoomTable(){
 
-        const imgs = facesRef.current.children         
+        const imgs = facesRef.current.children   
 
         const formData = new FormData()
 
-        for(let i=0;i<imgs.length;i++){
-            const imgHref = imgs[i].href 
+        const posPositions = ["px","nx","py","ny","pz","nz"]
+
+        const arr = []
+        const sortedArray = []
+
+        posPositions.forEach(order => {
+            let matchingImg
+            for(let img of imgs){
+                if(img.title === order){
+                    matchingImg = img
+                }
+            }
+            if(matchingImg && !arr.includes(matchingImg)){
+                sortedArray.push(matchingImg)
+            }
+
+            
+        })
+
+        console.log(sortedArray);
+        console.log(arr);
+
+        for(let i=0;i<sortedArray.length;i++){
+            const imgHref = sortedArray[i].href
 
             const response = await fetch(imgHref);
             const blob = await response.blob();
@@ -268,8 +291,6 @@ const GenerateRoom = () => {
             // const f = new File([blob], `file${i}`, { type: "image/jpeg", });
 
             formData.append(`file${i}`,blob)
-
-            console.log(blob);
 
             // uploadBlobFromHrefToCloudinary(imgHref,i,room_id).then(resp => {
             //     submitRef.current.style.display = "none"
@@ -289,16 +310,8 @@ const GenerateRoom = () => {
         formData.append("category",select)
         formData.append("user_id",user)
 
-        // const data = {
-        //     name:filename,
-        //     dimensions:dimensions,
-        //     description:description,
-        //     theme:theme,
-        //     category:select,
-        //     user_id:user
-        // }
 
-        // const jsonData = JSON.stringify(data)
+        // KEEP THIS
 
         try {
             const newRoom = await axios.post('http://localhost:5000/rooms', formData, {
@@ -345,7 +358,6 @@ const GenerateRoom = () => {
                     //     console.error(error);
                 
                 // })
-                console.log("line309",files)
             } catch (error) {
                 console.log(error)
             }

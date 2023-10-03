@@ -55,7 +55,6 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
             if(resp.status == 204){
                 setUser(username)
-                console.log("line58");
                 const options = {
                     method: 'GET',
                     headers: {
