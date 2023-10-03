@@ -40,9 +40,9 @@ const House = ({ scrollY, ...props }) => {
     const greenColor = { r: 0.2, g: 0.7, b: 0.2 };
 
     // Determine the color based on the scrollY position
-    const sectionHeight = 500; // Height of each text section
+    const sectionHeight = 600; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
-    const targetColor = sectionIndex % 2 === 0 ? initialColor : purpleColor;
+    const targetColor = sectionIndex === 0 ? initialColor : sectionIndex === 1 ? greenColor : purpleColor;
 
     // Set the initial color before the animation starts
     csg.current.children[0].children[3].material.color.set(initialColor);
@@ -57,8 +57,20 @@ const House = ({ scrollY, ...props }) => {
         },
       }
     );
+
+    tl.current.to(
+      csg.current.children[0].children[1].material.color,
+      {
+        duration: 3,
+        ...targetColor,
+        onStart: () => {
+          csg.current.children[0].children[1].material.needsUpdate = true;
+        },
+      }
+    );
   }, [scrollY]);
     
+  
   return (
     <>
       <mesh scale={0.3} ref={csg} {...props}>

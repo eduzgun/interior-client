@@ -87,12 +87,12 @@ export default function Home() {
               ab soluta ullam optio eius.</p>
           </div>
           <div class="text-section">
-            <h3>Welcome</h3>
+            <h3>About us</h3>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
               ab soluta ullam optio eius.</p>
           </div>
           <div class="text-section">
-            <h3>Welcome</h3>
+            <h3>Demo</h3>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
               ab soluta ullam optio eius.</p>
           </div>
