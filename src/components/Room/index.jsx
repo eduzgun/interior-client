@@ -80,13 +80,8 @@ const Room = ( {mapSet, initialMapIndex = 0} ) => {
   return (
     <div className="environment-map-grid">
       <button className='left-arrow' onClick={prevMap}>←</button>  
-      <AuthProvider>
-    
-
-      <EnvironmentMap mapUrls={maps[currentMapIndex]} />
-      </AuthProvider>
+      <EnvironmentMap mapUrls={maps[currentMapIndex]} /> 
       <button className='right-arrow' onClick={nextMap}>→</button> 
-     
     </div>
   );
 };

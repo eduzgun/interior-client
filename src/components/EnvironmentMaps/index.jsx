@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import  Marker  from '../Marker';
+ 
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
@@ -23,8 +23,7 @@ const EnvironmentMap = ({ mapUrls }) => {
 
   const { user } = useAuth();
 
-
-
+  console.log(user)
 
   const handleLike = async () => {
     
@@ -35,7 +34,7 @@ const EnvironmentMap = ({ mapUrls }) => {
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
         user_id: user,
-        room_id: 3
+        room_id: 1
     };
     console.log(likeData)
 
