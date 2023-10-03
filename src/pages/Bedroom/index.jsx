@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent, BackButton } from '../../components'
+import React, {useState, useEffect,useRef } from 'react';
+import { Room, StylesComponent, BackButton,BlobToImage } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
+
 
 const bedroomImages = [
   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
@@ -26,6 +27,9 @@ const bedroomImages = [
 ];
 
 function BedroomPage() {
+
+
+    const pageRefs = useRef([React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),])
 
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
 
@@ -80,6 +84,10 @@ const toggleLike = (index) => {
     window.removeEventListener('wheel', handleScroll);
   }
 
+  for(let img of pageRefs.current){
+    console.log(img.current.src);
+  }
+
   return () => {
     window.removeEventListener('wheel', handleScroll);
   };
@@ -87,6 +95,7 @@ const toggleLike = (index) => {
 
   return (
     <div>
+        <BlobToImage image_id={4} refs={pageRefs}/>
         <div className='title-section'>
       <h1 className='room-title'>Bedroom Inspiration</h1>
       <BackButton backTo="/explore" label="Back to Explore" />

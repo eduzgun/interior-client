@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
 import { AuthProvider } from '../../contexts';
 
 
 const Room = ( {mapSet, initialMapIndex = 0} ) => {
   const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
+
 
   const mapSets = {
     bedroom: [
@@ -81,9 +82,7 @@ const Room = ( {mapSet, initialMapIndex = 0} ) => {
     <div className="environment-map-grid">
       <button className='left-arrow' onClick={prevMap}>←</button>  
       <AuthProvider>
-    
-
-      <EnvironmentMap mapUrls={maps[currentMapIndex]} />
+        <EnvironmentMap mapUrls={maps[currentMapIndex]} />
       </AuthProvider>
       <button className='right-arrow' onClick={nextMap}>→</button> 
      
