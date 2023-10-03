@@ -201,12 +201,16 @@ cursor: pointer;
 
 .kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
   grid-gap: 20px;
   margin-left: 15px;
   margin-right: 15px;
   row-gap: 25px;
-  
+  grid-auto-rows: 500px;
+}
+
+.bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
+  grid-row-end: span 2; 
 }
 
 @media screen and (max-width: 767px) {
@@ -379,4 +383,5 @@ align-items: center;
     align-items: center;
     background: rgb(240, 240, 240, 0.1);
     z-index: 10; 
+    font-family: Arial, Helvetica, sans-serif;
 }
