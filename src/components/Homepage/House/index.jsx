@@ -40,7 +40,7 @@ const House = ({ scrollY, ...props }) => {
     const greenColor = { r: 0.2, g: 0.7, b: 0.2 };
 
     // Determine the color based on the scrollY position
-    const sectionHeight = 600; // Height of each text section
+    const sectionHeight = 700; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
     const targetColor = sectionIndex === 0 ? initialColor : sectionIndex === 1 ? greenColor : purpleColor;
 
