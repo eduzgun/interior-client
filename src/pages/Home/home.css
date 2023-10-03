@@ -15,7 +15,7 @@
 }
 
 .text-section {
-  margin-bottom: 500px; /* Add some margin for spacing between text sections */
+  margin-bottom: 400px; /* Add some margin for spacing between text sections */
 }
   
   #right-content {
@@ -47,7 +47,10 @@
   }
   
   h3 {
-    padding: 1rem;
+    padding: 2rem;
+    color: #3E8989;
+
+
   }
   
   canvas {
