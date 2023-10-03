@@ -15,7 +15,7 @@ const House = ({ scrollY, ...props }) => {
 
   // Add rotation
   useFrame(() => {
-    csg.current.rotation.y += 0.02  // Adjust rotation as needed
+    csg.current.rotation.y -= 0.02  // Adjust rotation as needed
     //tl.current.seek(scrollY * 0.01); // Adjust scroll sensitivity
   });
 
