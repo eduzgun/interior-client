@@ -5,7 +5,7 @@ import './profile.css'
 
 const Profile = () => {
   const { usersUsername } = useAuth()
-  // const { user } = useAuth()
+  const { user } = useAuth()
 
   const [userData, setUserData] = useState('')
   const [likes, setLikes] = useState(null)
