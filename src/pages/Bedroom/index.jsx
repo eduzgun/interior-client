@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
+import { useAuth } from '../../contexts/index.jsx';
+import axios from 'axios';
+
 
 const bedroomImages = [
   { id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
@@ -26,7 +29,7 @@ const bedroomImages = [
 
 
 function BedroomPage() {
-
+  const { user } = useAuth();
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
 
 
@@ -58,11 +61,32 @@ function BedroomPage() {
     setImagesWithStyles(newImagesWithStyles);
 }, []);
 
-const toggleLike = (index) => {
-    const newLikedImages = [...likedImages];
-    newLikedImages[index] = !newLikedImages[index];
-    setLikedImages(newLikedImages);
+const toggleLike = async (index) => {
+  const newLikedImages = [...likedImages];
+  newLikedImages[index] = !newLikedImages[index];
+  setLikedImages(newLikedImages);
+
+  if (newLikedImages[index]) {
+    const roomId = imagesWithStyles[index].id;
+    await sendLikeData(user, roomId);
+  }
 };
+
+const sendLikeData = async (user, roomId) => {
+  try {
+    const response = await axios.post('http://localhost:5000/likes', { user_id: user, room_id: roomId });
+
+    if (!response.data) {
+      throw new Error('Failed to send data');
+    }
+
+    console.log('Like created', response.data);
+  } catch (error) {
+    console.error("There was an error sending data:", error);
+  }
+};
+
+
 
 
   useEffect(() => {
@@ -123,9 +147,7 @@ const toggleLike = (index) => {
       {selectedImage && (
         <div className="fullscreen-div">
         <div className="fullscreen-content">
-          
             <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-            
             <button className="close-button" onClick={handleCloseClick}>Close</button>
         </div>
     </div>

@@ -107,7 +107,6 @@ const nextMap = () => {
     <div className="environment-map-grid">
       <button className='left-arrow' onClick={prevMap}>←</button>  
      <EnvironmentMap mapUrls={maps[currentMapIndex].images} roomId={roomId} />
-
       <button className='right-arrow' onClick={nextMap}>→</button> 
     </div>
   );
@@ -117,20 +116,7 @@ export default Room;
 
 
 
-  // const maps = useBedroomMaps ? [
-  //   ['../../src/assets/environmentMaps/0/px.png',
-  //     '../../src/assets/environmentMaps/0/nx.png',
-  //     '../../src/assets/environmentMaps/0/py.png',
-  //     '../../src/assets/environmentMaps/0/ny.png',
-  //     '../../src/assets/environmentMaps/0/pz.png',
-  //     '../../src/assets/environmentMaps/0/nz.png'],
-  //   ['../../src/assets/environmentMaps/2/px.png',
-  //     '../../src/assets/environmentMaps/2/nx.png',
-  //     '../../src/assets/environmentMaps/2/py.png',
-  //     '../../src/assets/environmentMaps/2/ny.png',
-  //     '../../src/assets/environmentMaps/2/pz.png',
-  //     '../../src/assets/environmentMaps/2/nz.png'],
-  // ];
+ 
 
 
 

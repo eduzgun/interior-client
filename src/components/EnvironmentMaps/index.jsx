@@ -12,7 +12,6 @@ import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
 import Room from '../Room';
 
-//need to add use auth here to enable comments and likes with user in return statement at the bottom:--)
 
 const EnvironmentMap = ({ mapUrls, roomId }) => {
 
@@ -32,7 +31,7 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
     setClick(prev => !prev);
     console.log(user)
 
-    //I will change this to the actual user logged in just wanted to check that it works first
+   
     const likeData = {
         user_id: user,
         room_id: roomId
@@ -57,12 +56,6 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
     const container = containerRef.current;
     
 
-    const gltfLoader = new GLTFLoader();
-    const cubeTextureLoader = new THREE.CubeTextureLoader();
-    const textureLoader = new THREE.TextureLoader();
-
-  
-    
     const global = {};
 
     const canvas = document.createElement('canvas');
