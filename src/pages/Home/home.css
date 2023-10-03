@@ -17,6 +17,9 @@
   margin-bottom: 500px; /* Add some margin for spacing between text sections */
 }
   
+h3 {
+  font-size: 45px;
+}
 .text-section :nth-child(1) {
   margin-top: 100px;
 }
