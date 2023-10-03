@@ -10,10 +10,12 @@ import { Canvas } from '@react-three/fiber';
 import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
+import Room from '../Room';
 
 //need to add use auth here to enable comments and likes with user in return statement at the bottom:--)
 
-const EnvironmentMap = ({ mapUrls }) => {
+const EnvironmentMap = ({ mapUrls, roomId }) => {
+
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
    const [showComments, setShowComments] = useState(false); 
@@ -27,14 +29,13 @@ const EnvironmentMap = ({ mapUrls }) => {
 
   const handleLike = async () => {
     
-    
     setClick(prev => !prev);
     console.log(user)
 
     //I will change this to the actual user logged in just wanted to check that it works first
     const likeData = {
         user_id: user,
-        room_id: 1
+        room_id: roomId
     };
     console.log(likeData)
 
