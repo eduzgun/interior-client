@@ -26,6 +26,9 @@ const bedroomImages = [
 
 function BedroomPage() {
 
+    const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
+
+
     const [likedImages, setLikedImages] = useState(new Array(bedroomImages.length).fill(false));
 
     const [imagesWithStyles, setImagesWithStyles] = useState([])
@@ -87,12 +90,19 @@ const toggleLike = (index) => {
     
     <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
       {imagesWithStyles.map((image, index) => (
-  <div className="bedroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
-    <img className='bedroom__item' src={image.src} alt={image.alt} />
+  <div className="bedroom__item-container" 
+    key={index} 
+    onClick={() => handleImageClick(image, index)}
+    onMouseEnter={() => setHoveredImageIndex(index)}
+    onMouseLeave={() => setHoveredImageIndex(null)}
+>
+<img className='bedroom__item' src={image.src} alt={image.alt} />
     <div className="bedroom__item-caption">{image.style}</div>
+    {hoveredImageIndex === index && (
     <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
       <Heart isClick={likedImages[index]} />
     </div>
+    )}
   </div>
   
 ))}
