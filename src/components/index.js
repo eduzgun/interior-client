@@ -15,4 +15,6 @@ export { default as StylesComponent } from "./Styles"
 
 export { default as BackButton } from "./BackButton"
 
+export { default as ImageBox } from "./ImageBox"
+
 
