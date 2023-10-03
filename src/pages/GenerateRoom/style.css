@@ -122,3 +122,16 @@ textarea:disabled,
 #createdP{
     display: none;
 }
+
+#category-dropdown{
+    width: 250px;
+    min-width: 100px;
+    border: none;
+    outline: solid 1px var(--outlinefocus);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    border-radius: 25px;
+    padding: 15px 20px;
+    background-color: var(--bg);
+    color: whitesmoke;
+}
