@@ -3,8 +3,10 @@
   justify-content: space-between; /* Space between left and right content */
   align-items: flex-start; /* Align content to the top */
   text-align: center;
+
   height: 2000px; /* Set a fixed height or remove this for dynamic height */
   overflow: auto;
+
 }
 
 #left-content {
@@ -20,6 +22,12 @@
   margin-bottom: 500px; /* Add some margin for spacing between text sections */
 }
   
+h3 {
+  font-size: 45px;
+}
+.text-section :nth-child(1) {
+  margin-top: 100px;
+}
   #right-content {
     width: 100%; /* Take up the full width of the container */
     display: flex;
