@@ -53,6 +53,7 @@ h3 {
   }
   
   #left-content button:hover {
+    color: #009688;
     cursor: pointer;
     background-color: var(--outlinefocus);
   }
@@ -79,6 +80,9 @@ h3 {
   
     #left-content {
       padding: 100px;
+    }
+    #centre-button button {
+        padding: 0.75rem 5rem;
     }
   }
   
