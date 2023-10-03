@@ -1,16 +1,22 @@
 #home-container {
-    display: flex;
-    flex-direction: column; /* Change to column direction */
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text within the container */
-    height: 2000px; /* Set a fixed height or remove this for dynamic height */
-  }
-  
-  #left-content {
-    padding: 20px;
-    color: aliceblue;
-    margin-bottom: 20px; /* Add some margin for spacing */
-  }
+  display: flex;
+  justify-content: space-between; /* Space between left and right content */
+  align-items: flex-start; /* Align content to the top */
+  text-align: center;
+  height: 2000px; /* Set a fixed height or remove this for dynamic height */
+}
+
+#left-content {
+  padding: 20px;
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-section {
+  margin-bottom: 500px; /* Add some margin for spacing between text sections */
+}
   
   #right-content {
     width: 100%; /* Take up the full width of the container */

@@ -81,14 +81,26 @@ export default function Home() {
     return (
       <div id='home-container'>
         <div id='left-content'>
-          <h3>Welcome</h3>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
-            ab soluta ullam optio eius.</p>
-        <Link to={`/explore`}>
-          <button>Enter</button>
-        </Link>
-        
+          <div class="text-section">
+            <h3>Welcome</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+              ab soluta ullam optio eius.</p>
+          </div>
+          <div class="text-section">
+            <h3>Welcome</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+              ab soluta ullam optio eius.</p>
+          </div>
+          <div class="text-section">
+            <h3>Welcome</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia aspernatur eaque accusamus dicta accusantium 
+              ab soluta ullam optio eius.</p>
+          </div>
+          <Link to={`/explore`}>
+            <button>Enter</button>
+          </Link>
       </div>
+
       <div id='right-content'>
         <Canvas shadows camera={{ position: [-15, 10, 15], fov: 25 }}>
             <House

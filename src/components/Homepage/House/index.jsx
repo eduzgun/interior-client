@@ -1,4 +1,4 @@
-import React, { useLayoutEffect} from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import { Geometry, Base, Subtraction, Addition } from '@react-three/csg';
 import { useFrame } from '@react-three/fiber';
@@ -12,63 +12,53 @@ import gsap from 'gsap';
 const House = ({ scrollY, ...props }) => {
   const csg = useRef();
   const tl = useRef();
+
   // Add rotation
   useFrame(() => {
-    csg.current.rotation.y += 0.02;
-    const newYPosition = -scrollY * 0.1; // Adjust as needed
-    csg.current.rotation.y = newYPosition;
-    tl.current.seek(scroll.offset * tl.current.duration());
+    csg.current.rotation.y += 0.02; // Adjust rotation as needed
+    tl.current.seek(scrollY * 0.1); // Adjust scroll sensitivity
   });
-
 
   useLayoutEffect(() => {
     tl.current = gsap.timeline();
 
-    // VERTICAL ANIMATION
-    tl.current.to(
-      csg.current.rotation.x,
-      {
-        duration: 5,
-        y: -5,
-      },
-      0
-    );
-    tl.current.to(
-      csg.current.children[0].children[3].material.color,
-      {
-        duration: 1,
-        r: 1,
-        g: 0.5,
-        b: 0.2,
-        delay: 2,
-        onUpdate: () => {
-          csg.current.children[0].children[3].material.color.r = 1;
-          csg.current.children[0].children[3].material.color.g = 0.5;
-          csg.current.children[0].children[3].material.color.b = 0.2;
-          csg.current.children[0].children[3].material.needsUpdate = true; // Explicitly update the material
-        },
-      }
-    );
-    
+   
 
-    tl.current.to(
-      csg.current.children[0].children[3].material.color,
-      {
-        duration: 1,
-        r: 0.7,
-        g: 0.2,
-        b: 0.9,
-        delay: 4, // Change at 4 seconds into the animation
-        onUpdate: () => {
-          csg.current.children[0].children[3].material.color.r = 0.2;
-          csg.current.children[0].children[3].material.color.g = 0.5;
-          csg.current.children[0].children[3].material.color.b = 0.9;
-          csg.current.children[0].children[3].material.needsUpdate = true; // Explicitly update the material
-        },
+    // Color changes based on the timeline's progress
+    const brownColor = { r: 1, g: 0.5, b: 0.2 };
+    const purpleColor = { r: 0.7, g: 0.2, b: 0.9 };
+    
+    // Define the positions where text sections start
+    const textSections = [
+      { name: 'Get Started', position: 0 },
+      { name: 'About Us', position: 500 },
+      { name: 'Another Section', position: 1000 },
+    ];
+
+    // Determine the color based on the timeline's progress and text sections
+    for (let i = 0; i < textSections.length; i++) {
+      const textSection = textSections[i];
+      const nextTextSection = textSections[i + 1];
+      const startPosition = textSection.position;
+      const endPosition = nextTextSection ? nextTextSection.position : Infinity;
+
+      if (scrollY >= startPosition && scrollY < endPosition) {
+        // Change color based on the current text section
+        const targetColor = i % 2 === 0 ? brownColor : purpleColor;
+        tl.current.to(
+          csg.current.children[0].children[3].material.color,
+          {
+            duration: 1,
+            ...targetColor,
+            onStart: () => {
+              csg.current.children[0].children[3].material.needsUpdate = true;
+            },
+          }
+        );
+        break; // Exit the loop once color change is determined
       }
-    );
-    });
-  
+    }
+  }, [scrollY]);
     
   return (
     <>
