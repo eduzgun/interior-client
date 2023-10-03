@@ -352,16 +352,17 @@ align-items: center;
     color: #005f5f;
 }
 
-.heart-container, .click-count {
+/* .heart-container, .click-count {
     margin: 0;
     padding: 0;
-}
+} */
 
 
 .heart-container {
   size: 60px;
     position: absolute;
     top: 0px;  
+    right: 1px;
     cursor: pointer;
     z-index: 10; 
 }
@@ -369,8 +370,8 @@ align-items: center;
 
 .click-count {
     position: absolute;
-    top: 70px;   
-    left: 32px;  
+    top: 25px;   
+    right: 74px;  
     cursor: pointer;
     height: 50px;
     border-radius: 50px;
