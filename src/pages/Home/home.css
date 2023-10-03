@@ -3,6 +3,10 @@
   justify-content: space-between; /* Space between left and right content */
   align-items: flex-start; /* Align content to the top */
   text-align: center;
+
+  height: 2000px; /* Set a fixed height or remove this for dynamic height */
+  overflow: auto;
+
 }
 
 #left-content {
@@ -11,6 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 .text-section {
@@ -30,6 +35,7 @@ h3 {
     position: sticky; /* Make it sticky */
     top: 0; /* Stick to the top of the viewport */
     z-index: 1; /* Ensure it's above other content */
+   
   }
   
   /* Adjust button styling as needed */
@@ -90,6 +96,7 @@ h3 {
   
     #home-container {
       height: 2000px;
+      overflow: auto;
     }
   }
   
