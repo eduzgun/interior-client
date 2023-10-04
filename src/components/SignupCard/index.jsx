@@ -118,16 +118,16 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
             <h2>Register</h2>
         </header>
         <form onSubmit={sendRegisterRequest} data-testid="signup-form">
-            <label htmlFor="username">username</label>
+            <label htmlFor="username">Username</label>
             <input data-testid={"user-input"} type="text" className={"signup-input"} name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">Email</label>
             <input data-testid={"email-input"} type="text" className={"signup-input"} name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="password">password</label>
+            <label htmlFor="password">Password</label>
             <input data-testid={"password-input"} ref={passwordRef} className={"signup-input"} type="password" name="password" id="reg-password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="confpassword">confirm password</label>
+            <label htmlFor="confpassword">Confirm Password</label>
             <input data-testid={"confpassword-input"} ref={confPasswordRef} className={"signup-input"} type="password" name="confpassword" id="conf-password-input" value={confPassword} placeholder='>' onChange={handleConfirmPassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <button type="submit" id='register-btn' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}}>Join</button>

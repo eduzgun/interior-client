@@ -1,6 +1,6 @@
 
 :root{
-    --bg: hsl(330, 43%, 5%);
+    --bg: #14080E;
     --fg: hsl(246, 12%, 32%);
     --outline: rgba(20,8,14);
     --outlinefocus: rgba(62,137,137);
