@@ -5,7 +5,7 @@ import "./style.css"
 const LightSwitch = ({ changeState, toggleSwitch }) => {
 
     const shadedStyle = {
-        "background": "linear-gradient(0deg, rgb(170, 170, 170) 0%, rgb(120,121,122) 81%)",
+        "background": "linear-gradient(90deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 95%)",
         "width": "108px",
         "height": "140px",
         "left": "-4px",
@@ -14,7 +14,7 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
     }
 
     const mainStyle = {
-        "background": "linear-gradient(0deg, rgb(35,36,37) 0%, rgb(160, 160, 160) 91%)",
+        "background": "linear-gradient(180deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 97%)",
         "top": "-23px",
         "left":"-2px",
         "width": "103px",
@@ -31,7 +31,7 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
     <>
         <div data-testid={"container"} className="switch-container">
             <h4 id='login-label'>Click To Switch</h4>
-            <div data-testid={'trial'}className="switch" onClick={() => {changeState();playAudio()}}>
+            <div className="switch" onClick={() => {changeState();playAudio()}}>
                 <div id="toggle">
                     <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
                     <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>

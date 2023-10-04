@@ -1,5 +1,6 @@
 #signup h2{
     font-size: 2.4rem;
+    color: #14080E;
     text-align: center;
     padding-top: 100px;
 
@@ -20,6 +21,7 @@
 
 #signup label{
     font-size: 0.8rem;
+    color: #14080E;
     align-self: start;
 }
 
@@ -37,19 +39,19 @@
 
 #signup button{
     font-size: 0.8rem;
-    border: 1px solid var(--outline);
+    border: 3px solid #3E8989;
     padding: 10px 25px;
     outline: none;
     border-radius: 25px;
     cursor: pointer;
     background-color: var(--bg);
-    color: var(--font);
+    color:  #14080E;
     font-family: inherit;
-    background-color: whitesmoke;
+    background-color: #FAF8F2;
 }
 
 #signup button:hover{
-    background-color: var(--bg);
+    background-color: #3E8989;
     border: 1px solid var(--outlinefocus);
 
 }

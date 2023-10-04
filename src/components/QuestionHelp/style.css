@@ -8,7 +8,7 @@
 
 #qmark{
     user-select: none;
-    background-color: whitesmoke;
+    background-color: #FAF8F2;
     z-index: 10;
     width: 2rem;
     height: 2rem;
@@ -31,17 +31,22 @@
 #qbox{
     position: absolute;
     display: none;
-    left: 150%;
+    left: 50%;
     top: 0;
-    width: 500px;
-    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%);
-    padding: 20px;
+    width: 400px;
+    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, #EDE4D9 0%);
+    padding: 10px;
     border-radius: 25px;
-    outline: 2px solid var(--outlinefocus);
+    outline: 2px solid var(--outline);
+    font-size: 20px;
+    text-align: center;
 }
 
 #qbox>h3{
-    text-decoration: underline;
+    text-decoration:double;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px;
 }
 
 #example-panoramic{

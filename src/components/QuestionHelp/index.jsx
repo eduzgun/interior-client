@@ -19,7 +19,7 @@ const QuestionHelp = ({active, title, content, drop_down="", orientation="right"
   return (
     <div id="questions" data-testid="questions">
         <p id='qmark' onClick={toggleDrop} data-testid="qmark">?</p>
-            <div data-testid="qBox" ref={questionRef} id="qbox" style={Object.assign(orientation === "right" ? {"left":"150%"} : {"right":"150%"},
+            <div data-testid="qBox" ref={questionRef} id="qbox" style={Object.assign(orientation === "right" ? {"left":"200%"} : {"right":"150%"},
     !active ? {"display":"none"} : {})
     }>
                  <h3>{title}</h3>
