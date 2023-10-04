@@ -65,7 +65,6 @@
 #home-btn:hover{
     background-color: var(--bg);
     border: 2px solid var(--outlinefocus);
-
 }
 
 .inputs{
@@ -134,4 +133,63 @@ textarea:disabled,
     padding: 15px 20px;
     background-color: var(--bg);
     color: whitesmoke;
+}
+
+#maptype-selector{
+    position: absolute;
+    top: -32px;
+    left: -1px;
+    display: flex;
+}
+
+#panorama-selector,
+#cubemap-selector{
+    padding: 5px 15px;
+    border-radius: 15px 15px 0px 0px;
+    font-size: 1.4rem;
+    margin-right: 10px;
+    border: solid 1px var(--outlinefocus);
+    border-bottom: none;
+    cursor: pointer;
+}
+
+#cubemap-header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#cubemap-inputs{
+    width: 80%;
+}
+
+#cubemap-inputs>*{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#cubemap-inputs>*>*{
+    font-family: inherit;
+}
+
+#cubemap-inputs>*>input::file-selector-button:hover,
+#submit-btn:hover,
+#home-btn:hover{
+    background-color: var(--bg);
+    border: 2px solid var(--outlinefocus);
+}
+
+
+#cubemap-inputs>*>input::file-selector-button{
+    font-family: inherit;
+    font-size: 0.8rem;
+    border: 2px solid var(--outline);
+    padding: 5px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #009688;
+    font-family: inherit;
+    margin-right: 10px;
+    margin-top: 2px;
 }
