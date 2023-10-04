@@ -46,8 +46,7 @@
 .nav-row a:hover{
     cursor: pointer;
     background-color: var(--outline);
-    font-weight: bold;
-    outline: solid 2px var(--outlinefocus);
+    outline: solid 2px var(--outline);
     
 }
 
