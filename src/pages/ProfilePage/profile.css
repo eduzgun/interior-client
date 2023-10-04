@@ -185,3 +185,32 @@
     background-color: aliceblue;
 }
 
+#profile-imgs {
+    width: 200px;
+    height: 200px;
+    opacity: 0.75;
+    border-radius: 10%;
+    margin: 10px 5px;
+}
+
+#profile-imgs-text {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    text-align: center;
+    position: relative;
+    bottom: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+#imgs-container {
+    background-color: #f4f4f4;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    margin: 0 20px;
+}
