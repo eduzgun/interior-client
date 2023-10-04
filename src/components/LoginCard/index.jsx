@@ -99,10 +99,10 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         </header>
         <form data-testid={"login-form"} onSubmit={sendLoginRequest}>
             <label htmlFor="username">username</label>
-            <input data-testid={"input"} type="text" name="username" id="user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"user-input"} type="text" name="username" id="user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="password">password</label>
-            <input data-testid={"input"} type="password" name="password" id="password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"password-input"} type="password" name="password" id="password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='false' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}} required/>
 
             <button type='submit' id='signin-btn' disabled={toggleSwitch} style={toggleSwitch ? activeStyle : {}}>Sign In</button>
         </form>
