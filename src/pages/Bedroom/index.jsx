@@ -6,7 +6,7 @@ import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
 import { useAuth } from '../../contexts/index.jsx';
 import axios from 'axios';
-
+import { motion } from 'framer-motion'; 
 
 const bedroomImages = [
   { id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
@@ -29,6 +29,11 @@ const bedroomImages = [
 
 
 function BedroomPage() {
+  const itemVariants = {
+  hidden: { opacity: 0, rotate: -25 },
+  visible: { opacity: 1, rotate: 0 }
+};
+
   const { user } = useAuth();
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
 
@@ -111,52 +116,57 @@ const sendLikeData = async (user, roomId) => {
 }, [selectedImage]);
 
   return (
+  
     <div className='overflow-hiding'>
-        <div className='title-section'>
-      <h1 className='room-title'>Bedroom Inspiration</h1>
-      <BackButton backTo="/explore" label="Back to Explore" />
+      <div className='title-section'>
+        <h1 className='room-title'>Bedroom Inspiration</h1>
+        <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     
-    <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
-      {imagesWithStyles.map((image, index) => (
-  <div className="bedroom__item-container" 
-    key={index} 
-    onClick={() => handleImageClick(image, index)}
-    onMouseEnter={() => setHoveredImageIndex(index)}
-    onMouseLeave={() => setHoveredImageIndex(null)}
-  >
-    <img className='bedroom__item' src={image.src} alt={image.alt} />
-    <div className="bedroom__item-caption">{image.style}
-    {hoveredImageIndex === index && (
-      <div className="icon-container">
-    
-        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
-          <Heart isClick={likedImages[index]} />
-        </div>
-        
-        <div className="click-count">
-          <AiFillEye />
-          <span> {image.clickCount}</span>
-        </div>
+      <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
+        {imagesWithStyles.map((image, index) => (
+          <motion.div 
+            className="bedroom__item-container"
+            key={index}
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+            transition={{ duration: 1, delay: index * 0.4 }} // Added delay here
+            onClick={() => handleImageClick(image, index)}
+            onMouseEnter={() => setHoveredImageIndex(index)}
+            onMouseLeave={() => setHoveredImageIndex(null)}
+          >
+            <img className='bedroom__item' src={image.src} alt={image.alt} />
+            <div className="bedroom__item-caption">{image.style}
+              {hoveredImageIndex === index && (
+                <div className="icon-container">
+                  <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
+                    <Heart isClick={likedImages[index]} />
+                  </div>
+                  <div className="click-count">
+                    <AiFillEye />
+                    <span> {image.clickCount}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        ))}
+  
+        {selectedImage && (
+          <div className="fullscreen-div">
+            <div className="fullscreen-content">
+              <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
+              <button className="close-button" onClick={handleCloseClick}>Close</button>
+            </div>
+          </div>
+        )}
       </div>
-    )}</div>
-    
-    
-  </div>
-))}
+    </div>
+  
+);
 
-
-      {selectedImage && (
-        <div className="fullscreen-div">
-        <div className="fullscreen-content">
-            <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-            <button className="close-button" onClick={handleCloseClick}>Close</button>
-        </div>
-    </div>
-      )}
-    </div>
-    </div>
-  );
 }
 
 export default BedroomPage;
+
