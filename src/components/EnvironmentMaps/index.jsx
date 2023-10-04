@@ -9,6 +9,7 @@ import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
 import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
+import { AiOutlineMail } from 'react-icons/ai';
 import { useAuth } from '../../contexts/index.jsx';
 import Room from '../Room';
 
@@ -147,7 +148,8 @@ scene.backgroundIntensity = 1
         <p className='favourites'>Add to favourites</p>
         <Heart isClick={isClick} onClick={handleLike} />
         <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
-      </div>
+      
+      <button className='email-button'><AiOutlineMail /></button></div>
       {showComments && <Comments commentsUrl="http://localhost:3004/comments"
         currentUserId="1" />} 
     
