@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
-import { AuthProvider } from '../../contexts';
+import { useAuth } from '../../contexts';
+
 
 
 const Room = ( {mapSet, initialMapIndex = 0} ) => {
+  const { user } = useAuth();
   const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
 
   const mapSets = {
