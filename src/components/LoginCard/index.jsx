@@ -52,7 +52,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         }
 
         try{
-            const resp = await fetch("http://localhost:5000/auth/login",options)
+            const resp = await fetch("https://lap-4-project.onrender.com/auth/login",options)
 
             if(resp.status == 204){
                 setUser(username)
@@ -65,7 +65,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
                 }
 
                 try {
-                    const resp2 = await fetch(`http://localhost:5000/users/name/${username}`,options)
+                    const resp2 = await fetch(`https://lap-4-project.onrender.com/users/${username}`,options)
 
                     const data = await resp2.json()
                     setUser(data.data.id)

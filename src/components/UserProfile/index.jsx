@@ -8,6 +8,30 @@ const UserProfile = ({ user, likes, loading }) => {
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
 
+  const bedroomImages = [
+    {id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
+    {id: 2, src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1', clickCount: 0},
+    {id: 3, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', caption: "Modern", clickCount: 0 },
+    {id: 4, src: '../../src/assets/environmentMaps/bedroom/3.jpeg', alt: 'Image 1', clickCount: 0 },
+     {id: 5, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 6, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
+    {id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 8, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 9, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
+    {id: 10, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
+    {id: 11, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 12, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
+     {id: 13, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
+    {id: 14, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 15, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
+    {id: 16, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
+  
+    
+  ];
+
+  const likedBedrooms = likes
+    ? bedroomImages.filter((image) => likes.some((like) => like.room_id === image.id))
+    : [];
 
   useEffect(() => {
     const storedImage = localStorage.getItem('profileImage')
@@ -146,11 +170,11 @@ const UserProfile = ({ user, likes, loading }) => {
                     {likes == null ? (
                       <p>You have not liked any rooms.<br></br> <Link to={`/explore`}><button>Find Rooms</button></Link></p>
                     ) : (
-                      likes.map((like, index) => (
+                      likedBedrooms.map((like, index) => (
                         <Link style={{textDecoration: "none"}} key={index} to={`/studio`}>
-                          <img src="src/assets/images/house.jpg" className="likes-img" style={{width: "200px", opacity: "0.75", borderRadius: "20%", margin: "10px 20px 0 0"}} alt="" /> 
+                          <img src={like.src} className="likes-img" style={{width: "200px", height:"200px", opacity: "0.75", borderRadius: "20%", margin: "10px 20px 0 0"}} alt="" /> 
                           <p key={index} style={{ display: 'flex', flexDirection: 'column', color: "white", margin: "10px 20px 0 0", textAlign: 'center', position:"relative", bottom:"48px", backgroundColor: "hsla(257, 64%, 2%, 0.644)"}}> 
-                            Room {like.room_id}
+                            Room {like.id}
                           </p>
                         </Link>
                       ))

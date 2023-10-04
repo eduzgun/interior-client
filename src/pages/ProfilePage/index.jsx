@@ -12,12 +12,12 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
       async function displayUser() {
-          const res = await fetch(`http://localhost:5000/users/${usersUsername}`)
+          const res = await fetch(`https://lap-4-project.onrender.com/users/${usersUsername}`)
           const data = await res.json()
           setUserData(data.data)
 
-          // const res2 = await fetch(`http://localhost:5000/likes/user/1`)
-          const res2 = await fetch(`http://localhost:5000/likes/user/${data.data.id}`)
+          // const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/1`)
+          const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/${data.data.id}`)
           const data2 = await res2.json()
           setLikes(data2.data)
           
