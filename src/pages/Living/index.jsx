@@ -1,28 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import { Room, StylesComponent, BackButton } from '../../components'
+import axios from 'axios';
 
 
-const livingImages = [
-  { src: '../../src/assets/environmentMaps/living/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/2.avif', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/4.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/5.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/6.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/7.webp', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/8.webp', alt: 'Image 1' },
+// const livingImages = [
+//   { src: '../../src/assets/environmentMaps/living/1.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/2.avif', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/2.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/3.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/4.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/5.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/6.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/7.webp', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/living/8.webp', alt: 'Image 1' },
  
-];
+// ];
 
 function LivingPage() {
     const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [roomArray,setRoomArray] = useState([])
+
 
   const handleImageClick = (image, index) => {
     setSelectedImage(image);
-    setSelectedImageIndex(index);
+    setSelectedImageIndex(image.id);
   };
 
   const handleCloseClick = () => {
@@ -32,12 +35,13 @@ function LivingPage() {
 
  useEffect(() => {
 
-    const newImagesWithStyles = livingImages.map((image, index) => ({
+    const newImagesWithStyles = roomArray.map((image, index) => ({
         ...image,
         style: <StylesComponent seed={index} />,
     }));
     setImagesWithStyles(newImagesWithStyles);
 }, []);
+
 
 
   useEffect(() => {
@@ -60,6 +64,26 @@ function LivingPage() {
   };
 }, [selectedImage]);
 
+
+  useEffect(() => {
+    async function callRoomImages(){
+      const call = await axios.get("http://localhost:5000/rooms").then(data => {
+        const rooms = data.data.rooms
+        const tempArr = []
+        for(let i=0;i<rooms.length;i++){
+          if(rooms[i].category === "Living Room"){
+            rooms[i].src = '../../src/assets/environmentMaps/living/1.png'
+            rooms[i].alt = 'Image 1'
+            tempArr.push(rooms[i])
+          }
+        }
+        setRoomArray(tempArr)
+      })
+
+    }
+    callRoomImages()
+  },[])
+
   return (
     <>
     <div className='title-section'>
@@ -67,10 +91,12 @@ function LivingPage() {
       <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     <div className={`living-page${selectedImage ? ' dimmed' : ''}`}>
-      {imagesWithStyles.map((image, index) => (
-  <div className="living__item-container" key={index} onClick={() => handleImageClick(image, index)}>
+      {roomArray.map((image, index) => (
+    <div className="living__item-container" 
+    key={index} 
+    onClick={() => handleImageClick(image, index)}>
     <img className='living__item' src={image.src} alt={image.alt} />
-    <div className="living__item-caption">{image.style}</div>
+    <div className="living__item-caption">{image.name}</div>
   </div>
 ))}
 

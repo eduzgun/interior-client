@@ -1,30 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import { Room, StylesComponent, BackButton } from '../../components'
-
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 
-const gardenImages = [
-  { src: '../../src/assets/environmentMaps/garden/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/4.jpeg', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/garden/5.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/6.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/7.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/8.webp', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/9.webp', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/garden/9.png', alt: 'Image 1' },
+// const gardenImages = [
+//   { src: '../../src/assets/environmentMaps/garden/1.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/2.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/3.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/4.jpeg', alt: 'Image 1' },
+//    { src: '../../src/assets/environmentMaps/garden/5.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/6.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/7.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/8.webp', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/garden/9.webp', alt: 'Image 1' },
+// //   { src: '../../src/assets/environmentMaps/garden/9.png', alt: 'Image 1' },
   
-];
+// ];
 
 function GardenPage() {
     const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [roomArray,setRoomArray] = useState([])
+
 
   const handleImageClick = (image, index) => {
     setSelectedImage(image);
-    setSelectedImageIndex(index);
+    setSelectedImageIndex(image.id);
   };
 
   const handleCloseClick = () => {
@@ -34,7 +36,7 @@ function GardenPage() {
 
  useEffect(() => {
 
-    const newImagesWithStyles = gardenImages.map((image, index) => ({
+    const newImagesWithStyles = roomArray.map((image, index) => ({
         ...image,
         style: <StylesComponent seed={index + 2} />,
     }));
@@ -62,6 +64,25 @@ function GardenPage() {
   };
 }, [selectedImage]);
 
+useEffect(() => {
+  async function callRoomImages(){
+    const call = await axios.get("http://localhost:5000/rooms").then(data => {
+      const rooms = data.data.rooms
+      const tempArr = []
+      for(let i=0;i<rooms.length;i++){
+        if(rooms[i].category === "Bedroom"){
+          rooms[i].src = '../../src/assets/environmentMaps/garden/1.png'
+          rooms[i].alt = 'Image 1'
+          tempArr.push(rooms[i])
+        }
+      }
+      setRoomArray(tempArr)
+    })
+
+  }
+  callRoomImages()
+},[])
+
   return (
     <>
     <div className='title-section'>
@@ -69,10 +90,10 @@ function GardenPage() {
       <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     <div className={`garden-page${selectedImage ? ' dimmed' : ''}`}>
-      {imagesWithStyles.map((image, index) => (
+      {roomArray.map((image, index) => (
   <div className="garden__item-container" key={index} onClick={() => handleImageClick(image, index)}>
     <img className='garden__item' src={image.src} alt={image.alt} />
-    <div className="garden__item-caption">{image.style}</div>
+    <div className="garden__item-caption">{image.name}</div>
   </div>
 ))}
 
