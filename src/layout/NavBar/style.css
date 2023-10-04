@@ -34,7 +34,7 @@
 }
 
 .nav-row a{
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-decoration: none;
     margin-right: 60px;
     outline: solid 2px var(--outline);
