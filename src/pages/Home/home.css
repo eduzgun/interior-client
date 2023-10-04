@@ -4,8 +4,7 @@
   align-items: flex-start; /* Align content to the top */
   text-align: center;
 
-  height: 2000px; /* Set a fixed height or remove this for dynamic height */
-  overflow: auto;
+ 
 
 }
 
@@ -16,6 +15,7 @@
   flex-direction: column;
   align-items: center;
   overflow: auto;
+  width: 70vw;
 }
 
 .text-section {
@@ -98,10 +98,7 @@ h3 {
       width: 50vw;
     }
   
-    #home-container {
-      height: 2000px;
-      overflow: auto;
-    }
+    
   }
   
 

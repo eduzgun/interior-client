@@ -1,9 +1,11 @@
-import React from 'react';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { screen, render, cleanup } from '@testing-library/react'
-import { AuthProvider } from '../../contexts';
+import React, { Children } from 'react';
+import { AuthProvider } from '../../contexts/index';
+import { describe, it, expect, beforeEach, afterEach,vi } from 'vitest';
+import { screen, render, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'; 
 
 import { MemoryRouter } from 'react-router-dom';
+import axios from 'axios';
 import * as matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
@@ -11,14 +13,23 @@ expect.extend(matchers);
 import NavBar from '.';
 
 describe('NavBar Component', () => { 
+    
     beforeEach(() => {
+
+        axios.get = vi.fn(() =>
+      Promise.resolve({
+        data: {
+          image_url: 'https://example.com/logo.png', 
+        },
+      })
+    );
+
         render(
-            <AuthProvider>
-                <MemoryRouter>
-                    <NavBar/>
-                </MemoryRouter>
-            </AuthProvider>
-        )
+        <AuthProvider>
+        <MemoryRouter>
+            <NavBar />
+        </MemoryRouter> </AuthProvider>)
+       
     })
 
     afterEach(() => {
@@ -45,4 +56,23 @@ describe('NavBar Component', () => {
         })
         expect(truthy).toBe(true)
     })
+
+    it('setImageUrl is called and updates imageUrl correctly', async () => {
+       
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(axios.get).toHaveBeenCalledWith(
+          'https://lap-4-project.onrender.com//filestorage/static-files/logo.png'
+        );
+    
+        const logoImage = screen.getByAltText('API Image');
+        expect(logoImage).toHaveAttribute(
+          'src',
+          'https://example.com/logo.png' // Mocked image URL
+        );
+    });
+
+
+  
+
  })
