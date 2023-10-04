@@ -158,4 +158,3 @@ const sendLikeData = async (user, roomId) => {
 }
 
 export default BedroomPage;
-
