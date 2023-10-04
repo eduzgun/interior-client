@@ -29,6 +29,7 @@ const bedroomImages = [
 
 
 function BedroomPage() {
+  const { user } = useAuth();
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
 
 
@@ -39,6 +40,7 @@ function BedroomPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   const handleImageClick = (image, index) => {
+    document.body.style.overflow = 'hidden';
     const updatedImages = [...imagesWithStyles];
   updatedImages[index].clickCount += 1;
   setImagesWithStyles(updatedImages);
@@ -115,36 +117,37 @@ const sendLikeData = async (user, roomId) => {
 
 
   return (
-    <div>
+    <div className='overflow-hiding'>
         <div className='title-section'>
       <h1 className='room-title'>Bedroom Inspiration</h1>
       <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     
-      <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
-        {imagesWithStyles.map((image, index) => (
-          <div className="bedroom__item-container" 
-            key={index} 
-            onClick={() => handleImageClick(image, index)}
-            onMouseEnter={() => setHoveredImageIndex(index)}
-            onMouseLeave={() => setHoveredImageIndex(null)}
-          >
-          <img className='bedroom__item' src={image.src} alt={image.alt} />
-          <div className="bedroom__item-caption">{image.style}</div>
+    <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
+      {imagesWithStyles.map((image, index) => (
+  <div className="bedroom__item-container" 
+    key={index} 
+    onClick={() => handleImageClick(image, index)}
+    onMouseEnter={() => setHoveredImageIndex(index)}
+    onMouseLeave={() => setHoveredImageIndex(null)}
+  >
+    <img className='bedroom__item' src={image.src} alt={image.alt} />
+    <div className="bedroom__item-caption">{image.style}
+    {hoveredImageIndex === index && (
+      <div className="icon-container">
     
-          {hoveredImageIndex === index && (
-            <div className="icon-container">
-          
-              <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
-                <Heart isClick={likedImages[index]} />
-              </div>
+        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
+          <Heart isClick={likedImages[index]} />
+        </div>
         
         <div className="click-count">
           <AiFillEye />
           <span> {image.clickCount}</span>
         </div>
       </div>
-    )}
+    )}</div>
+    
+    
   </div>
 ))}
 
@@ -163,4 +166,3 @@ const sendLikeData = async (user, roomId) => {
 }
 
 export default BedroomPage;
-
