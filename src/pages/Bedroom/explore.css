@@ -153,7 +153,7 @@ font-size: 18px;
     font-size: 0.7rem;
     text-decoration: none;
     margin-right: 60px;
-    outline: solid 2px var(--outline);
+    outline: solid 1px var(--outline);
     padding: 12px 60px;
     border-radius: 100px;
 }
