@@ -1,9 +1,11 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 
-const UserProfile = ({ user, likes, loading }) => {
+const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
   const inputRef = useRef(null)
   const [image, setImage] = useState(null)
+  const [newUsername, setNewUsername] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [profileImage, setProfileImage] = useState(null)
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
@@ -125,7 +127,7 @@ const UserProfile = ({ user, likes, loading }) => {
                     />
                   ) : (
                     // <FontAwesomeIcon icon={faUser} id='profile-icon' />
-                    <img src="src/assets/images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
+                    <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
                   )}
                     {/* <img src="src/assets/images/profile.png" alt="" /> */}
 
@@ -147,20 +149,34 @@ const UserProfile = ({ user, likes, loading }) => {
                 <h4>{user.username}</h4>
                 <h5 id='profile-email'>Email: {user.email}</h5>
                 <div style={{padding: 0, paddingTop: "40px"}} className='main-content-nav'>
-                <h5 className={likesVisible ? 'active' : ''} onClick={toggleLikes} id='sidebar-likes' role='heading3'>Likes</h5>
+                  <h5 className={likesVisible ? 'active' : ''} onClick={toggleLikes} id='sidebar-likes' role='heading3'>Likes</h5>
                   <h5 className={editProfileVisible ? 'active' : ''} onClick={toggleEditProfile} id="sidebar-heading" role='heading2'>Edit Profile</h5>
                   
                 </div>
 
                 <div id="edit-profile" style={{ display: editProfileVisible ? 'block' : 'none', paddingTop: "30px" }}>
-                  {/* <h3 role='heading1' id='profile-title'>Profile</h3> */}
-                  <p style={{textAlign:"left"}}>Name </p>
-                  <input type="text" placeholder={user.username} id="" />
+                  <p style={{textAlign:"left"}}>Username </p>
+                  <input 
+                    type="text" 
+                    placeholder={user.username} 
+                    id="" 
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                  />
                   
                   <p style={{textAlign:"left"}}>Email</p>
-                  {/* <h4>{user.email}</h4> */}
-                  <input type="text" placeholder={user.email} id="" /> <br></br>
-                  <button>save</button>
+                  <input 
+                    type="text" 
+                    placeholder={user.email} 
+                    id="" 
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                  /> 
+                  <br></br>
+                  <button
+                    onClick={() => updateUser(newUsername, newEmail)}
+                  >save
+                  </button>
                 </div>
                 
                 
@@ -172,8 +188,8 @@ const UserProfile = ({ user, likes, loading }) => {
                     ) : (
                       likedBedrooms.map((like, index) => (
                         <Link style={{textDecoration: "none"}} key={index} to={`/studio`}>
-                          <img src={like.src} className="likes-img" style={{width: "200px", height:"200px", opacity: "0.75", borderRadius: "20%", margin: "10px 20px 0 0"}} alt="" /> 
-                          <p key={index} style={{ display: 'flex', flexDirection: 'column', color: "white", margin: "10px 20px 0 0", textAlign: 'center', position:"relative", bottom:"48px", backgroundColor: "hsla(257, 64%, 2%, 0.644)"}}> 
+                          <img src={like.src} className="likes-img" id='profile-imgs'  alt="" /> 
+                          <p key={index} id='profile-imgs-text' > 
                             Room {like.id}
                           </p>
                         </Link>

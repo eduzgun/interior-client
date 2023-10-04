@@ -185,3 +185,22 @@
     background-color: aliceblue;
 }
 
+#profile-imgs {
+    width: 200px;
+    height: 200px;
+    opacity: 0.75;
+    border-radius: 20%;
+    margin: 10px 20px 0 0;
+    border: 2px white solid;
+}
+
+#profile-imgs-text {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 10px 20px 0 0;
+    text-align: center;
+    position:relative;
+    bottom:48px;
+    background-color: hsla(257, 64%, 2%, 0.644);
+}

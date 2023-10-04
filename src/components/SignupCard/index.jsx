@@ -91,7 +91,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
                 },
             }
 
-            const resp = await fetch("https://lap-4-project.onrender.com/auth/register",options)
+            const resp = await fetch("http://localhost:5000/auth/register",options)
 
             if(resp.status === 201){
                 setToggleSwitch(!toggleSwitch)
