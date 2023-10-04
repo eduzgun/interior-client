@@ -164,7 +164,7 @@ font-size: 18px;
    
   border-radius: 30px;
   background-color: #009688;
-  /* outline: solid 2px var(--outline); */
+  outline: solid 1px var(--outline);
   font-size: 0.9em;
   justify-content: center;
   align-items: center;
@@ -191,7 +191,7 @@ font-size: 18px;
 .email-button:hover{
     cursor: pointer;
     background-color: white;
-    outline: solid 2px var(--outlinefocus);
+    /* outline: solid 2px var(--outlinefocus); */
     
 }
 
