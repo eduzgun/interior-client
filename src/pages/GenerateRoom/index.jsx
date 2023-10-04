@@ -498,6 +498,23 @@ const GenerateRoom = () => {
     },[fileState])
 
 
+    const panoramicQuestionMark = {
+        header:"What do I do here?",
+        body:<p>
+        You see the button that says: "Choose File" over there? <br/><br />
+       You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
+   </p>,
+        summaryContent:<p>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</p>,
+        image:"./src/pages/GenerateRoom/example-panorama.jpg"
+    }
+
+    const cubeQuestionMark = {
+        header:"What do I do here?",
+        body:<p>See those "choose file" buttons? Each of those correspond to a <strong>CUBEMAP</strong> image.<br /><br />They go in order:<br /> PX, NX, PY, NY, PZ ,NZ<br /><br />Make sure your files are inserted in that order too, as the renderer is very specific and we don't want your room to come out the wrong way. <br /><br /></p>,
+        summaryContent:<p>Don't know what a <strong>CUBEMAP</strong> is? Open me for an example!</p>,
+        image:"./src/pages/GenerateRoom/example-cubemap.jpg"
+    }
+
     return (
         <div id="wrapper" data-testid={"wrapper"} >
             <div className="generator-container" data-testid={"generator-container"}>
@@ -505,10 +522,12 @@ const GenerateRoom = () => {
                     <div id="panorama-selector" onClick={handleImageTypeSelect} style={!imageTypeSelect ? activeStyle : inactiveStyle}>PANORAMA</div>
                     <div id="cubemap-selector" onClick={handleImageTypeSelect} style={imageTypeSelect ? activeStyle : inactiveStyle}>CUBEMAP</div>
                 </div>
-                <QuestionHelp title={"What do I do here?"} content={<p>
-                     You see the button that says: "Choose File" over there? <br/><br />
-                    You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
-                </p>} drop_down={<summary>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</summary>}/>
+                {imageTypeSelect 
+                ? <QuestionHelp title={panoramicQuestionMark.header} content={panoramicQuestionMark.body} summaryContent={panoramicQuestionMark.summaryContent} image={panoramicQuestionMark.image} />
+
+                : <QuestionHelp title={cubeQuestionMark.header} content={cubeQuestionMark.body} summaryContent={cubeQuestionMark.summaryContent} image={cubeQuestionMark.image} />
+                }
+                
                 
                 <div id="cubemap" style={ imageTypeSelect ? cubeMapStyle : {}}>
                     <output id="faces" ref={facesRef} style={ imageTypeSelect ? {"display":"block"} : {"display":"none"}}></output>
@@ -517,7 +536,7 @@ const GenerateRoom = () => {
 
 
                 { imageTypeSelect ? 
-                <form ref={formRef} onSubmit={handleCubeMapSubmit}>
+                <form ref={formRef} onSubmit={handleCubeMapSubmit} style={{"zIndex":"5"}}>
 
                     {/* panorama input */}
                     <input placeholder=">" ref={imageInputRef} type="file" name='file' className='form-input' onChange={handleFile} disabled={!imageTypeSelect ? true : false} required/>

@@ -30,10 +30,11 @@
 
 #qbox{
     position: absolute;
-    display: none;
-    left: 150%;
+    flex-direction: column;
+    font-size: 0.7rem;
+    right: 150%;
     top: 0;
-    width: 500px;
+    width: 300px;
     background: linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%);
     padding: 20px;
     border-radius: 25px;
@@ -42,6 +43,9 @@
 
 #qbox>h3{
     text-decoration: underline;
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
 }
 
 #example-panoramic{
