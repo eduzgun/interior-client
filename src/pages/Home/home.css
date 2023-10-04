@@ -3,7 +3,9 @@
   justify-content: space-between; /* Space between left and right content */
   align-items: flex-start; /* Align content to the top */
   text-align: center;
-  height: 2000px; /* Set a fixed height or remove this for dynamic height */
+
+ 
+
 }
 
 #left-content {
@@ -12,12 +14,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
+  width: 70vw;
 }
 
 .text-section {
-  margin-bottom: 500px; /* Add some margin for spacing between text sections */
+  margin-bottom: 400px; /* Add some margin for spacing between text sections */
 }
   
+h3 {
+  font-size: 45px;
+}
+.text-section :nth-child(1) {
+  margin-top: 100px;
+}
   #right-content {
     width: 100%; /* Take up the full width of the container */
     display: flex;
@@ -25,11 +35,12 @@
     position: sticky; /* Make it sticky */
     top: 0; /* Stick to the top of the viewport */
     z-index: 1; /* Ensure it's above other content */
+   
   }
   
   /* Adjust button styling as needed */
   #left-content button {
-    padding: 0.60rem 2rem;
+    padding: 0.60rem 1rem;
     font-size: 0.7rem;
     text-decoration: none;
     background-color: #009688;
@@ -38,16 +49,20 @@
     font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
-    margin: 10px; /* Reduce the margin for spacing */
+    margin: 40px; /* Reduce the margin for spacing */
   }
   
   #left-content button:hover {
+    color: #009688;
     cursor: pointer;
     background-color: var(--outlinefocus);
   }
   
   h3 {
-    padding: 1rem;
+    padding: 2rem;
+    color: #3E8989;
+
+
   }
   
   canvas {
@@ -66,6 +81,9 @@
     #left-content {
       padding: 100px;
     }
+    #centre-button button {
+        padding: 0.75rem 5rem;
+    }
   }
   
   @media only screen and (max-width: 1400px) {
@@ -80,8 +98,8 @@
       width: 50vw;
     }
   
-    #home-container {
-      height: 2000px;
-    }
+    
   }
+  
+
   

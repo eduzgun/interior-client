@@ -5,7 +5,7 @@
     justify-content: space-between;
     height: 70px;
     font-family: 'Space Grotesk', sans-serif;
-    background-color:#f4f4f4;
+    background-color:#FAF8F2;
     padding: 5px;
    
 
@@ -34,7 +34,7 @@
 }
 
 .nav-row a{
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-decoration: none;
     margin-right: 60px;
     outline: solid 2px var(--outline);
@@ -46,13 +46,13 @@
 .nav-row a:hover{
     cursor: pointer;
     background-color: var(--outline);
-    font-weight: bold;
-    outline: solid 2px var(--outlinefocus);
+    outline: solid 2px var(--outline);
     
 }
 
 .nav-row a:visited{
     color: #00776C;
+    
    
 
 }
@@ -64,7 +64,6 @@
     
 
 }
-
 
 /* styling for the three-container - this is the canvas it sits on the page, not the page layout  */
 

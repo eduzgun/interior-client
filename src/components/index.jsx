@@ -6,5 +6,6 @@ export {default as Room} from "./Room"
 export {default as EnvironmentMap} from "./EnvironmentMaps"
 export {default as ExploreItems} from "./Explore"
 export {default as Marker} from "./Marker"
+export { default as BlobToImage } from "./BlobToImage"
 
 export {default as QuestionHelp} from "./QuestionHelp"
