@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { screen, render, cleanup, fireEvent } from '@testing-library/react';
 
+
 import * as matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
@@ -30,7 +31,7 @@ describe('LightSwitch component', () => {
   });
 
   it('plays audio on click', () => {
-    const playSpy = jest.spyOn(window.Audio.prototype, 'play');
+    const playSpy = vi.spyOn(window.Audio.prototype, 'play');
 
     // Render the component
     const { container } = render(
@@ -48,10 +49,10 @@ describe('LightSwitch component', () => {
   });
 
   it('toggles switch styles on click', () => {
-    const changeStateMock = jest.fn();
+    const changeStateMock = vi.fn();
     render(<LightSwitch changeState={changeStateMock} toggleSwitch={false} />);
     
-    const switchElement = screen.getByRole('button');
+    const switchElement = screen.getAllByText('Click To Switch');
     fireEvent.click(switchElement);
 
     const mainBit = screen.getByTestId('mainbit');
