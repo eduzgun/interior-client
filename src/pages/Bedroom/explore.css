@@ -159,15 +159,19 @@ font-size: 18px;
 }
 
 .email-button {
-  width: 60px;
-  height: 50px;
-  border-radius: 20px; 
+  width: 54px;
+    height: 50px;
+   
+  border-radius: 30px;
+  background-color: #009688;
+  /* outline: solid 2px var(--outline); */
   font-size: 0.9em;
   justify-content: center;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 24px;
+   margin-left: -32px;
     /* height: 40px;
-    margin-left: -350px;
+   
     margin-top: -300px;
     font-size: 0.7rem;
     text-decoration: none;
@@ -180,6 +184,13 @@ font-size: 18px;
 .comments-button:hover{
     cursor: pointer;
     background-color: #009688;
+    outline: solid 2px var(--outlinefocus);
+    
+}
+
+.email-button:hover{
+    cursor: pointer;
+    background-color: white;
     outline: solid 2px var(--outlinefocus);
     
 }
