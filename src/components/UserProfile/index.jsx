@@ -187,7 +187,7 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
                       <p>You have not liked any rooms.<br></br> <Link to={`/explore`}><button>Find Rooms</button></Link></p>
                     ) : (
                       likedBedrooms.map((like, index) => (
-                        <Link style={{textDecoration: "none"}} key={index} to={`/studio`}>
+                        <Link id="imgs-container" style={{textDecoration: "none"}} key={index} to={`/studio`}>
                           <img src={like.src} className="likes-img" id='profile-imgs'  alt="" /> 
                           <p key={index} id='profile-imgs-text' > 
                             Room {like.id}
