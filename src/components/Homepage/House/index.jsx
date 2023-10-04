@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Geometry, Base, Subtraction, Addition } from '@react-three/csg';
 import { useFrame } from '@react-three/fiber';
@@ -9,59 +9,136 @@ import * as THREE from 'three'; // Import THREE library
 import { useGLTF, MeshWobbleMaterial } from '@react-three/drei';
 import gsap from 'gsap';
 
+
 const House = ({ scrollY, ...props }) => {
   const csg = useRef();
   const tl = useRef();
-
+  const [catMoving, setCatMoving] = useState(false);
+  
   // Add rotation
   useFrame(() => {
-    csg.current.rotation.y -= 0.02  // Adjust rotation as needed
-    //tl.current.seek(scrollY * 0.01); // Adjust scroll sensitivity
+    csg.current.rotation.y -= 0.02; // Adjust rotation as needed
+
+    // Get the current position of the object
+    const currentY = csg.current.children[0].children[9].position.y;
+
+    // Check scroll position and update position accordingly
+    if (scrollY > 600 && scrollY < 1100) {
+      if (currentY <= -5 && !catMoving) {
+        csg.current.children[0].children[9].position.y = -1.5;
+        setCatMoving(true);
+      }
+    } else {
+      if (currentY >= -5 && catMoving) {
+        csg.current.children[0].children[9].position.y = -50;
+        setCatMoving(false);
+      }
+    }
   });
+  
 
   useLayoutEffect(() => {
     tl.current = gsap.timeline();
-
-    // VERTICAL ANIMATION
-    
-
-    // Define the initial color as brown
-    const initialColor = { r: 1, g: 1, b: 1 };
-
-    // Color changes based on the timeline's progress
-    const purpleColor = { r: 0.2, g: 0.4, b: 0.6 };
-    const greenColor = { r: 0.2, g: 0.7, b: 0.2 };
-
-    // Determine the color based on the scrollY position
-    const sectionHeight = 700; // Height of each text section
+  
+    // Determine the target colors based on the scroll position
+    const sectionHeight = 600; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
-    const targetColor = sectionIndex === 0 ? initialColor : sectionIndex === 1 ? greenColor : purpleColor;
-
-    // Set the initial color before the animation starts
-
-    tl.current.to(
-      csg.current.children[0].children[3].material.color,
-      {
-        duration: 0.2,
-        ...targetColor,
-        onStart: () => {
-          csg.current.children[0].children[3].material.needsUpdate = true;
+    let targetColors;
+  
+    if (sectionIndex === 1) {
+      // Green house (first house)
+      targetColors = {
+        base: { r: 0.36470588, g: 0.36470, b: 0.43921 }, 
+        roof: { r: 0.788235, g: 0.78820, b: 0.639215 }, 
+        wall1: { r: 0.2, g: 0.7, b: 0.2 }, 
+        chimney: { r: 0.34117647, g: 0.2, b: 0.1058823 }, 
+      };
+    } else if (sectionIndex === 2) {
+      // Purple house (second house)
+      targetColors = {
+        base: { r: 0.8, g: 0.76470, b: 0.6627450 }, 
+        roof: { r: 0.0666666, g: 0.0666666, b: 0.1607843 }, 
+        wall1: { r: 0.2, g: 0.4, b: 0.6 }, 
+        chimney: { r: 0.34117647, g: 0.2, b: 0.1058823 }, 
+      };
+    } else {
+      // Colors remain unchanged in section 0
+      targetColors = null;
+    }
+  
+    // Animate the colors to the target colors if defined
+    if (targetColors) {
+      tl.current.to(
+        csg.current.children[0].children[3].material.color,
+        {
+          
+          ...targetColors.base,
+          onStart: () => {
+            csg.current.children[0].children[3].material.needsUpdate = true;
+          },
+          duration: 2,
         },
-      }
-    );
-
-    tl.current.to(
-      csg.current.children[0].children[1].material.color,
-      {
-        duration: 0.2,
-        ...targetColor,
-        onStart: () => {
-          csg.current.children[0].children[1].material.needsUpdate = true;
+        0
+      );
+  
+      tl.current.to(
+        csg.current.children[0].children[2].children[0].material.color,
+        {
+          
+          ...targetColors.roof,
+          onStart: () => {
+            csg.current.children[0].children[2].children[0].material.needsUpdate = true;
+          },
+          duration: 2,
         },
-      }
-    );
+        0 // Delay for simultaneous animation
+      );
+  
+      tl.current.to(
+        csg.current.children[0].children[1].material.color,
+        {
+          
+          ...targetColors.wall1,
+          onStart: () => {
+            csg.current.children[0].children[1].material.needsUpdate = true;
+          },
+          duration: 2,
+        },
+        0 // Delay for simultaneous animation
+      );
+  
+      tl.current.to(
+        csg.current.children[0].children[0].material.color,
+        {
+          duration: 2,
+          ...targetColors.base,
+          onStart: () => {
+            csg.current.children[0].children[2].material.needsUpdate = true;
+          },
+        },
+        0 // Delay for simultaneous animation
+      );
+  
+      tl.current.to(
+        csg.current.children[0].children[3].material.color,
+        {
+          duration: 4,
+          ...targetColors.chimney,
+          onStart: () => {
+            csg.current.children[0].children[3].material.needsUpdate = true;
+          },
+        },
+        0 // Delay for simultaneous animation
+      );
+    }
+  
+    // Reset the timeline when the scrollY changes
+    const progress = (scrollY - sectionIndex * sectionHeight) / sectionHeight;
+    tl.current.progress(progress);
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollY]);
-    
+  
   
   const { nodes, materials } = useGLTF('../../src/assets/models/low_poly_cat/scene.gltf');
 
@@ -89,7 +166,7 @@ const House = ({ scrollY, ...props }) => {
               color: "#cc9149", 
             })
           }   
-          position={[-2, -1.5, 2]}
+          position={[-2, -50, 2]}
           scale={0.12}  
           rotation={[0,4.2,0]}
           />
