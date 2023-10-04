@@ -18,4 +18,6 @@ export { default as BackButton } from "./BackButton"
 
 export { default as ImageBox } from "./ImageBox"
 
+export { default as EmailButton } from './Email'
+
 

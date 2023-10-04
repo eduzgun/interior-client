@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { Room, StylesComponent, BackButton } from '../../components'
+import React, {useState, useEffect,useRef } from 'react';
+import { Room, StylesComponent, BackButton,BlobToImage } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
@@ -105,10 +105,16 @@ const sendLikeData = async (user, roomId) => {
     window.removeEventListener('wheel', handleScroll);
   }
 
+  // for(let img of pageRefs.current){
+  //   console.log(img.current.src);
+  // }
+
   return () => {
     window.removeEventListener('wheel', handleScroll);
   };
 }, [selectedImage]);
+
+
 
   return (
     <div className='overflow-hiding'>

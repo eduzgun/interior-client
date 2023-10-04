@@ -3,6 +3,8 @@
     right: 5%;
     top: 2%;
     z-index: 2;
+    color: #14080E;
+    text-align: center;
     
 }
 
@@ -43,10 +45,11 @@
 }
 
 #qbox>h3{
-    text-decoration:double;
-    font-size: 30px;
-    text-align: center;
-    padding: 10px;
+    /* text-decoration: underline; */
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
+    
 }
 
 #example-panoramic{

@@ -102,11 +102,12 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
     }
 
   return (
-    <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outline)"})}>
+    <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
         <div className="lamp">
             <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
         </div>
+
         <QuestionHelp active={toggleSwitch} title={"Signing Up"} content={<>Not sure how to register? In each box enter the required content.<br /><br />Make sure your passwords contain at least one:<br/><ul>
             <li>Uppercase Letter</li>
             <li>Digit</li>
