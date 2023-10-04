@@ -556,15 +556,41 @@ const GenerateRoom = () => {
                 </form>
 
                 : 
-                <form ref={formRef} onSubmit={handleCubeMapSubmit}>
 
+                <form ref={formRef} onSubmit={handleCubeMapSubmit} >
+                    <h2 id='cubemap-header'>Upload a CubeMap</h2>
                     {/* cubemap inputs */}
-                    <input type="file" ref={cubemapRefs.current[0]} name='px' className='cubemap-inputs' onChange={(e) => handleCube(e,"px")} required accept='.jpg, .jpeg, .png'/>
-                    <input type="file" ref={cubemapRefs.current[1]} name='nx' className='cubemap-inputs' onChange={(e) => handleCube(e,"nx")} required accept='.jpg, .jpeg, .png'/>
-                    <input type="file" ref={cubemapRefs.current[2]} name='py' className='cubemap-inputs' onChange={(e) => handleCube(e,"py")} required accept='.jpg, .jpeg, .png'/>
-                    <input type="file" ref={cubemapRefs.current[3]} name='ny' className='cubemap-inputs' onChange={(e) => handleCube(e,"ny")} required accept='.jpg, .jpeg, .png'/>
-                    <input type="file" ref={cubemapRefs.current[4]} name='pz' className='cubemap-inputs' onChange={(e) => handleCube(e,"pz")} required accept='.jpg, .jpeg, .png'/>
-                    <input type="file" ref={cubemapRefs.current[5]} name='nz' className='cubemap-inputs' onChange={(e) => handleCube(e,"nz")} required accept='.jpg, .jpeg, .png'/>
+                    <div id="cubemap-inputs">
+                        <div id="px">
+                            <label htmlFor="px">PX</label>
+                            <input type="file" ref={cubemapRefs.current[0]} name='px' className='cubemap-inputs' onChange={(e) => handleCube(e,"px")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+
+                        <div id="nx">
+                            <label htmlFor="px">NX</label>
+                            <input type="file" ref={cubemapRefs.current[1]} name='nx' className='cubemap-inputs' onChange={(e) => handleCube(e,"nx")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+
+                        <div id="py">
+                            <label htmlFor="px">PY</label>
+                            <input type="file" ref={cubemapRefs.current[2]} name='py' className='cubemap-inputs' onChange={(e) => handleCube(e,"py")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+
+                        <div id="ny">
+                            <label htmlFor="px">NY</label>
+                            <input type="file" ref={cubemapRefs.current[3]} name='ny' className='cubemap-inputs' onChange={(e) => handleCube(e,"ny")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+
+                        <div id="pz">
+                            <label htmlFor="px">PZ</label>
+                            <input type="file" ref={cubemapRefs.current[4]} name='pz' className='cubemap-inputs' onChange={(e) => handleCube(e,"pz")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+
+                        <div id="nz">
+                            <label htmlFor="px">NZ</label>
+                            <input type="file" ref={cubemapRefs.current[5]} name='nz' className='cubemap-inputs' onChange={(e) => handleCube(e,"nz")} required accept='.jpg, .jpeg, .png'/>
+                        </div>
+                    </div>
 
                 <div className="inputs" id='filename-input'>
                     <label htmlFor="filename">Filename</label>
