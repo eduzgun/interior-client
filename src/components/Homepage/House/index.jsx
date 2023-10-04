@@ -23,7 +23,7 @@ const House = ({ scrollY, ...props }) => {
     const currentY = csg.current.children[0].children[9].position.y;
 
     // Check scroll position and update position accordingly
-    if (scrollY > 600 && scrollY < 1100) {
+    if (scrollY > 700 && scrollY < 1400) {
       if (currentY <= -5 && !catMoving) {
         csg.current.children[0].children[9].position.y = -1.5;
         setCatMoving(true);
@@ -41,8 +41,9 @@ const House = ({ scrollY, ...props }) => {
     tl.current = gsap.timeline();
   
     // Determine the target colors based on the scroll position
-    const sectionHeight = 600; // Height of each text section
+    const sectionHeight = 700; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
+    console.log(scrollY, sectionIndex)
     let targetColors;
   
     if (sectionIndex === 1) {
@@ -53,7 +54,7 @@ const House = ({ scrollY, ...props }) => {
         wall1: { r: 0.2, g: 0.7, b: 0.2 }, 
         chimney: { r: 0.34117647, g: 0.2, b: 0.1058823 }, 
       };
-    } else if (sectionIndex === 2) {
+    } else if (sectionIndex >= 2 ) {
       // Purple house (second house)
       targetColors = {
         base: { r: 0.8, g: 0.76470, b: 0.6627450 }, 
