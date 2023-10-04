@@ -30,7 +30,7 @@ const bedroomImages = [
 
 function BedroomPage() {
   const itemVariants = {
-  hidden: { opacity: 0, rotate: -25 },
+  hidden: { opacity: 0, rotate: -10 },
   visible: { opacity: 1, rotate: 0 }
 };
 
@@ -131,7 +131,7 @@ const sendLikeData = async (user, roomId) => {
             initial="hidden"
             animate="visible"
             variants={itemVariants}
-            transition={{ duration: 0.7, delay: index * 0.3 }} // Added delay here
+            transition={{ duration: 0.5, delay: index * 0.25 }} // Added delay here
             onClick={() => handleImageClick(image, index)}
             onMouseEnter={() => setHoveredImageIndex(index)}
             onMouseLeave={() => setHoveredImageIndex(null)}
