@@ -131,7 +131,7 @@ const sendLikeData = async (user, roomId) => {
             initial="hidden"
             animate="visible"
             variants={itemVariants}
-            transition={{ duration: 1, delay: index * 0.4 }} // Added delay here
+            transition={{ duration: 0.7, delay: index * 0.3 }} // Added delay here
             onClick={() => handleImageClick(image, index)}
             onMouseEnter={() => setHoveredImageIndex(index)}
             onMouseLeave={() => setHoveredImageIndex(null)}

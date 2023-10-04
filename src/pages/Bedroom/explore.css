@@ -223,8 +223,9 @@ cursor: pointer;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
   grid-gap: 30px;
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 120px;
+  margin-right: 120px;
+  margin-top: 40px;
   row-gap: 25px;
   grid-auto-rows: 500px;
 overflow-y: scroll;
@@ -378,14 +379,14 @@ align-items: center;
 
 .room-title {
   color:white;
-  margin-top: 30px;
-  margin-left: 15px;
+  margin-top: 50px;
+  margin-left: 125px;
   margin-bottom: 10px
 }
 
 .back-to-button {
-  margin-top: 30px;
-  margin-right: 15px;
+  margin-top: 50px;
+  margin-right: 130px;
   border-radius: 4px;
   cursor: pointer;
   color: #009688;
