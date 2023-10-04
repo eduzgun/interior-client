@@ -13,7 +13,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: var(--bg);
-    overflow: scroll;
+    overflow-y: scroll;
 } 
 
 
@@ -206,7 +206,7 @@ cursor: pointer;
   margin-right: 80px;
   row-gap: 25px;
   grid-auto-rows: 500px;
-
+overflow-y: scroll;
 }
 
 .bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
@@ -231,7 +231,7 @@ cursor: pointer;
 }
 
 .kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover, .garden__item:hover, .bathroom__item:hover, .studio__item:hover, .living__item:hover {
-  transform: scale(1.05);
+  transform: scale(0.97);
 }
 
 .fullscreen-content {
@@ -252,13 +252,13 @@ cursor: pointer;
     width: 100%;  
     height: 100%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8); 
+    background-color: rgba(0, 0, 0, 0.9); 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 100;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -301,18 +301,26 @@ cursor: pointer;
 
 
 .bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
-  position: relative;
-  display: inline-block;
+  background-color:#f4f4f4;
+    position: relative;
+    border: 1px solid #e0e0e0;  
+    border-radius: 20px;  
+    overflow: hidden; 
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:50px; 
+    transition: box-shadow 0.3s; 
 }
 
 .bedroom__item-caption, .kitchen__item-caption, .garden__item-caption, .bathroom__item-caption, .studio__item-caption, .living__item-caption  {
   position: absolute;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); 
-  color: white;
+  padding-bottom: 6px;
+  color: black;
   width: 100%;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
+  left: 15px
  
 }
 
@@ -323,12 +331,21 @@ cursor: pointer;
 .bathroom-page.dimmed .bathroom-caption, .studio-page.dimmed .studio__item, 
 .studio-page.dimmed .studio-caption, .living-page.dimmed .living__item, 
 .living-page.dimmed .living-caption {
-  opacity: 0.1;
+  background-color: black;
+  opacity: 1;
+  overflow-y: hidden;
+}
+
+.bedroom__item-container.dimmed {
+background-color: black;
+  opacity: 1;
   overflow-y: hidden;
 }
 
 .bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container, .garden-page.dimmed .garden-container, .bathroom-page.dimmed .bathroom-container, .studio-page.dimmed .studio-container, .living-page.dimmed .living-container {
   pointer-events: none; 
+  background-color: black;
+  opacity: 1;
   overflow-y: hidden;
 }
 
@@ -357,20 +374,23 @@ align-items: center;
     color: #005f5f;
 }
 
-/* .heart-container, .click-count {
-    margin: 0;
-    padding: 0;
+.icon-container {
+    position: absolute;
+    bottom: -34px; 
+    right: 5px; 
+    display: flex;
+   align-items: flex-end;
+    gap: 1px;
+   
+}
+
+
+
+/* .bedroom__item-caption, .icon-container {
+    display: flex;
+    align-items: center;
 } */
 
-
-.heart-container {
-  size: 60px;
-    position: absolute;
-    top: 0px;  
-    right: 1px;
-    cursor: pointer;
-    z-index: 10; 
-}
 
 
 .click-count {

@@ -40,6 +40,7 @@ function BedroomPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   const handleImageClick = (image, index) => {
+    document.body.style.overflow = 'hidden';
     const updatedImages = [...imagesWithStyles];
   updatedImages[index].clickCount += 1;
   setImagesWithStyles(updatedImages);
@@ -125,8 +126,7 @@ const sendLikeData = async (user, roomId) => {
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
     <img className='bedroom__item' src={image.src} alt={image.alt} />
-    <div className="bedroom__item-caption">{image.style}</div>
-    
+    <div className="bedroom__item-caption">{image.style}
     {hoveredImageIndex === index && (
       <div className="icon-container">
     
@@ -139,7 +139,9 @@ const sendLikeData = async (user, roomId) => {
           <span> {image.clickCount}</span>
         </div>
       </div>
-    )}
+    )}</div>
+    
+    
   </div>
 ))}
 
@@ -158,4 +160,3 @@ const sendLikeData = async (user, roomId) => {
 }
 
 export default BedroomPage;
-
