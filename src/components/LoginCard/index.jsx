@@ -9,6 +9,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
     const { setUser } = useAuth()
+    const { setUsersUsername }  = useAuth()
 
     const navigate = useNavigate()
 
@@ -67,6 +68,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
 
                     const data = await resp2.json()
                     setUser(data.data.id)
+                    setUsersUsername(data.data.username)
                     setUsername("")
                     setPassword("")
                     navigate("/")

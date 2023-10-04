@@ -3,17 +3,18 @@ import * as THREE from 'three';
 import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import  Marker  from '../Marker';
+ 
 import Heart from "react-animated-heart";
 import axios from 'axios'
 import { Canvas } from '@react-three/fiber';
 import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
+import Room from '../Room';
 
-//need to add use auth here to enable comments and likes with user in return statement at the bottom:--)
 
-const EnvironmentMap = ({ mapUrls }) => {
+const EnvironmentMap = ({ mapUrls, roomId }) => {
+
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
    const [showComments, setShowComments] = useState(false); 
@@ -23,21 +24,14 @@ const EnvironmentMap = ({ mapUrls }) => {
 
   const { user } = useAuth();
 
-
-  
-
   const handleLike = async () => {
     
     setClick(prev => !prev);
-    console.log(user)
-
-    //I will change this to the actual user logged in just wanted to check that it works first
+   
     const likeData = {
         user_id: user,
-        room_id: 3
+        room_id: roomId
     };
-    console.log(likeData)
-
     
     try {
         const response = await axios.post('http://localhost:5000/likes', likeData);
@@ -56,12 +50,6 @@ const EnvironmentMap = ({ mapUrls }) => {
     const container = containerRef.current;
     
 
-    const gltfLoader = new GLTFLoader();
-    const cubeTextureLoader = new THREE.CubeTextureLoader();
-    const textureLoader = new THREE.TextureLoader();
-
-  
-    
     const global = {};
 
     const canvas = document.createElement('canvas');

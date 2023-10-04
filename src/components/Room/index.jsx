@@ -13,21 +13,31 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
 
   const [loadedVar,setLoadedVar] = useState(false)
 
-  const mapSets = {
-    bedroom: [
-      ['../../src/assets/environmentMaps/0/px.png',
-       '../../src/assets/environmentMaps/0/nx.png',
-        '../../src/assets/environmentMaps/0/py.png',
-        '../../src/assets/environmentMaps/0/ny.png',
-      '../../src/assets/environmentMaps/0/pz.png',
-        '../../src/assets/environmentMaps/0/nz.png'],
-        ['../../src/assets/environmentMaps/0/1/px.png',
-       '../../src/assets/environmentMaps/0/1/nx.png',
-        '../../src/assets/environmentMaps/0/1/py.png',
-        '../../src/assets/environmentMaps/0/1/ny.png',
-      '../../src/assets/environmentMaps/0/1/pz.png',
-        '../../src/assets/environmentMaps/0/1/nz.png']
-    ],
+
+  const loading = [
+    "../../src/assets/environmentMaps/loading/px.png",
+    "../../src/assets/environmentMaps/loading/nx.png",
+    "../../src/assets/environmentMaps/loading/py.png",
+    "../../src/assets/environmentMaps/loading/ny.png",
+    "../../src/assets/environmentMaps/loading/pz.png",
+    "../../src/assets/environmentMaps/loading/nz.png",
+  ]
+
+  // const mapSets = {
+  //   bedroom: [
+  //     ['../../src/assets/environmentMaps/0/px.png',
+  //      '../../src/assets/environmentMaps/0/nx.png',
+  //       '../../src/assets/environmentMaps/0/py.png',
+  //       '../../src/assets/environmentMaps/0/ny.png',
+  //     '../../src/assets/environmentMaps/0/pz.png',
+  //       '../../src/assets/environmentMaps/0/nz.png'],
+  //       ['../../src/assets/environmentMaps/0/1/px.png',
+  //      '../../src/assets/environmentMaps/0/1/nx.png',
+  //       '../../src/assets/environmentMaps/0/1/py.png',
+  //       '../../src/assets/environmentMaps/0/1/ny.png',
+  //     '../../src/assets/environmentMaps/0/1/pz.png',
+  //       '../../src/assets/environmentMaps/0/1/nz.png']
+  //   ],
     // studio: [
     //   ['../../src/assets/environmentMaps/2/px.png',
     //    '../../src/assets/environmentMaps/2/nx.png',
@@ -72,9 +82,9 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
     //   '../../src/assets/environmentMaps/6/pz.png',
     //     '../../src/assets/environmentMaps/6/nz.png'],
     // ],
-  }
+  // }
 
-  const maps = mapSets[mapSet] || mapSets.bedroom;
+  // const maps = mapSets[mapSet] || mapSets.bedroom;
 
   const prevMap = () => {
     setCurrentMapIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maps.length - 1));
@@ -100,19 +110,16 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
         posPositions.forEach(order => {
           let matchingImg;
           for(let img of imgs){
-            // console.log(img.current.alt, order);
             if(img.current.alt.split("/")[1] === order){
-              matchingImg = img
-              if(matchingImg && !arr.includes(matchingImg.current.alt)){
-                sortedArray.push(matchingImg.current.src)
-                arr.push(matchingImg.current.alt)
-              }
+              matchingImg = img              
             }
             
           }
+          if(matchingImg && !arr.includes(matchingImg.current.alt)){
+            sortedArray.push(matchingImg.current.src)
+            arr.push(matchingImg.current.alt)
+          }
         })
-        console.log(arr);
-        console.log(sortedArray);
         setMapSet(sortedArray)
       }
     } catch (error) {
@@ -122,9 +129,10 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
 
   return (
     <div className="environment-map-grid">
-      <BlobToImage image_id={11} refs={pageRefs} loadedFunc={setLoadedVar}/>
+      <BlobToImage image_id={14} refs={pageRefs} loadedFunc={setLoadedVar}/>
       <button className='left-arrow' onClick={prevMap}>←</button>  
-        <EnvironmentMap mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} />
+        {/* <EnvironmentMap roomId={13} mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} /> */}
+        <EnvironmentMap roomId={14} mapUrls={mapset.length == 6 ? mapset : loading} />
         {/* <EnvironmentMap mapUrls={maps[currentMapIndex]} /> */}
       <button className='right-arrow' onClick={nextMap}>→</button> 
      

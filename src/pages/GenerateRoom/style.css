@@ -135,3 +135,22 @@ textarea:disabled,
     background-color: var(--bg);
     color: whitesmoke;
 }
+
+#maptype-selector{
+    position: absolute;
+    top: -32px;
+    left: -1px;
+    display: flex;
+}
+
+#panorama-selector,
+#cubemap-selector{
+    padding: 5px 15px;
+    border-radius: 15px 15px 0px 0px;
+    font-size: 1.4rem;
+    margin-right: 10px;
+    border: solid 1px var(--outlinefocus);
+    border-bottom: none;
+    cursor: pointer;
+}
+
