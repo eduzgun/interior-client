@@ -12,6 +12,11 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-three/csg": "^3.0.0",
     "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.3",
