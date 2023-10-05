@@ -9,16 +9,16 @@ import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const studioImages = [
-  { id:1, src: '../../src/assets/environmentMaps/studio/1.png', alt: 'Image 1' },
-  { id:2,src: '../../src/assets/environmentMaps/studio/2.png', alt: 'Image 1' },
-  { id:3,src: '../../src/assets/environmentMaps/studio/3.png', alt: 'Image 1' },
-  { id:4,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
-  { id:5,src: '../../src/assets/environmentMaps/studio/5.png', alt: 'Image 1' },
-  { id:6,src: '../../src/assets/environmentMaps/studio/6.png', alt: 'Image 1' },
-  { id:7,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
+  { id:1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/1.png', alt: 'Image 1' },
+  { id:2,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/2.png', alt: 'Image 1' },
+  { id:3,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/3.png', alt: 'Image 1' },
+  { id:4,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/4.png', alt: 'Image 1' },
+  { id:5,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/5.png', alt: 'Image 1' },
+  { id:6,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/6.png', alt: 'Image 1' },
+  { id:7,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/4.png', alt: 'Image 1' },
 
-  { id:7,src: '../../src/assets/environmentMaps/studio/7.png', alt: 'Image 1' },
-  { id:8,src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
+  { id:7,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/7.png', alt: 'Image 1' },
+  { id:8,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/8.jpeg', alt: 'Image 1' },
   // { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
 ];
 

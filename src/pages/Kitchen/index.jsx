@@ -9,11 +9,11 @@ import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const kitchenImages = [
-  { src: '../../src/assets/environmentMaps/kitchen/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/kitchen/2.webp', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/kitchen/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/kitchen/4.jpeg', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/kitchen/5.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/1.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/2.webp', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/3.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/4.jpeg', alt: 'Image 1' },
+   { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/5.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/kitchen/6.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/kitchen/7.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/kitchen/8.png', alt: 'Image 1' },
