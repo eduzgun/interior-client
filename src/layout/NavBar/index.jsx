@@ -5,20 +5,6 @@ import { useAuth } from "../../contexts";
 import axios from "axios";
 
 const NavBar = () => {
-  const [imageUrl, setImageUrl] = useState("");
-  const apiUrl =
-    "https://lap-4-project.onrender.com//filestorage/static-files/logo.png"; 
-
-  useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setImageUrl(response.data.image_url);
-      })
-      .catch((error) => {
-        console.error("Error fetching image:", error);
-      });
-  }, []);
 
   const { user, setUser } = useAuth();
 
@@ -36,11 +22,9 @@ const NavBar = () => {
   return (
     <>
       <nav className="nav-row">
-        {imageUrl ? (
-          <img id="logo" src={imageUrl} alt="API Image" />
-        ) : (
-          <p>Loading image...</p>
-        )}
+
+        <img id="logo" src='https://interior-cloud-store.s3.amazonaws.com/images/logo.png' alt="API Image" />
+
         <ul>
           <li>
             <NavLink to="/" style={navActive}>
