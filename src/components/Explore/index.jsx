@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 const ExploreItems = () => {
   const items = [
-    { image: '../../src/assets/environmentMaps/bedroom/1.png', title: 'Bedroom', link: '/bedroom' },
+    { image: '../../src/assets/environmentMaps/bedroom.png', title: 'Bedroom', link: '/bedroom' },
     { image: '../../src/assets/environmentMaps/studio.png', title: 'Studio', link: '/studio' },  
-    { image: '../../src/assets/environmentMaps/kitchen/1.png', title: 'Kitchen', link: '/kitchen' },
+    { image: '../../src/assets/environmentMaps/kitchen.png', title: 'Kitchen', link: '/kitchen' },
     { image: '../../src/assets/environmentMaps/garden.png', title: 'Garden', link: '/garden' }, 
      { image: '../../src/assets/environmentMaps/bathroom.png', title: 'Bathroom', link: '/bathroom' }, 
      { image: '../../src/assets/environmentMaps/living.png', title: 'Living', link: '/living' }, 

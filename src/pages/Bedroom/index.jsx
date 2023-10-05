@@ -85,6 +85,7 @@ useEffect(() => {
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Bedroom"){
+          console.log(rooms[i].cover_image);
             // rooms[i].src = rooms[i].cover_image
           rooms[i].src = bedroomImages[counter].src
           rooms[i].alt = 'Image 1'
