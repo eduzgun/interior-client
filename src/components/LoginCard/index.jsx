@@ -52,7 +52,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         }
 
         try{
-            const resp = await fetch(`${baseUrl}/auth/login`,options)
+            const resp = await fetch(`${baseUrl}auth/login`,options)
 
             if(resp.status == 204){
                 setUser(username)
@@ -64,7 +64,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
                 }
 
                 try {
-                    const resp2 = await fetch(`${baseUrl}/users/name/${username}`,options)
+                    const resp2 = await fetch(`${baseUrl}users/name/${username}`,options)
 
                     const data = await resp2.json()
                     setUser(data.data.id)

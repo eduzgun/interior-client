@@ -91,7 +91,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
                 },
             }
 
-            const resp = await fetch(`${baseUrl}/auth/register`,options)
+            const resp = await fetch(`${baseUrl}auth/register`,options)
 
             if(resp.status === 201){
                 setToggleSwitch(!toggleSwitch)
