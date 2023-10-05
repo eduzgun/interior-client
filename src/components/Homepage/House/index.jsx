@@ -13,16 +13,17 @@ import gsap from 'gsap';
 const House = ({ scrollY, ...props }) => {
   const csg = useRef();
   const tl = useRef();
-  const [catMoving, setCatMoving] = useState(false);
+  //const [catMoving, setCatMoving] = useState(false);
   
   // Add rotation
   useFrame(() => {
     csg.current.rotation.y -= 0.02; // Adjust rotation as needed
 
     // Get the current position of the object
-    const currentY = csg.current.children[0].children[9].position.y;
+    //const currentY = csg.current.children[0].children[9].position.y;
 
     // Check scroll position and update position accordingly
+    /*
     if (scrollY > 700 && scrollY < 1400) {
       if (currentY <= -5 && !catMoving) {
         csg.current.children[0].children[9].position.y = -1.5;
@@ -34,6 +35,7 @@ const House = ({ scrollY, ...props }) => {
         setCatMoving(false);
       }
     }
+    */
   });
   
 
@@ -141,7 +143,7 @@ const House = ({ scrollY, ...props }) => {
   }, [scrollY]);
   
   
-  const { nodes, materials } = useGLTF('../../src/assets/models/low_poly_cat/scene.gltf');
+  //const { nodes, materials } = useGLTF('../../src/assets/models/low_poly_cat/scene.gltf');
 
   return (
     <>
@@ -160,6 +162,7 @@ const House = ({ scrollY, ...props }) => {
           <Window rotation={[0, Math.PI / 2, 0]} position={[1.425, 0.25, 0]} scale={1.25} material={new THREE.MeshStandardMaterial({ color: 'white' })} />
           <Door rotation={[0, Math.PI / 2, 0]} position={[-1.425, -0.45, 0]} scale={[1, 0.9, 1]} material={new THREE.MeshStandardMaterial({ color: 'black' })} />
 
+          {/*
           <primitive
           object={nodes.CatMesh2_lambert1_0} // Use the mesh name
           material={
@@ -170,7 +173,7 @@ const House = ({ scrollY, ...props }) => {
           position={[-2, -50, 2]}
           scale={0.12}  
           rotation={[0,4.2,0]}
-          />
+        /> */}
 
         </Geometry>
         <meshStandardMaterial envMapIntensity={0.25} />
