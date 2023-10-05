@@ -9,12 +9,12 @@ import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
  const bedroomImages = [
-   { id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-   { id: 2, src: '../../src/assets/environmentMaps/bedroom/2.png', alt: 'Image 2', clickCount: 0},
-  { id: 3, src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
-  { id: 4, src: '../../src/assets/environmentMaps/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
-  { id: 5, src: '../../src/assets/environmentMaps/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
-  { id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 },
+   { id: 1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
+   { id: 2, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/2.png', alt: 'Image 2', clickCount: 0},
+  { id: 3, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
+  { id: 4, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
+  { id: 5, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
+  { id: 7, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 },
  ];
 
 
@@ -85,6 +85,7 @@ useEffect(() => {
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Bedroom"){
+          console.log(rooms[i].cover_image);
             // rooms[i].src = rooms[i].cover_image
           rooms[i].src = bedroomImages[counter].src
           rooms[i].alt = 'Image 1'
