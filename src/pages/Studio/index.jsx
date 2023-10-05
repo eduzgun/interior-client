@@ -9,15 +9,17 @@ import axios from 'axios';
 import {GrClose} from 'react-icons/gr'
 
 const studioImages = [
-  { src: '../../src/assets/environmentMaps/studio/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/4.avif', alt: 'Image 1' },
-  // { src: '../../src/assets/environmentMaps/studio/4.jpeg', alt: 'Image 1' },
-  // { src: '../../src/assets/environmentMaps/studio/5.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/6.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/7.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
+  { id:1, src: '../../src/assets/environmentMaps/studio/1.png', alt: 'Image 1' },
+  { id:2,src: '../../src/assets/environmentMaps/studio/2.png', alt: 'Image 1' },
+  { id:3,src: '../../src/assets/environmentMaps/studio/3.png', alt: 'Image 1' },
+  { id:4,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
+  { id:5,src: '../../src/assets/environmentMaps/studio/5.png', alt: 'Image 1' },
+  { id:6,src: '../../src/assets/environmentMaps/studio/6.png', alt: 'Image 1' },
+  { id:7,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
+
+  { id:7,src: '../../src/assets/environmentMaps/studio/7.png', alt: 'Image 1' },
+  { id:8,src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
+  // { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
 ];
 
 
@@ -91,6 +93,7 @@ useEffect(() => {
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Studio"){
             // rooms[i].src = rooms[i].cover_image
+            console.log(rooms[i].cover_image);
           rooms[i].src = studioImages[counter].src
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])

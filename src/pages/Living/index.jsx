@@ -11,11 +11,11 @@ import {GrClose} from 'react-icons/gr'
 
 const livingImages = [
   { src: '../../src/assets/environmentMaps/living/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/2.avif', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/4.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/5.jpeg', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/living/2.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/living/3.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/living/4.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/living/5.png', alt: 'Image 1' },
+  { src: '../../src/assets/environmentMaps/living/5.png', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/6.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/7.webp', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/8.webp', alt: 'Image 1' },
