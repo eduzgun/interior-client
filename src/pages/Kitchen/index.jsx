@@ -5,7 +5,7 @@ import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
 import { useAuth } from '../../contexts';
-import axios from 'axios';
+import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const kitchenImages = [
@@ -60,7 +60,7 @@ function KitchenPage() {
   
   const sendLikeData = async (user, roomId) => {
     try {
-      const response = await axios.post('http://localhost:5000/likes', { user_id: user, room_id: roomId });
+      const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
   
       if (!response.data) {
         throw new Error('Failed to send data');
@@ -105,7 +105,7 @@ function KitchenPage() {
 
 useEffect(() => {
   async function callRoomImages(){
-    const call = await axios.get("http://localhost:5000/rooms").then(data => {
+    const call = await axiosInstance.get("/rooms").then(data => {
       const rooms = data.data.rooms
       const tempArr = []
       let counter = 0

@@ -32,7 +32,7 @@
 #qbox{
     position: absolute;
     display: none;
-    left: 50%;
+    /* left: 50%; */
     top: 0;
     width: 400px;
     background: linear-gradient(0deg, rgba(15,13,20,1) 0%, #EDE4D9 0%);

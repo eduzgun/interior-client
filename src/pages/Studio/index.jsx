@@ -5,19 +5,21 @@ import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
 import { useAuth } from '../../contexts';
-import axios from 'axios';
+import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const studioImages = [
-  { src: '../../src/assets/environmentMaps/studio/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/studio/4.avif', alt: 'Image 1' },
-  // { src: '../../src/assets/environmentMaps/studio/4.jpeg', alt: 'Image 1' },
-  // { src: '../../src/assets/environmentMaps/studio/5.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/6.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/7.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
+  { id:1, src: '../../src/assets/environmentMaps/studio/1.png', alt: 'Image 1' },
+  { id:2,src: '../../src/assets/environmentMaps/studio/2.png', alt: 'Image 1' },
+  { id:3,src: '../../src/assets/environmentMaps/studio/3.png', alt: 'Image 1' },
+  { id:4,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
+  { id:5,src: '../../src/assets/environmentMaps/studio/5.png', alt: 'Image 1' },
+  { id:6,src: '../../src/assets/environmentMaps/studio/6.png', alt: 'Image 1' },
+  { id:7,src: '../../src/assets/environmentMaps/studio/4.png', alt: 'Image 1' },
+
+  { id:7,src: '../../src/assets/environmentMaps/studio/7.png', alt: 'Image 1' },
+  { id:8,src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
+  // { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
 ];
 
 
@@ -70,7 +72,7 @@ const toggleLike = async (index) => {
 
 const sendLikeData = async (user, roomId) => {
   try {
-    const response = await axios.post('http://localhost:5000/likes', { user_id: user, room_id: roomId });
+    const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
 
     if (!response.data) {
       throw new Error('Failed to send data');
@@ -84,13 +86,14 @@ const sendLikeData = async (user, roomId) => {
 
 useEffect(() => {
   async function callRoomImages(){
-    const call = await axios.get("http://localhost:5000/rooms").then(data => {
+    const call = await axiosInstance.get("/rooms").then(data => {
       const rooms = data.data.rooms
       const tempArr = []
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Studio"){
             // rooms[i].src = rooms[i].cover_image
+            console.log(rooms[i].cover_image);
           rooms[i].src = studioImages[counter].src
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])

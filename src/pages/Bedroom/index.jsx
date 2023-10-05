@@ -5,26 +5,16 @@ import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
 import { useAuth } from '../../contexts';
-import axios from 'axios';
+import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
  const bedroomImages = [
    { id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-   { id: 2, src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1', clickCount: 0},
-  { id: 3, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', caption: "Modern", clickCount: 0 },
-  { id: 4, src: '../../src/assets/environmentMaps/bedroom/3.jpeg', alt: 'Image 1', clickCount: 0 },
-  { id: 5, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-  { id: 6, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-  { id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 8, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 9, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
-  // { id: 10, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-  // { id: 11, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 12, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 13, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-  // { id: 14, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 15, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-  // { id: 16, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
+   { id: 2, src: '../../src/assets/environmentMaps/bedroom/2.png', alt: 'Image 2', clickCount: 0},
+  { id: 3, src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
+  { id: 4, src: '../../src/assets/environmentMaps/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
+  { id: 5, src: '../../src/assets/environmentMaps/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
+  { id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 },
  ];
 
 
@@ -75,7 +65,7 @@ const toggleLike = async (index) => {
 
 const sendLikeData = async (user, roomId) => {
   try {
-    const response = await axios.post('http://localhost:5000/likes', { user_id: user, room_id: roomId });
+    const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
 
     if (!response.data) {
       throw new Error('Failed to send data');
@@ -89,7 +79,7 @@ const sendLikeData = async (user, roomId) => {
 
 useEffect(() => {
   async function callRoomImages(){
-    const call = await axios.get("http://localhost:5000/rooms").then(data => {
+    const call = await axiosInstance.get("/rooms").then(data => {
       const rooms = data.data.rooms
       const tempArr = []
       let counter = 0
