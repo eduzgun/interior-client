@@ -65,8 +65,10 @@ const toggleLike = async (index) => {
   newLikedImages[index] = !newLikedImages[index];
   setLikedImages(newLikedImages);
 
+
   if (newLikedImages[index]) {
-    const roomId = imagesWithStyles[index].id;
+    // const roomId = imagesWithStyles[index].id;
+    const roomId = hoveredImageIndex;
     await sendLikeData(user, roomId);
   }
 };

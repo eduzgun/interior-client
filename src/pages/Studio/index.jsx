@@ -45,14 +45,6 @@ function StudioPage() {
     setSelectedImageIndex(null)
   };
 
- useEffect(() => {
-    const newImagesWithStyles = roomArray.map((image, index) => ({
-        ...image,
-        style: <StylesComponent seed={index + 3} />,
-    }));
-    setImagesWithStyles(newImagesWithStyles);
-}, []);
-
 
 useEffect(() => {
   const newImagesWithStyles = roomArray.map((image, index) => ({
@@ -68,10 +60,25 @@ const toggleLike = async (index) => {
   newLikedImages[index] = !newLikedImages[index];
   setLikedImages(newLikedImages);
 
+
   if (newLikedImages[index]) {
-    const roomId = imagesWithStyles[index].id;
-    console.log("line74",roomId);
+    // const roomId = imagesWithStyles[index].id;
+    const roomId = hoveredImageIndex;
     await sendLikeData(user, roomId);
+  }
+};
+
+const sendLikeData = async (user, roomId) => {
+  try {
+    const response = await axios.post('http://localhost:5000/likes', { user_id: user, room_id: roomId });
+
+    if (!response.data) {
+      throw new Error('Failed to send data');
+    }
+
+    console.log('Like created', response.data);
+  } catch (error) {
+    console.error("There was an error sending data:", error);
   }
 };
 
