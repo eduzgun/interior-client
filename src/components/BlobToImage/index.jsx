@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import JSZip from "jszip"
 import "./style.css"
+import axiosInstance from '../../helpers'
 
 const BlobToImage = ({ image_id, refs, className="", loadedFunc }) => {
   const [images, setImages] = useState([]);
@@ -31,7 +31,7 @@ const BlobToImage = ({ image_id, refs, className="", loadedFunc }) => {
     async function GetImageZip(){
 
         try {
-            const resp = await axios.get(`http://localhost:5000/rooms/images/${image_id}`,{
+            const resp = await axiosInstance.get(`/rooms/images/${image_id}`,{
                 responseType:"blob"
             })
 
@@ -41,7 +41,7 @@ const BlobToImage = ({ image_id, refs, className="", loadedFunc }) => {
             setImages(imagesArray)
 
             URL.revokeObjectURL(blob)
-            const cleanup = await axios.post("http://localhost:5000/rooms/images/cleanup",{
+            const cleanup = await axiosInstance.post("/rooms/images/cleanup",{
                 method:"POST"
             })
             console.log("FINISHED");

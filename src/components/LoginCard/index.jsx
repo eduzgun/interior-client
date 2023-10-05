@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
 
 const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
-
+    const baseUrl = 'https://lap-4-project.onrender.com/'
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
     const { setUser } = useAuth()
@@ -52,7 +52,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
         }
 
         try{
-            const resp = await fetch("http://localhost:5000/auth/login",options)
+            const resp = await fetch(`${baseUrl}/auth/login`,options)
 
             if(resp.status == 204){
                 setUser(username)
@@ -64,7 +64,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
                 }
 
                 try {
-                    const resp2 = await fetch(`http://localhost:5000/users/name/${username}`,options)
+                    const resp2 = await fetch(`${baseUrl}/users/name/${username}`,options)
 
                     const data = await resp2.json()
                     setUser(data.data.id)
