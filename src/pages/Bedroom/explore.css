@@ -229,7 +229,7 @@ cursor: pointer;
   margin-right: 80px;
   row-gap: 25px;
   grid-auto-rows: 500px;
-overflow-y: scroll;
+overflow-y: hidden;
 }
 
 .bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
