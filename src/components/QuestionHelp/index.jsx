@@ -1,7 +1,7 @@
 import React,{ useState, useRef } from 'react'
 import "./style.css"
 
-const QuestionHelp = ({active, title, content, drop_down="", orientation="right"}) => {
+const QuestionHelp = ({active, title, content, summaryContent="", image="", orientation="right"}) => {
 
     const [dropdown,setDropdown] = useState(true)
 
@@ -19,14 +19,15 @@ const QuestionHelp = ({active, title, content, drop_down="", orientation="right"
   return (
     <div id="questions" data-testid="questions">
         <p id='qmark' onClick={toggleDrop} data-testid="qmark">?</p>
-            <div data-testid="qBox" ref={questionRef} id="qbox" style={Object.assign(orientation === "right" ? {"left":"150%"} : {"right":"150%"},
+            <div data-testid="qBox" ref={questionRef} id="qbox" style={Object.assign(orientation === "right" ? {"left":"200%"} : {"right":"150%"},
     !active ? {"display":"none"} : {})
     }>
                  <h3>{title}</h3>
                 {content}{
-                    drop_down !== "" ?
-                <details>{drop_down}
-                    <img id="example-panoramic" src="./src/components/QuestionHelp/Living-Room-Panorama.jpg" alt="" />
+                    summaryContent !== "" ?
+                <details>
+                    <summary>{summaryContent}</summary>
+                    <img id="example-panoramic" src={image} alt="" />
                 </details>
                 : ""
                 }

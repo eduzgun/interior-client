@@ -3,7 +3,7 @@ import axios from 'axios';
 import JSZip from "jszip"
 import "./style.css"
 
-const BlobToImage = ({ image_id, className=""}) => {
+const BlobToImage = ({ image_id, refs, className="", loadedFunc }) => {
   const [images, setImages] = useState([]);
 
     async function extractImages(zipData){
@@ -44,7 +44,8 @@ const BlobToImage = ({ image_id, className=""}) => {
             const cleanup = await axios.post("http://localhost:5000/rooms/images/cleanup",{
                 method:"POST"
             })
-
+            console.log("FINISHED");
+            loadedFunc(true)
         } catch (error) {
             console.log(error);
         }
@@ -62,6 +63,8 @@ const BlobToImage = ({ image_id, className=""}) => {
                 src={URL.createObjectURL(image.blobData)} 
                 alt={image.fileName}
                 className={className}
+                ref={refs.current[index]}
+                style={{"display":"none"}}
             />
         ))}
     </div>

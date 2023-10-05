@@ -26,20 +26,14 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
 
   const { user } = useAuth();
 
-  console.log(user)
-
   const handleLike = async () => {
     
     setClick(prev => !prev);
-    console.log(user)
-
    
     const likeData = {
         user_id: user,
         room_id: roomId
     };
-    console.log(likeData)
-
     
     try {
         const response = await axios.post('http://localhost:5000/likes', likeData);

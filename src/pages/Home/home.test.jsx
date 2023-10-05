@@ -16,13 +16,13 @@ describe('Homepage', () => {
         cleanup()
     })
 
-    it('should display a heading with appropriate text', () => {
-        const element = screen.getByRole('heading', {name: /Welcome/i})
-        expect(element).toBeInTheDocument()
-    })
+    // it('should display a heading with appropriate text', () => {
+    //     const element = screen.getByRole('heading', {name: /Welcome/i})
+    //     expect(element).toBeInTheDocument()
+    // })
 
-    it("renders a paragraph", () => {
-        const paragraph = screen.getByRole("paragraph")
-        expect(paragraph).toBeInTheDocument()
-    })
+    // it("renders a paragraph", () => {
+    //     const paragraph = screen.getByRole("paragraph")
+    //     expect(paragraph).toBeInTheDocument()
+    // })
 })

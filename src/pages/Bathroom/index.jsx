@@ -1,37 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import { Room, StylesComponent, BackButton } from '../../components'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const bathroomImages = [
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
+// const bathroomImages = [
+//   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//    { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
+//    { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
+//   { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
 
   
-];
+// ];
 
 
 function BathroomPage() {
     const [imagesWithStyles, setImagesWithStyles] = useState([])
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [roomArray,setRoomArray] = useState([])
+
 
   const handleImageClick = (image, index) => {
     setSelectedImage(image);
-    setSelectedImageIndex(index);
+    setSelectedImageIndex(image.id);
   };
 
   const handleCloseClick = () => {
@@ -41,7 +44,7 @@ function BathroomPage() {
 
  useEffect(() => {
 
-    const newImagesWithStyles = bathroomImages.map((image, index) => ({
+    const newImagesWithStyles = roomArray.map((image, index) => ({
         ...image,
         style: <StylesComponent seed={index + 3} />,
     }));
@@ -69,6 +72,25 @@ function BathroomPage() {
   };
 }, [selectedImage]);
 
+useEffect(() => {
+  async function callRoomImages(){
+    const call = await axios.get("http://localhost:5000/rooms").then(data => {
+      const rooms = data.data.rooms
+      const tempArr = []
+      for(let i=0;i<rooms.length;i++){
+        if(rooms[i].category === "Bathroom"){
+          rooms[i].src = '../../src/assets/environmentMaps/bathroom.png'
+          rooms[i].alt = 'Image 1'
+          tempArr.push(rooms[i])
+        }
+      }
+      setRoomArray(tempArr)
+    })
+
+  }
+  callRoomImages()
+},[])
+
   return (
     <>
     <div className='title-section'>
@@ -76,10 +98,10 @@ function BathroomPage() {
       <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     <div className={`bathroom-page${selectedImage ? ' dimmed' : ''}`}>
-      {imagesWithStyles.map((image, index) => (
+      {roomArray.map((image, index) => (
   <div className="bathroom__item-container" key={index} onClick={() => handleImageClick(image, index)}>
     <img className='bathroom__item' src={image.src} alt={image.alt} />
-    <div className="bathroom__item-caption">{image.style}</div>
+    <div className="bathroom__item-caption">{image.name}</div>
   </div>
 ))}
 

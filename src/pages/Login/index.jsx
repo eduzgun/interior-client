@@ -11,8 +11,9 @@ const Login = () => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
 
   const focusStyle = {
-    "background": "linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%)",
-    "backgroundColor":"var(--outline)"
+    "background": "#EDE4D9",
+    // "background": "linear-gradient(0deg, rgba(20,8,14,1) 0%, rgba(250,248,242,1) 100%)",
+    "backgroundColor":"#EDE4D9"
 
   }
 

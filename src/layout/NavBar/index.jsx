@@ -23,7 +23,7 @@ const NavBar = () => {
   const { user, setUser } = useAuth();
 
   const activeStyle = {
-    outline: "solid 2px var(--outlinefocus)",
+    outline: "solid 2px #3E8989",
     backgrounColor: "var(--outline)",
   };
 
