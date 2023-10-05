@@ -6,7 +6,7 @@ import { AiFillEye } from 'react-icons/ai'
 import './explore.css'
 import { useAuth } from '../../contexts/index.jsx';
 import axios from 'axios';
-
+import {GrClose} from 'react-icons/gr'
 
 // const bedroomImages = [
 //   { id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
@@ -44,7 +44,7 @@ function BedroomPage() {
     console.log("line44",image);
     document.body.style.overflow = 'hidden';
     const updatedImages = [...imagesWithStyles];
-    updatedImages[index].clickCount += 1;
+    //updatedImages[index].clickCount += 1;
     setImagesWithStyles(updatedImages);
     setSelectedImage(image);
     setSelectedImageIndex(image.id);
@@ -175,7 +175,7 @@ const sendLikeData = async (user, roomId) => {
         <div className="fullscreen-div">
         <div className="fullscreen-content">
             <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-            <button className="close-button" onClick={handleCloseClick}>Close</button>
+            <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
         </div>
     </div>
       )}
