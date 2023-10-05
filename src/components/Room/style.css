@@ -1,0 +1,17 @@
+.spinner_d9Sa{
+    transform-origin:center;
+    background-color: whitesmoke;
+}
+.spinner_qQQY{
+    animation:spinner_ZpfF 9s linear infinite;
+    background-color: whitesmoke;
+
+}
+.spinner_pote{
+    animation:spinner_ZpfF .75s linear infinite;
+    background-color: whitesmoke;
+
+}
+@keyframes spinner_ZpfF{
+    100%{transform:rotate(360deg)}
+}
