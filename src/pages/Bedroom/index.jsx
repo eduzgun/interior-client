@@ -41,7 +41,7 @@ function BedroomPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   const handleImageClick = (image, index) => {
-    console.log("line44",image);
+    console.log("line44",image.clickCount);
     document.body.style.overflow = 'hidden';
     const updatedImages = [...imagesWithStyles];
     updatedImages[index].clickCount += 1;
@@ -71,6 +71,7 @@ const toggleLike = async (index) => {
 
   if (newLikedImages[index]) {
     const roomId = imagesWithStyles[index].id;
+    console.log("line74",roomId);
     await sendLikeData(user, roomId);
   }
 };
@@ -100,6 +101,7 @@ const sendLikeData = async (user, roomId) => {
           if(rooms[i].category === "Bedroom"){
             rooms[i].src = rooms[i].cover_image
             rooms[i].alt = 'Image 1'
+            rooms[i].clickCount = 0
             tempArr.push(rooms[i])
           }
         }
@@ -149,16 +151,16 @@ const sendLikeData = async (user, roomId) => {
     <div className="bedroom__item-container" 
       key={index} 
       onClick={() => handleImageClick(image, index)}
-      onMouseEnter={() => setHoveredImageIndex(index)}
+      onMouseEnter={() => setHoveredImageIndex(image.id)}
       onMouseLeave={() => setHoveredImageIndex(null)}
     >
     <img className='bedroom__item' src={image.src} alt={image.alt} />
     <div className="bedroom__item-caption">{image.name}
-    {hoveredImageIndex === index && (
+    {hoveredImageIndex == image.id && (
       <div className="icon-container">
     
-        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
-          <Heart isClick={likedImages[index]} />
+        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(image.id); }}>
+          <Heart isClick={likedImages[image.id]} />
         </div>
         
         <div className="click-count">

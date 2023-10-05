@@ -70,8 +70,8 @@ useEffect(() => {
       const rooms = data.data.rooms
       const tempArr = []
       for(let i=0;i<rooms.length;i++){
-        if(rooms[i].category === "Bedroom"){
-          rooms[i].src = '../../src/assets/environmentMaps/garden/1.png'
+        if(rooms[i].category === "Garden"){
+          rooms[i].src = rooms[i].cover_image
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
         }

@@ -69,7 +69,7 @@ useEffect(() => {
       const tempArr = []
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Kitchen"){
-          rooms[i].src = '../../src/assets/environmentMaps/kitchen/1.png'
+          rooms[i].src = rooms[i].cover_image
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
         }

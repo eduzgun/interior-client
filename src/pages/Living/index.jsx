@@ -72,7 +72,7 @@ function LivingPage() {
         const tempArr = []
         for(let i=0;i<rooms.length;i++){
           if(rooms[i].category === "Living Room"){
-            rooms[i].src = '../../src/assets/environmentMaps/living/1.png'
+            rooms[i].src = rooms[i].cover_image
             rooms[i].alt = 'Image 1'
             tempArr.push(rooms[i])
           }
