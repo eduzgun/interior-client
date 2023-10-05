@@ -148,7 +148,6 @@ const sendLikeData = async (user, roomId) => {
         <BackButton backTo="/explore" label="Back to Explore" />
       </div>
     
-<<<<<<< HEAD
       <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
         {imagesWithStyles.map((image, index) => (
           <motion.div 
@@ -187,29 +186,6 @@ const sendLikeData = async (user, roomId) => {
             </div>
           </div>
         )}
-=======
-    <div className={`bedroom-page${selectedImage ? ' dimmed' : ''}`}>
-      {roomArray.map((image, index) => (
-    <div className="bedroom__item-container" 
-      key={index} 
-      onClick={() => handleImageClick(image, index)}
-      onMouseEnter={() => setHoveredImageIndex(index)}
-      onMouseLeave={() => setHoveredImageIndex(null)}
-    >
-    <img className='bedroom__item' src={image.src} alt={image.alt} />
-    <div className="bedroom__item-caption">{image.name}
-    {hoveredImageIndex === index && (
-      <div className="icon-container">
-    
-        <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
-          <Heart isClick={likedImages[index]} />
-        </div>
-        
-        <div className="click-count">
-          <AiFillEye />
-          <span> {image.clickCount}</span>
-        </div>
->>>>>>> 4987b2e97c9fc21713b5331c116aadbb69235aa7
       </div>
     </div>
   
