@@ -6,7 +6,7 @@ import axios from "axios";
 import './profile.css'
 
 const Profile = () => {
-  const baseUrl = 'https://lap-4-project.onrender.com/'
+  const baseUrl = 'https://lap-4-project.onrender.com'
   const { usersUsername, setUsersUsername } = useAuth()
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -21,9 +21,10 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      .get(apiUrl)
+      .get(`${baseUrl}/users/name/${usersUsername}`)
       .then((response) => {
-        setImageUrl1(response.data.image_url);
+        console.log(response.data.data.avatar_image)
+        setImageUrl1(response.data.data.avatar_image);
       })
       .catch((error) => {
         console.error("Error fetching image:", error);
@@ -74,7 +75,7 @@ const Profile = () => {
 
   return (
     <>
-      <UserProfile imageUrl1={imageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} />
+      <UserProfile imageUrl1={imageUrl1} setImageUrl1={setImageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} />
     </>
     
   )

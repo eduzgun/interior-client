@@ -1,12 +1,12 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import axiosInstance from '../../helpers';
 
-const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
+const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1 }) => {
   const inputRef = useRef(null)
-  const [image, setImage] = useState(null)
+  // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [profileImage, setProfileImage] = useState(null)
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
 
@@ -36,10 +36,6 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
     : [];
 
   useEffect(() => {
-    const storedImage = localStorage.getItem('profileImage')
-    if (storedImage) {
-      setImage(storedImage)
-    }
   }, []);
 
   const handleClick = () => {
@@ -48,9 +44,35 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
+    const formData = new FormData()
+    formData.append(`file`, selectedImage)
       if (selectedImage) {
-        const imageURL = URL.createObjectURL(selectedImage)
-        setProfileImage(imageURL)
+        if(user.avatar_image == "https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png") {
+          axiosInstance.post(`/filestorage/avatar-images/${user.id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(() => {
+            setImageUrl1(`https://interior-cloud-store.s3.amazonaws.com/avatar-images/${user.id}.${selectedImage.name.split('.')[1]}`);
+          })
+          .catch((error) => {
+            console.error("Error fetching image:", error);
+          });
+        } else {
+          axiosInstance.patch(`/filestorage/avatar-images/${user.id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(() => {
+            setImageUrl1(`https://interior-cloud-store.s3.amazonaws.com/avatar-images/${user.id}.${selectedImage.name.split('.')[1]}`);
+          })
+          .catch((error) => {
+            console.error("Error fetching image:", error);
+          });
+        }
+        
       }
   }
 
@@ -119,8 +141,8 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
                   style={{ margin: 0, padding: 0 }}
                   onClick={handleClick}
                 >
-                  {profileImage ? (
-                    <img src={profileImage} 
+                  {imageUrl1 ? (
+                    <img src={imageUrl1} 
                       alt='Profile' 
                       id='profile-icon' 
                       style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
