@@ -110,7 +110,9 @@ const nextMap = () => {
 
         posPositions.forEach(order => {
           let matchingImg;
+          console.log("IMAGEESSSS", imgs)
           for(let img of imgs){
+            console.log("IMGGECURENT", img.current)
             if(img.current.alt.split("/")[1] === order){
               matchingImg = img              
             }
@@ -130,10 +132,10 @@ const nextMap = () => {
 
   return (
     <div className="environment-map-grid">
-      <BlobToImage image_id={14} refs={pageRefs} loadedFunc={setLoadedVar}/>
+      <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar}/>
       <button className='left-arrow' onClick={prevMap}>←</button>  
         {/* <EnvironmentMap roomId={13} mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} /> */}
-        <EnvironmentMap roomId={14} mapUrls={mapset.length == 6 ? mapset : loading} />
+        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset.length == 6 ? mapset : loading} />
         {/* <EnvironmentMap mapUrls={maps[currentMapIndex]} /> */}
       <button className='right-arrow' onClick={nextMap}>→</button> 
     </div>

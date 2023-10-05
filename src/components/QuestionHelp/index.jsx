@@ -10,7 +10,7 @@ const QuestionHelp = ({active, title, content, summaryContent="", image="", orie
     function toggleDrop(){
         setDropdown(!dropdown)
         if(dropdown){
-            questionRef.current.style.display = "flex"
+            questionRef.current.style.display = "block"
         }else{
             questionRef.current.style.display = "none"
         }
