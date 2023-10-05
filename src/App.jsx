@@ -4,7 +4,6 @@ import * as Pages from './pages';
 import { NavBar } from './layout'
 import { Routes, Route } from "react-router-dom"
 
-import axios from 'axios';
 import { useAuth } from './contexts';
 import ProtectedRoute from './routes';
 

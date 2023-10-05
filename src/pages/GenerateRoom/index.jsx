@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { loadImage } from "canvas"
 import "./style.css"
 import { useAuth } from '../../contexts'
-import axios from "axios"
+import axiosInstance from "../../helpers"
 import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
 
@@ -313,7 +313,7 @@ const GenerateRoom = () => {
         // KEEP THIS
 
         try {
-            const newRoom = await axios.post('http://localhost:5000/rooms', formData, {
+            const newRoom = await axiosInstance.post('/rooms', formData, {
                 headers: {
                   'Content-Type': 'multipart/form-data'
                 }
@@ -362,7 +362,7 @@ const GenerateRoom = () => {
 
     const getUserData = async () => {
         try {
-            const resp = await axios.get(`http://localhost:5000/users/${user}`,{
+            const resp = await axiosInstance.get(`/users/${user}`,{
                 method:"GET",
                 headers: {
                     'Content-Type': 'application/json'
