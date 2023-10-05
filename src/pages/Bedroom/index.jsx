@@ -93,10 +93,12 @@ const sendLikeData = async (user, roomId) => {
     async function callRoomImages(){
       const call = await axios.get("http://localhost:5000/rooms").then(data => {
         const rooms = data.data.rooms
+
         const tempArr = []
         for(let i=0;i<rooms.length;i++){
+    
           if(rooms[i].category === "Bedroom"){
-            rooms[i].src = '../../src/assets/environmentMaps/bedroom/1.png'
+            rooms[i].src = rooms[i].cover_image
             rooms[i].alt = 'Image 1'
             tempArr.push(rooms[i])
           }
