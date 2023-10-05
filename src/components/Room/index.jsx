@@ -23,69 +23,6 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
     "../../src/assets/environmentMaps/loading/nz.png",
   ]
 
-  // const mapSets = {
-  //   bedroom: [
-  //     ['../../src/assets/environmentMaps/0/px.png',
-  //      '../../src/assets/environmentMaps/0/nx.png',
-  //       '../../src/assets/environmentMaps/0/py.png',
-  //       '../../src/assets/environmentMaps/0/ny.png',
-  //     '../../src/assets/environmentMaps/0/pz.png',
-  //       '../../src/assets/environmentMaps/0/nz.png'],
-  //       ['../../src/assets/environmentMaps/0/1/px.png',
-  //      '../../src/assets/environmentMaps/0/1/nx.png',
-  //       '../../src/assets/environmentMaps/0/1/py.png',
-  //       '../../src/assets/environmentMaps/0/1/ny.png',
-  //     '../../src/assets/environmentMaps/0/1/pz.png',
-  //       '../../src/assets/environmentMaps/0/1/nz.png']
-  //   ],
-    // studio: [
-    //   ['../../src/assets/environmentMaps/2/px.png',
-    //    '../../src/assets/environmentMaps/2/nx.png',
-    //     '../../src/assets/environmentMaps/2/py.png',
-    //     '../../src/assets/environmentMaps/2/ny.png',
-    //   '../../src/assets/environmentMaps/2/pz.png',
-    //     '../../src/assets/environmentMaps/2/nz.png'],
-    // ],
-
-    // garden: [
-    //   ['../../src/assets/environmentMaps/3/px.png',
-    //    '../../src/assets/environmentMaps/3/nx.png',
-    //     '../../src/assets/environmentMaps/3/py.png',
-    //     '../../src/assets/environmentMaps/3/ny.png',
-    //   '../../src/assets/environmentMaps/3/pz.png',
-    //     '../../src/assets/environmentMaps/3/nz.png'],
-    // ],
-
-    // kitchen: [
-    //   ['../../src/assets/environmentMaps/2/px.png',
-    //    '../../src/assets/environmentMaps/2/nx.png',
-    //     '../../src/assets/environmentMaps/2/py.png',
-    //     '../../src/assets/environmentMaps/2/ny.png',
-    //   '../../src/assets/environmentMaps/2/pz.png',
-    //     '../../src/assets/environmentMaps/2/nz.png'],
-    // ],
-
-    // bathroom: [
-    //   ['../../src/assets/environmentMaps/5/px.png',
-    //    '../../src/assets/environmentMaps/5/nx.png',
-    //     '../../src/assets/environmentMaps/5/py.png',
-    //     '../../src/assets/environmentMaps/5/ny.png',
-    //   '../../src/assets/environmentMaps/5/pz.png',
-    //     '../../src/assets/environmentMaps/5/nz.png'],
-    // ],
-
-    // living: [
-    //   ['../../src/assets/environmentMaps/6/px.png',
-    //    '../../src/assets/environmentMaps/6/nx.png',
-    //     '../../src/assets/environmentMaps/6/py.png',
-    //     '../../src/assets/environmentMaps/6/ny.png',
-    //   '../../src/assets/environmentMaps/6/pz.png',
-    //     '../../src/assets/environmentMaps/6/nz.png'],
-    // ],
-  // }
-
-  // const maps = mapSets[mapSet] || mapSets.bedroom;
-
   const prevMap = () => {
     setCurrentMapIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maps.length - 1));
 };
@@ -103,7 +40,7 @@ const nextMap = () => {
     const imgs = pageRefs.current
     const arr = []
     try {
-      if(!imgs){
+      if(!loadedVar){
         console.log("LOADING...");
       }else{
         console.log("LOADED")
@@ -130,10 +67,11 @@ const nextMap = () => {
 
   return (
     <div className="environment-map-grid">
-      <BlobToImage image_id={14} refs={pageRefs} loadedFunc={setLoadedVar}/>
+      {  }
+      <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar}/>
       <button className='left-arrow' onClick={prevMap}>←</button>  
         {/* <EnvironmentMap roomId={13} mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} /> */}
-        <EnvironmentMap roomId={14} mapUrls={mapset.length == 6 ? mapset : loading} />
+        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset.length == 6 ? mapset : loading} />
         {/* <EnvironmentMap mapUrls={maps[currentMapIndex]} /> */}
       <button className='right-arrow' onClick={nextMap}>→</button> 
     </div>

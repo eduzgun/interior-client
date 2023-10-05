@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './style.css';  
+import './style.css'; 
+import { motion } from 'framer-motion'; 
 
 const ExploreItems = () => {
   const items = [
@@ -13,6 +14,12 @@ const ExploreItems = () => {
   ];
 
   return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      style={{ minHeight: '100vh', backgroundColor: 'black' }}
+    >
     <div className="explore-container">
       {items.map((item, index) => (
         <Link key={index} to={item.link} className="explore-item">
@@ -23,6 +30,7 @@ const ExploreItems = () => {
         </Link>
       ))}
     </div>
+    </motion.div>
   );
 };
 
