@@ -10,12 +10,12 @@ import {GrClose} from 'react-icons/gr'
 
 
 const livingImages = [
-  { src: '../../src/assets/environmentMaps/living/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/2.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/3.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/4.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/5.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/living/5.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/1.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/2.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/3.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/4.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/5.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/living/5.png', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/6.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/7.webp', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/living/8.webp', alt: 'Image 1' },

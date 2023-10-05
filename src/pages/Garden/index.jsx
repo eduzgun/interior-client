@@ -9,12 +9,12 @@ import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const gardenImages = [
-  { src: '../../src/assets/environmentMaps/garden/1.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/2.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/3.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/4.jpeg', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/garden/5.jpeg', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/garden/6.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/1.png', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/2.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/3.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/4.jpeg', alt: 'Image 1' },
+   { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/5.jpeg', alt: 'Image 1' },
+  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/garden/6.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/garden/7.jpeg', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/garden/8.webp', alt: 'Image 1' },
 //   { src: '../../src/assets/environmentMaps/garden/9.webp', alt: 'Image 1' },
