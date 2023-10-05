@@ -6,6 +6,7 @@ import axios from "axios";
 import './profile.css'
 
 const Profile = () => {
+  const baseUrl = 'https://lap-4-project.onrender.com/'
   const { usersUsername, setUsersUsername } = useAuth()
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -31,12 +32,12 @@ const Profile = () => {
 
   useEffect(() => {
     async function displayUser() {
-      const res = await fetch(`http://localhost:5000/users/name/${usersUsername}`)
+      const res = await fetch(`${baseUrl}/users/name/${usersUsername}`)
       const data = await res.json()
       setUserData(data.data)
 
-      // const res2 = await fetch(`http://localhost:5000/likes/user/1`)
-      const res2 = await fetch(`http://localhost:5000/likes/user/${data.data.id}`)
+      // const res2 = await fetch(`${baseUrl}/likes/user/1`)
+      const res2 = await fetch(`${baseUrl}/likes/user/${data.data.id}`)
       const data2 = await res2.json()
       setLikes(data2.data)
       
@@ -53,7 +54,7 @@ const Profile = () => {
         email: newEmail || user.email,
       }
 
-      const response = await fetch(`http://localhost:5000/users/name/${userData.username}`, {
+      const response = await fetch(`${baseUrl}/users/name/${userData.username}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

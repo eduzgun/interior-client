@@ -3,7 +3,7 @@ import "./style.css"
 import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
-
+    const baseUrl='https://lap-4-project.onrender.com/'
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
@@ -91,7 +91,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
                 },
             }
 
-            const resp = await fetch("http://localhost:5000/auth/register",options)
+            const resp = await fetch(`${baseUrl}/auth/register`,options)
 
             if(resp.status === 201){
                 setToggleSwitch(!toggleSwitch)
