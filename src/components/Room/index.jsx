@@ -110,7 +110,9 @@ const nextMap = () => {
 
         posPositions.forEach(order => {
           let matchingImg;
+          console.log("IMAGEESSSS", imgs)
           for(let img of imgs){
+            console.log("IMGGECURENT", img.current)
             if(img.current.alt.split("/")[1] === order){
               matchingImg = img              
             }
