@@ -1,100 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
-import { useAuth } from '../../contexts';
+import { AuthProvider } from '../../contexts';
+import { BlobToImage } from "../../components"
 
 
-
-const Room = ( {mapSet, initialMapIndex = 0} ) => {
-  const { user } = useAuth();
+const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
   const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
 
-  const mapSets = {
-    bedroom: {
-      id: 1, 
-      maps: [
-      {id: 101, images: ['../../src/assets/environmentMaps/0/px.png',
-       '../../src/assets/environmentMaps/0/nx.png',
-        '../../src/assets/environmentMaps/0/py.png',
-        '../../src/assets/environmentMaps/0/ny.png',
-      '../../src/assets/environmentMaps/0/pz.png',
-        '../../src/assets/environmentMaps/0/nz.png']},
-        {id: 102, images:['../../src/assets/environmentMaps/0/1/px.png',
-       '../../src/assets/environmentMaps/0/1/nx.png',
-        '../../src/assets/environmentMaps/0/1/py.png',
-        '../../src/assets/environmentMaps/0/1/ny.png',
-      '../../src/assets/environmentMaps/0/1/pz.png',
-        '../../src/assets/environmentMaps/0/1/nz.png']}
-    ]
-  },
+  const pageRefs = useRef([React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),])
 
-    studio: {
-      id: 2, 
-      maps:[
-      {id: 201, images:['../../src/assets/environmentMaps/2/px.png',
-       '../../src/assets/environmentMaps/2/nx.png',
-        '../../src/assets/environmentMaps/2/py.png',
-        '../../src/assets/environmentMaps/2/ny.png',
-      '../../src/assets/environmentMaps/2/pz.png',
-        '../../src/assets/environmentMaps/2/nz.png']}
-    ]
-  },
+  const [mapset,setMapSet] = useState([])
 
-    garden: {
-      id: 3, 
-      maps:[
-      {id: 301, images:['../../src/assets/environmentMaps/3/px.png',
-       '../../src/assets/environmentMaps/3/nx.png',
-        '../../src/assets/environmentMaps/3/py.png',
-        '../../src/assets/environmentMaps/3/ny.png',
-      '../../src/assets/environmentMaps/3/pz.png',
-        '../../src/assets/environmentMaps/3/nz.png']}
-    ]
-  },
-
-    kitchen: {
-      id: 4, 
-      maps:[
-      {id: 401, images:['../../src/assets/environmentMaps/2/px.png',
-       '../../src/assets/environmentMaps/2/nx.png',
-        '../../src/assets/environmentMaps/2/py.png',
-        '../../src/assets/environmentMaps/2/ny.png',
-      '../../src/assets/environmentMaps/2/pz.png',
-        '../../src/assets/environmentMaps/2/nz.png']}
-    ]
-  },
-
-    bathroom: {
-      id: 5, 
-      maps:[
-      {id: 501, images:
-      ['../../src/assets/environmentMaps/5/px.png',
-       '../../src/assets/environmentMaps/5/nx.png',
-        '../../src/assets/environmentMaps/5/py.png',
-        '../../src/assets/environmentMaps/5/ny.png',
-      '../../src/assets/environmentMaps/5/pz.png',
-        '../../src/assets/environmentMaps/5/nz.png']}
-    ]
-  },
-
-    living: {
-      id: 6, 
-      maps:[
-      {id: 601, images:
-      ['../../src/assets/environmentMaps/6/px.png',
-       '../../src/assets/environmentMaps/6/nx.png',
-        '../../src/assets/environmentMaps/6/py.png',
-        '../../src/assets/environmentMaps/6/ny.png',
-      '../../src/assets/environmentMaps/6/pz.png',
-        '../../src/assets/environmentMaps/6/nz.png']}
-    ]
-  },
-}
-
-  const roomId = mapSets[mapSet]?.id || mapSets.bedroom.id;
-const maps = mapSets[mapSet]?.maps || mapSets.bedroom.maps;
+  const [loadedVar,setLoadedVar] = useState(false)
 
 
-
+  const loading = [
+    "../../src/assets/environmentMaps/loading/px.png",
+    "../../src/assets/environmentMaps/loading/nx.png",
+    "../../src/assets/environmentMaps/loading/py.png",
+    "../../src/assets/environmentMaps/loading/ny.png",
+    "../../src/assets/environmentMaps/loading/pz.png",
+    "../../src/assets/environmentMaps/loading/nz.png",
+  ]
 
   const prevMap = () => {
     setCurrentMapIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maps.length - 1));
@@ -105,10 +32,47 @@ const nextMap = () => {
 };
 
 
+  useEffect(() => {
+    setMapSet([])
+    const sortedArray = []
+
+    const posPositions = ["px","nx","py","ny","pz","nz"]
+    const imgs = pageRefs.current
+    const arr = []
+    try {
+      if(!loadedVar){
+        console.log("LOADING...");
+      }else{
+        console.log("LOADED")
+
+        posPositions.forEach(order => {
+          let matchingImg;
+          for(let img of imgs){
+            if(img.current.alt.split("/")[1] === order){
+              matchingImg = img              
+            }
+            
+          }
+          if(matchingImg && !arr.includes(matchingImg.current.alt)){
+            sortedArray.push(matchingImg.current.src)
+            arr.push(matchingImg.current.alt)
+          }
+        })
+        setMapSet(sortedArray)
+      }
+    } catch (error) {
+      console.log("Damn it",error);
+    }
+  },[loadedVar])
+
   return (
     <div className="environment-map-grid">
+      {  }
+      <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar}/>
       <button className='left-arrow' onClick={prevMap}>←</button>  
-     <EnvironmentMap mapUrls={maps[currentMapIndex].images} roomId={roomId} />
+        {/* <EnvironmentMap roomId={13} mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} /> */}
+        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset.length == 6 ? mapset : loading} />
+        {/* <EnvironmentMap mapUrls={maps[currentMapIndex]} /> */}
       <button className='right-arrow' onClick={nextMap}>→</button> 
     </div>
   );

@@ -3,7 +3,7 @@ import "./style.css"
 import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
-
+    const baseUrl='https://lap-4-project.onrender.com/'
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
@@ -91,7 +91,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
                 },
             }
 
-            const resp = await fetch("https://lap-4-project.onrender.com/auth/register",options)
+            const resp = await fetch(`${baseUrl}auth/register`,options)
 
             if(resp.status === 201){
                 setToggleSwitch(!toggleSwitch)
@@ -102,11 +102,12 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
     }
 
   return (
-    <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outline)"})}>
+    <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
         <div className="lamp">
             <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
         </div>
+
         <QuestionHelp active={toggleSwitch} title={"Signing Up"} content={<>Not sure how to register? In each box enter the required content.<br /><br />Make sure your passwords contain at least one:<br/><ul>
             <li>Uppercase Letter</li>
             <li>Digit</li>
@@ -117,16 +118,16 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
             <h2>Register</h2>
         </header>
         <form onSubmit={sendRegisterRequest} data-testid="signup-form">
-            <label htmlFor="username">username</label>
+            <label htmlFor="username">Username</label>
             <input data-testid={"user-input"} type="text" className={"signup-input"} name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">Email</label>
             <input data-testid={"email-input"} type="text" className={"signup-input"} name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="password">password</label>
+            <label htmlFor="password">Password</label>
             <input data-testid={"password-input"} ref={passwordRef} className={"signup-input"} type="password" name="password" id="reg-password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
-            <label htmlFor="confpassword">confirm password</label>
+            <label htmlFor="confpassword">Confirm Password</label>
             <input data-testid={"confpassword-input"} ref={confPasswordRef} className={"signup-input"} type="password" name="confpassword" id="conf-password-input" value={confPassword} placeholder='>' onChange={handleConfirmPassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <button type="submit" id='register-btn' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}}>Join</button>

@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
  
 import Heart from "react-animated-heart";
-import axios from 'axios'
+import axiosInstance from '../../helpers'
 import { Canvas } from '@react-three/fiber';
 import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
@@ -26,23 +26,17 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
 
   const { user } = useAuth();
 
-  console.log(user)
-
   const handleLike = async () => {
     
     setClick(prev => !prev);
-    console.log(user)
-
    
     const likeData = {
         user_id: user,
         room_id: roomId
     };
-    console.log(likeData)
-
     
     try {
-        const response = await axios.post('http://localhost:5000/likes', likeData);
+        const response = await axiosInstance.post('/likes', likeData);
         console.log('Like created', response.data);
     } catch (error) {
         console.error('Error creating like:', error);

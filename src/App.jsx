@@ -3,8 +3,7 @@ import * as Pages from './pages';
 // import { Login } from "./pages"
 import { NavBar } from './layout'
 import { Routes, Route } from "react-router-dom"
-import "./App.css"
-import axios from 'axios';
+
 import { useAuth } from './contexts';
 import ProtectedRoute from './routes';
 

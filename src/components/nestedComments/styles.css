@@ -6,7 +6,8 @@
   margin-top: 20px;
   color: white;
   /* border: solid 2px green; */
-overflow-y: scroll;
+  overflow-y: hidden;
+  padding: 2rem;
 
 }
 
@@ -18,9 +19,10 @@ overflow-y: scroll;
 
 .comments-container {
   margin-top: 40px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   background-color: white; 
   border-radius: 20px;
+  padding: 2rem;
 }
 
 .comment-form-title {

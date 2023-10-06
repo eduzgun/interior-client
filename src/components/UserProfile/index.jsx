@@ -1,33 +1,22 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import axiosInstance from '../../helpers';
 
-const UserProfile = ({ user, likes, loading, updateUser, updateImage, imageUrl1 }) => {
+const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1 }) => {
   const inputRef = useRef(null)
   // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [profileImage, setProfileImage] = useState(null)
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
 
   const bedroomImages = [
-    {id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-    {id: 2, src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1', clickCount: 0},
-    {id: 3, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', caption: "Modern", clickCount: 0 },
-    {id: 4, src: '../../src/assets/environmentMaps/bedroom/3.jpeg', alt: 'Image 1', clickCount: 0 },
-     {id: 5, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 6, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-    {id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 8, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 9, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
-    {id: 10, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-    {id: 11, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 12, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-     {id: 13, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-    {id: 14, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 15, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 16, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
-  
+    { id: 1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
+    { id: 2, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/2.png', alt: 'Image 2', clickCount: 0},
+   { id: 3, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
+   { id: 4, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
+   { id: 5, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
+   { id: 7, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 }, 
     
   ];
 
@@ -35,12 +24,8 @@ const UserProfile = ({ user, likes, loading, updateUser, updateImage, imageUrl1 
     ? bedroomImages.filter((image) => likes.some((like) => like.room_id === image.id))
     : [];
 
-  // useEffect(() => {
-  //   const storedImage = localStorage.getItem('profileImage')
-  //   if (storedImage) {
-  //     setImage(storedImage)
-  //   }
-  // }, []);
+  useEffect(() => {
+  }, []);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -48,9 +33,35 @@ const UserProfile = ({ user, likes, loading, updateUser, updateImage, imageUrl1 
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
+    const formData = new FormData()
+    formData.append(`file`, selectedImage)
       if (selectedImage) {
-        setProfileImage(selectedImage)
-        updateImage(selectedImage)
+        if(user.avatar_image == "https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png") {
+          axiosInstance.post(`/filestorage/avatar-images/${user.id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(() => {
+            setImageUrl1(`https://interior-cloud-store.s3.amazonaws.com/avatar-images/${user.id}.${selectedImage.name.split('.')[1]}`);
+          })
+          .catch((error) => {
+            console.error("Error fetching image:", error);
+          });
+        } else {
+          axiosInstance.patch(`/filestorage/avatar-images/${user.id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(() => {
+            setImageUrl1(`https://interior-cloud-store.s3.amazonaws.com/avatar-images/${user.id}.${selectedImage.name.split('.')[1]}`);
+          })
+          .catch((error) => {
+            console.error("Error fetching image:", error);
+          });
+        }
+        
       }
   }
 
@@ -119,16 +130,16 @@ const UserProfile = ({ user, likes, loading, updateUser, updateImage, imageUrl1 
                   style={{ margin: 0, padding: 0 }}
                   onClick={handleClick}
                 >
-                  <img src={imageUrl1} id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
-                  {/* {profileImage ? (
-                    <img src={profileImage} 
+                  {imageUrl1 ? (
+                    <img src={imageUrl1} 
                       alt='Profile' 
                       id='profile-icon' 
                       style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
                     />
                   ) : (
-                    <img src={imageUrl1} id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
-                  )} */}
+                    // <FontAwesomeIcon icon={faUser} id='profile-icon' />
+                    <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
+                  )}
                     {/* <img src="src/assets/images/profile.png" alt="" /> */}
 
 

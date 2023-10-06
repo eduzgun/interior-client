@@ -1,54 +1,54 @@
 
 :root{
-    --bg: hsl(330, 43%, 5%);
-    --fg: hsl(246, 12%, 32%);
-    --outline: rgba(20,8,14);
-    --outlinefocus: rgba(62,137,137);
-    --font : rgba(62,137,137);
-    font-size: 24px;
-    font-family: 'Space Grotesk', sans-serif;
+  --bg: #14080E;
+  --fg: hsl(246, 12%, 32%);
+  --outline: rgba(20,8,14);
+  --outlinefocus: rgba(62,137,137);
+  --font : rgba(62,137,137);
+  font-size: 24px;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 body{
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg);
-    /* overflow: hidden; */
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  /* overflow: hidden; */
 }
 
 
 
 /* styling for the page component - this is on the page where the room lives */
 .room {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 70px);
 
 }
 
 /* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
 .point {
-  position: absolute;
-    top: 50%;
-    left: 50%
+position: absolute;
+  top: 50%;
+  left: 50%
 }
 
 /* hovering over marker text */
 .point:hover .text {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* styling of the label - this is the number it is */
 .point .label {
- position: absolute;
- top: -20px;
- left: -20px;
- width: 40px;
- height: 40px;
- border-radius: 50%;
- background: #00000077;
+position: absolute;
+top: -20px;
+left: -20px;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: #00000077;
 color: #ffffff;
 font-family: Arial, Helvetica, sans-serif;
 text-align: center;
@@ -59,263 +59,263 @@ font-size: 18px;
 
 /* styling of the text itself (when hovered on) */
 .point .text {
-    /* display: none; */
-    position: absolute;
-    top: 30px;
-    left: -120px;
-    width: 200px;
-    padding: 20px;
-    border-radius: 4px;
-    background: #00000077;
-    color: #ffffff;
-    line-height: 1.3em;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    font-weight: 100;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s;
+  /* display: none; */
+  position: absolute;
+  top: 30px;
+  left: -120px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  background: #00000077;
+  color: #ffffff;
+  line-height: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 
 .like-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 
 /* opacity of text when visibible - regarding the useState in the marker component  */
 .text.visible {
-  opacity: 1;
-  visibility: visible;
+opacity: 1;
+visibility: visible;
 }
 
 
 .environment-map-grid {
-  display: block;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
- margin-top: 0px;
- overflow-y: auto;
+display: block;
+justify-content: center;
+text-align: center;
+align-items: center;
+margin-top: 0px;
+overflow-y: auto;
 
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
 .arrow-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .arrow-button.left {
-    left: 10px;
-    
+  left: 10px;
+  
 }
 
 .arrow-button.right {
-    right: 10px;
-    
+  right: 10px;
+  
 }
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
 .environment-map {
-  margin-left: 30px;
-  margin-right: 30px;
-  width: 1800px; 
-  height: 1100px;
-  display: flex;
-  overflow-y: auto;
+margin-left: 30px;
+margin-right: 30px;
+width: 1800px; 
+height: 1100px;
+display: flex;
+overflow-y: auto;
 }
 
 .favourites {
-    margin-top: 33px;
-    margin-left: 20px;
+  margin-top: 33px;
+  margin-left: 20px;
 }
 
 
 .like-bar {
-    display: flex;
-    flex-wrap: wrap;
-    color: white; 
-    margin-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  color: white; 
+  margin-left: 30px;
 }
 
 .comments-button {
-    width: 300px;
-    height: 50px;
-    margin-top: 24px;
-    font-size: 0.7rem;
-    text-decoration: none;
-    margin-right: 60px;
-    outline: solid 2px var(--outline);
-    padding: 12px 60px;
-    border-radius: 100px;
+  width: 300px;
+  height: 50px;
+  margin-top: 24px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  margin-right: 60px;
+  outline: solid 2px var(--outline);
+  padding: 12px 60px;
+  border-radius: 100px;
 }
 
 .comments-button:hover{
-    cursor: pointer;
-    background-color: #009688;
-    outline: solid 2px var(--outlinefocus);
-    
+  cursor: pointer;
+  background-color: #009688;
+  outline: solid 2px var(--outlinefocus);
+  
 }
 
 
 
 .left-arrow,
 .right-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 100px;
-  border-radius: 50%;
-  border: none;
-  color: white;
-  background: none;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+font-size: 100px;
+border-radius: 50%;
+border: none;
+color: white;
+background: none;
 cursor: pointer;
 }
 
 .left-arrow {
-  left: 20px;
+left: 20px;
 }
 
 .right-arrow {
-  right: 20px;
+right: 20px;
 }
 
 .center-page-room {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh; 
-    width: 100vw; 
-    /* overflow-y: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh; 
+  width: 100vw; 
+  /* overflow-y: auto; */
 }
 
 .kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
-  grid-gap: 30px;
-  margin-left: 80px;
-  margin-right: 80px;
-  row-gap: 25px;
-  grid-auto-rows: 500px;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+grid-gap: 30px;
+margin-left: 80px;
+margin-right: 80px;
+row-gap: 25px;
+grid-auto-rows: 500px;
 
 }
 
 .bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
-  grid-row-end: span 2; 
+grid-row-end: span 2; 
 }
 
 @media screen and (max-width: 767px) {
-  .gallery {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 20px;
-  }
+.gallery {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 20px;
+}
 }
 
 .kitchen__item, .bedroom__item, .bathroom__item, .garden__item, .studio__item, .living__item {
-    margin-top: 10px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.2s ease-in-out;
-  border-radius: 20px;
- 
+  margin-top: 10px;
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.2s ease-in-out;
+border-radius: 20px;
+
 }
 
 .kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover, .garden__item:hover, .bathroom__item:hover, .studio__item:hover, .living__item:hover {
-  transform: scale(1.05);
+transform: scale(1.05);
 }
 
 .fullscreen-content {
-    height: 100%;
-    overflow-y: auto;  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
+  height: 100%;
+  overflow-y: auto;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
 }
 
 .fullscreen-div {
-    margin-top: 50px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;  
-    height: 100%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    overflow-y: scroll;
+  margin-top: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;  
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow-y: scroll;
 }
 
 
 
 
 .fullscreen-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  overflow-y: auto;
 
 }
 
 .description {
-    margin: 10px 0;
-    color: white;
-    position: absolute;
-    bottom: 20px;
-    text-align: center;
-    width: 100%;
-    padding: 0 20px;  
+  margin: 10px 0;
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;  
 }
 
 .close-button {
-    font-family: 'Space Grotesk', sans-serif;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: solid 2px var(--outline);
-    border-radius: 100px;
+  font-family: 'Space Grotesk', sans-serif;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: solid 2px var(--outline);
+  border-radius: 100px;
 }
 
 .close-button:hover {
-    cursor: pointer;
-    background-color: #009688;
-    outline: solid 2px var(--outlinefocus);
+  cursor: pointer;
+  background-color: #009688;
+  outline: solid 2px var(--outlinefocus);
 }
 
 
 .bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
-  position: relative;
-  display: inline-block;
+position: relative;
+display: inline-block;
 }
 
 .bedroom__item-caption, .kitchen__item-caption, .garden__item-caption, .bathroom__item-caption, .studio__item-caption, .living__item-caption  {
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); 
-  color: white;
-  width: 100%;
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
- 
+position: absolute;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5); 
+color: white;
+width: 100%;
+text-align: left;
+font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .bedroom-page.dimmed .bedroom__item, 
@@ -325,11 +325,11 @@ cursor: pointer;
 .bathroom-page.dimmed .bathroom-caption, .studio-page.dimmed .studio__item, 
 .studio-page.dimmed .studio-caption, .living-page.dimmed .living__item, 
 .living-page.dimmed .living-caption {
-  opacity: 0.1;
+opacity: 0.1;
 }
 
 .bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container, .garden-page.dimmed .garden-container, .bathroom-page.dimmed .bathroom-container, .studio-page.dimmed .studio-container, .living-page.dimmed .living-container {
-  pointer-events: none; 
+pointer-events: none; 
 }
 
 .title-section {
@@ -339,50 +339,50 @@ align-items: center;
 }
 
 .room-title {
-  color:white;
-  margin-top: 30px;
-  margin-left: 15px;
-  margin-bottom: 10px
+color:white;
+margin-top: 30px;
+margin-left: 15px;
+margin-bottom: 10px
 }
 
 .back-to-button {
-  margin-top: 30px;
-  margin-right: 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #009688;
+margin-top: 30px;
+margin-right: 15px;
+border-radius: 4px;
+cursor: pointer;
+color: #009688;
 }
 
 .back-to-button:hover {
-    color: #005f5f;
+  color: #005f5f;
 }
 
 /* .heart-container, .click-count {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 } */
 
 
 .heart-container {
-  size: 60px;
-    position: absolute;
-    top: 0px;  
-    right: 1px;
-    cursor: pointer;
-    z-index: 10; 
+size: 60px;
+  position: absolute;
+  top: 0px;  
+  right: 1px;
+  cursor: pointer;
+  z-index: 10; 
 }
 
 
 .click-count {
-    position: absolute;
-    top: 25px;   
-    right: 74px;  
-    cursor: pointer;
-    height: 50px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    background: rgb(240, 240, 240, 0.1);
-    z-index: 10; 
-    font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 25px;   
+  right: 74px;  
+  cursor: pointer;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  background: rgb(240, 240, 240, 0.1);
+  z-index: 10; 
+  font-family: Arial, Helvetica, sans-serif;
 }

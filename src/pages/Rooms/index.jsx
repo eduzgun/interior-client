@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Marker } from '../../components'
 import {Room}  from '../../components'
-import "../../App.css"
+
 
 const Rooms = () => {
   return (
