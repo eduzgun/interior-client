@@ -1,9 +1,9 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 
-const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
+const UserProfile = ({ user, likes, loading, updateUser, updateImage, imageUrl1 }) => {
   const inputRef = useRef(null)
-  const [image, setImage] = useState(null)
+  // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [profileImage, setProfileImage] = useState(null)
@@ -35,12 +35,12 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
     ? bedroomImages.filter((image) => likes.some((like) => like.room_id === image.id))
     : [];
 
-  useEffect(() => {
-    const storedImage = localStorage.getItem('profileImage')
-    if (storedImage) {
-      setImage(storedImage)
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedImage = localStorage.getItem('profileImage')
+  //   if (storedImage) {
+  //     setImage(storedImage)
+  //   }
+  // }, []);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -49,8 +49,8 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
       if (selectedImage) {
-        const imageURL = URL.createObjectURL(selectedImage)
-        setProfileImage(imageURL)
+        setProfileImage(selectedImage)
+        updateImage(selectedImage)
       }
   }
 
@@ -119,16 +119,16 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1 }) => {
                   style={{ margin: 0, padding: 0 }}
                   onClick={handleClick}
                 >
-                  {profileImage ? (
+                  <img src={imageUrl1} id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
+                  {/* {profileImage ? (
                     <img src={profileImage} 
                       alt='Profile' 
                       id='profile-icon' 
                       style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
                     />
                   ) : (
-                    // <FontAwesomeIcon icon={faUser} id='profile-icon' />
-                    <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
-                  )}
+                    <img src={imageUrl1} id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
+                  )} */}
                     {/* <img src="src/assets/images/profile.png" alt="" /> */}
 
 

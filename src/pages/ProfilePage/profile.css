@@ -30,6 +30,7 @@
     align-items: center;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 #sidebar h5, #sidebar h4 {
@@ -109,8 +110,8 @@
     font-size: 0.75rem;
     position: relative;
     bottom:29px;
-    padding: 3px 55px;
-    background-color: hsla(257, 64%, 2%, 0.644);
+    padding: 3px 55px; 
+    background-color: hsla(330, 43%, 5%, 0.644);
 }
 
 .likes-img {

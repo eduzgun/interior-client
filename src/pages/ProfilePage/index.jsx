@@ -12,34 +12,36 @@ const Profile = () => {
   const [userData, setUserData] = useState('')
   const [likes, setLikes] = useState(null)
   const [loading, setLoading] = useState(true);
-  const [imageUrl1, setImageUrl1] = useState("");
+  const [imageUrl1, setImageUrl1] = useState('');
   const [editsSaved, setEditsSaved] = useState(false)
 
-  const apiUrl =
-    "https://lap-4-project.onrender.com//filestorage/static-files/profile.png"; 
+  // const apiUrl =
+  //   "https://lap-4-project.onrender.com//filestorage/static-files/profile.png"; 
 
-  useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setImageUrl1(response.data.image_url);
-      })
-      .catch((error) => {
-        console.error("Error fetching image:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(apiUrl)
+  //     .then((response) => {
+  //       setImageUrl1(response.data.image_url);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching image:", error);
+  //     });
+  // }, []);
 
   useEffect(() => {
     async function displayUser() {
-      const res = await fetch(`http://localhost:5000/users/name/${usersUsername}`)
+      const res = await fetch(`https://lap-4-project.onrender.com/users/name/${usersUsername}`)
       const data = await res.json()
       setUserData(data.data)
 
-      // const res2 = await fetch(`http://localhost:5000/likes/user/1`)
-      const res2 = await fetch(`http://localhost:5000/likes/user/${data.data.id}`)
+      setImageUrl1(data.data.avatar_image)
+
+      // const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/1`)
+      const res2 = await fetch(`https://lap-4-project.onrender.com/likes/user/${data.data.id}`)
       const data2 = await res2.json()
       setLikes(data2.data)
-      
+      console.log(data.data)
       setLoading(false)
     }
     displayUser()
@@ -53,7 +55,7 @@ const Profile = () => {
         email: newEmail || user.email,
       }
 
-      const response = await fetch(`http://localhost:5000/users/name/${userData.username}`, {
+      const response = await fetch(`https://lap-4-project.onrender.com/users/name/${userData.username}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -70,10 +72,31 @@ const Profile = () => {
     }
   }
 
+  const updateImage = async (newImage) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', newImage)
+
+      const response = await fetch(`https://lap-4-project.onrender.com/filestorage/avatar-images/${userData.id}`, {
+        method: 'PATCH',
+        body: formData,
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        // console.log(data)
+        setImageUrl1(data.image_url)
+      } 
+    
+    } catch (error) {
+      console.error('Error updating profile image:', error)
+    }
+  }
+
 
   return (
     <>
-      <UserProfile imageUrl1={imageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} />
+      <UserProfile imageUrl1={imageUrl1} updateImage={updateImage} updateUser={updateUser} loading={loading} user={userData} likes={likes} />
     </>
     
   )
