@@ -4,28 +4,57 @@ import axiosInstance from '../../helpers';
 
 const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1 }) => {
   const inputRef = useRef(null)
-  // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
+  const [likedRooms, setLikedRooms] = useState([])
 
   const bedroomImages = [
     { id: 1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-    { id: 2, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/2.png', alt: 'Image 2', clickCount: 0},
-   { id: 3, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
-   { id: 4, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
-   { id: 5, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
-   { id: 7, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 }, 
-    
+   { id: 2, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/2.png', alt: 'Image 2', clickCount: 0},
+  { id: 3, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
+  { id: 4, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
+  { id: 5, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
   ];
 
+  const generateRandomNumber = (id) => {
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = (hash << 5) - hash + id.charCodeAt(i);
+    }
+    return Math.abs(hash) % bedroomImages.length;
+  }
+
   const likedBedrooms = likes
-    ? bedroomImages.filter((image) => likes.some((like) => like.room_id === image.id))
-    : [];
+    ? likes.map((like) => {
+        const randomIndex = generateRandomNumber(like.room_id.toString());
+        const likedBedroom = bedroomImages[randomIndex];
+        return likedBedroom;
+      })
+    : []
 
   useEffect(() => {
   }, []);
+
+  useEffect(() => {
+    const fetchLikedRooms = async () => {
+      if (likes && likes.length > 0) {
+        const roomIds = likes.map((like) => like.room_id);
+        try {
+          const response = await axiosInstance.get('/rooms');
+          const allRooms = response.data.rooms;
+          const likedRoomNames = allRooms.filter((room) => roomIds.includes(room.id)).map((room) => room.name);
+          console.log(likedRoomNames)
+          setLikedRooms(likedRoomNames);
+        } catch (error) {
+          console.error('Error fetching room data:', error);
+        }
+      }
+    };
+
+    fetchLikedRooms();
+  }, [likes]);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -77,52 +106,12 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
 
   return (
     <>
-      {/* <div>Profile</div> */}
       <div id='profile-container'>
         {loading ? (
           <p>loading ...</p>
           ) : (
             <>
-              {/* <div id="sidebar">
-                
-                <div 
-                  role='profile-icon' 
-                  id='profile-icon-container1'
-                  style={{ margin: 0, padding: 0 }}
-                  onClick={handleClick}
-                >
-                  {profileImage ? (
-                    <img src={profileImage} 
-                      alt='Profile' 
-                      id='profile-icon' 
-                      style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
-                    />
-                  ) : (
-                    
-                    <img src="src/assets/images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
-                  )}
-                   
-
-
-                  <input
-                  type='file'
-                  accept='image/*'
-                  placeholder='Edit'
-                  style={{display: "none"}}
-                  ref={inputRef}
-                  onChange={
-                    handleImageChange
-                  }
-                />
-                <label id="edit-image" htmlFor="profile-icon-container1">Edit</label>
-                
-                </div>
-
-                <h4>{user.username}</h4>
-                <h5>Email: {user.email}</h5>
-                
-                
-              </div> */}
+              
               <div id="main-content">
               <div 
                   role='profile-icon' 
@@ -137,10 +126,8 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                       style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
                     />
                   ) : (
-                    // <FontAwesomeIcon icon={faUser} id='profile-icon' />
                     <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
                   )}
-                    {/* <img src="src/assets/images/profile.png" alt="" /> */}
 
 
                   <input
@@ -201,7 +188,8 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                         <Link id="imgs-container" style={{textDecoration: "none"}} key={index} to={`/studio`}>
                           <img src={like.src} className="likes-img" id='profile-imgs'  alt="" /> 
                           <p key={index} id='profile-imgs-text' > 
-                            Room {like.id}
+                            {likedRooms[index] ? (likedRooms[index].length > 10 ? likedRooms[index].substring(0, 10) + '...' : likedRooms[index]) : 'Unknown Room'}
+
                           </p>
                         </Link>
                       ))
@@ -213,13 +201,8 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                 
               </div>
 
-              
-
-              
             </>
         )}
-        
-        
         
       </div>
     </>
