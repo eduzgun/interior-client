@@ -42,6 +42,9 @@ const Profile = () => {
       const data2 = await res2.json()
       setLikes(data2.data)
       
+      // console.log(likes)
+      // console.log(data2)
+
       setLoading(false)
     }
     displayUser()
