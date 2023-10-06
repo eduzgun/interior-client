@@ -136,7 +136,7 @@ useEffect(() => {
 return (
   <div className='overflow-hiding'>
       <div className='title-section'>
-    <h1 className='room-title'>Bedroom Inspiration</h1>
+    <h1 className='room-title'>Bathroom Inspiration</h1>
     <BackButton backTo="/explore" label="Back to Explore" />
     </div>
   
