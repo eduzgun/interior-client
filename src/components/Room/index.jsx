@@ -14,6 +14,8 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
   const [loadedVar,setLoadedVar] = useState(false)
 
 
+  const [arr, setArr] = useState([]);
+const [sortedArray, setSortedArray] = useState([]);
   const loading = [
     "../../src/assets/environmentMaps/loading/px.png",
     "../../src/assets/environmentMaps/loading/nx.png",
@@ -32,38 +34,40 @@ const nextMap = () => {
 };
 
 
-  useEffect(() => {
-    setMapSet([])
-    const sortedArray = []
+useEffect(() => {
+  setMapSet([]);
+  const posPositions = ["px", "nx", "py", "ny", "pz", "nz"];
+  const imgs = pageRefs.current;
+  const arr = new Set(); // Use a Set to ensure unique values
+  let sortedArray = posPositions.map((position) => "");
 
-    const posPositions = ["px","nx","py","ny","pz","nz"]
-    const imgs = pageRefs.current
-    const arr = []
-    try {
-      if(!loadedVar){
-        console.log("LOADING...");
-      }else{
-        console.log("LOADED")
+  try {
+    if (!loadedVar) {
+      console.log("LOADING...");
+    } else {
+      console.log("LOADED");
 
-        posPositions.forEach(order => {
-          let matchingImg;
-          for(let img of imgs){
-            if(img.current.alt.split("/")[1] === order){
-              matchingImg = img              
-            }
-            
-          }
-          if(matchingImg && !arr.includes(matchingImg.current.alt)){
-            sortedArray.push(matchingImg.current.src)
-            arr.push(matchingImg.current.alt)
-          }
-        })
-        setMapSet(sortedArray)
-      }
-    } catch (error) {
-      console.log("Damn it",error);
+      imgs.forEach((img) => {
+        const altValue = img.current.alt;
+        const order = altValue.split("/").pop().split(".")[0];
+        const index = posPositions.indexOf(order);
+
+        if (index !== -1 && !arr.has(altValue)) {
+          console.log("MATCHING IMG CURRENT", img.current);
+          sortedArray[index] = img.current.src;
+          arr.add(altValue);
+        }
+      });
+
+      console.log("arr:", Array.from(arr)); // Convert Set to Array for logging
+      console.log("sortedArray:", sortedArray);
+      setMapSet(sortedArray);
     }
-  },[loadedVar])
+  } catch (error) {
+    console.log("Damn it", error);
+  }
+}, [loadedVar]);
+
 
   return (
     <div className="environment-map-grid">
