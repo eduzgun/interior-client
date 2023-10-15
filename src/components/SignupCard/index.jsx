@@ -3,7 +3,7 @@ import "./style.css"
 import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
-    const baseUrl='https://lap-4-project.onrender.com/'
+    const baseUrl='http://localhost:5000/'
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
@@ -104,7 +104,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
   return (
     <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
         <div className="lamp">
-            <img src="./src/assets/images/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
+            <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>
         </div>
 

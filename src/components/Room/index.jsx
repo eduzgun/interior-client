@@ -3,11 +3,17 @@ import EnvironmentMap from '../EnvironmentMaps';
 import { AuthProvider } from '../../contexts';
 import { BlobToImage } from "../../components"
 
-
-const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
+const Room = ( {mapSet, initialMapIndex = 0, user_id, room_name, roomType} ) => {
   const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
-
   const pageRefs = useRef([React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),])
+  const imageURLs = [
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/px.png`,
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/nx.png`,
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/py.png`,
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/ny.png`,
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/pz.png`,
+    `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/nz.png`,
+]
 
   const [mapset,setMapSet] = useState([])
 
@@ -15,12 +21,12 @@ const Room = ( {mapSet, initialMapIndex = 0, room_id} ) => {
 
 
   const loading = [
-    "../../src/assets/environmentMaps/loading/px.png",
-    "../../src/assets/environmentMaps/loading/nx.png",
-    "../../src/assets/environmentMaps/loading/py.png",
-    "../../src/assets/environmentMaps/loading/ny.png",
-    "../../src/assets/environmentMaps/loading/pz.png",
-    "../../src/assets/environmentMaps/loading/nz.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
   ]
 
   const prevMap = () => {
@@ -60,6 +66,7 @@ const nextMap = () => {
         })
         setMapSet(sortedArray)
       }
+      console.log(arr);
     } catch (error) {
       console.log("Damn it",error);
     }
@@ -67,12 +74,10 @@ const nextMap = () => {
 
   return (
     <div className="environment-map-grid">
-      {  }
-      <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar}/>
+      {}
+      {/* <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar} room_name={room_name} roomType={roomType}/> */}
       <button className='left-arrow' onClick={prevMap}>←</button>  
-        {/* <EnvironmentMap roomId={13} mapUrls={mapset.length == 6 ? mapset : maps[currentMapIndex]} /> */}
-        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset.length == 6 ? mapset : loading} />
-        {/* <EnvironmentMap mapUrls={maps[currentMapIndex]} /> */}
+        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset ? imageURLs : loading} />
       <button className='right-arrow' onClick={nextMap}>→</button> 
     </div>
   );

@@ -3,32 +3,10 @@ import { Room, StylesComponent, BackButton,BlobToImage } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
-import './explore.css'
+import '../explore.css'
 import { useAuth } from '../../contexts';
 import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
-
-const bathroomImages = [
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-   { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-  { src: '../../src/assets/environmentMaps/5/px.png', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/3.png', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1' },
-//    { src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/7.webp', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/bedroom/8.jpeg', alt: 'Image 1' },
-
-  
-];
-
 
 function BathroomPage() {
   const { user } = useAuth();
@@ -119,8 +97,15 @@ useEffect(() => {
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Bathroom"){
-            // rooms[i].src = rooms[i].cover_image
-          rooms[i].src = bathroomImages[counter].src
+          let room = ""
+
+          if(rooms[i].name.includes(" ")){
+            room = rooms[i].name.split(" ").join("_")
+            console.log("106",room);
+          }else{
+            room = rooms[i].name
+          }
+          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].fetchUID}/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
           counter += 1
@@ -149,7 +134,7 @@ return (
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
   <img className='bathroom__item' src={image.src} alt={image.alt} />
-  <div className="bathroom__item-caption">{image.name}
+  <div className="bathroom__item-caption">{image.name.split("_").join(" ")}
   {hoveredImageIndex == image.id && (
     <div className="icon-container">
   
@@ -172,8 +157,8 @@ return (
     {selectedImage && (
       <div className="fullscreen-div">
       <div className="fullscreen-content">
-          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-          <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+        <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} roomType={"Bathroom"} room_name={selectedImage.name} user_id={selectedImage.user_id} />
+        <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
       </div>
   </div>
     )}

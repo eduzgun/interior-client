@@ -1,7 +1,9 @@
 import axios from "axios";
 
 let axiosInstance = axios.create({
-    baseURL: 'https://lap-4-project.onrender.com'
+    baseURL: 'http://localhost:5000'
 });
+
+axiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*"
 
 export default axiosInstance;

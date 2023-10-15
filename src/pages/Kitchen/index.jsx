@@ -3,23 +3,10 @@ import { Room, StylesComponent, BackButton,BlobToImage } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
-import './explore.css'
+import '../explore.css'
 import { useAuth } from '../../contexts';
 import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
-
-const kitchenImages = [
-  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/1.png', alt: 'Image 1' },
-  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/2.webp', alt: 'Image 1' },
-  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/3.jpeg', alt: 'Image 1' },
-  { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/4.jpeg', alt: 'Image 1' },
-   { src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/kitchen/5.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/kitchen/6.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/kitchen/7.jpeg', alt: 'Image 1' },
-//   { src: '../../src/assets/environmentMaps/kitchen/8.png', alt: 'Image 1' },
-// //   { src: '../../src/assets/environmentMaps/kitchen/9.png', alt: 'Image 1' },
-  
-];
 
 function KitchenPage() {
   const { user } = useAuth();
@@ -111,8 +98,15 @@ useEffect(() => {
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Kitchen"){
-            // rooms[i].src = rooms[i].cover_image
-          rooms[i].src = kitchenImages[counter].src
+          let room = ""
+
+          if(rooms[i].name.includes(" ")){
+            room = rooms[i].name.split(" ").join("_")
+            console.log("106",room);
+          }else{
+            room = rooms[i].name
+          }
+          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].fetchUID}/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
           counter += 1
@@ -141,7 +135,7 @@ return (
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
   <img className='kitchen__item' src={image.src} alt={image.alt} />
-  <div className="kitchen__item-caption">{image.name}
+  <div className="kitchen__item-caption">{image.name.split("_").join(" ")}
   {hoveredImageIndex == image.id && (
     <div className="icon-container">
   
@@ -164,8 +158,9 @@ return (
     {selectedImage && (
       <div className="fullscreen-div">
       <div className="fullscreen-content">
-          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-          <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+        <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} roomType={"Kitchen"} room_name={selectedImage.name} user_id={selectedImage.user_id}/>
+
+        <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
       </div>
   </div>
     )}

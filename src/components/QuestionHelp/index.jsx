@@ -26,7 +26,7 @@ const QuestionHelp = ({active, title, content, summaryContent="", image="", orie
                 {content}{
                     summaryContent !== "" ?
                 <details>
-                    <summary>{summaryContent}</summary>
+                    <summary id='summarytext'>{summaryContent}</summary>
                     <img id="example-panoramic" src={image} alt="" />
                 </details>
                 : ""

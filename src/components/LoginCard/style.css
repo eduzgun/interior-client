@@ -44,7 +44,7 @@
 
 #login button{
     font-size: 0.8rem;
-    border: 3px solid #3E8989;
+    border: 2px solid var(--outline);
     padding: 10px 25px;
     outline: none;
     border-radius: 25px;
@@ -56,9 +56,9 @@
 }
 
 #login button:hover{
-    background-color: #3E8989;
-    border: 1px solid var(--outlinefocus);
-
+    background-color: black;
+    border: 2px solid var(--beige);
+    color: var(--beige);
 }
 
 .lamp{

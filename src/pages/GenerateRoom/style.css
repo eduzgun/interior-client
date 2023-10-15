@@ -8,8 +8,9 @@
 }
 
 .generator-container{
-    color: whitesmoke;
-    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%);
+    color: black;
+    /* background: linear-gradient(0deg, rgba(15,13,20,1) 0%, rgb(60,62,73) 81%); */
+    background-color: var(--beige);
     min-width: 45%;
     height: 100%;
     display: flex;
@@ -19,12 +20,14 @@
     padding: 20px;
     margin: 50px 0;
     border-radius: 25px;
-    border: 1px solid var(--outlinefocus);
+    border: 1px solid var(--beige);
     position: relative;
 }
 
 #cubemap{
     border-radius: 25px;
+    outline: solid 1px black;
+    border: none;
 }
 
 .generator-container>form{
@@ -53,8 +56,8 @@
     padding: 10px 25px;
     border-radius: 25px;
     cursor: pointer;
-    background-color: #ffffff;
-    color: #009688;
+    background-color: var(--beige);
+    color: black;
     font-family: inherit;
     margin-right: 10px;
 }
@@ -62,8 +65,8 @@
 .form-input::file-selector-button:hover,
 #submit-btn:hover,
 #home-btn:hover{
-    background-color: var(--bg);
-    border: 2px solid var(--outlinefocus);
+    background-color: black;
+    border: 2px solid var(--beige);
 }
 
 .inputs{
@@ -79,7 +82,7 @@
     width: 350px;
     min-width: 100px;
     border: none;
-    outline: solid 1px var(--outlinefocus);
+    outline: solid 1px var(--beige);
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.8rem;
     border-radius: 25px;
@@ -106,14 +109,14 @@ input[type="text"]:disabled,
 #submit-btn:disabled,
 textarea:disabled,
 .form-input:disabled::file-selector-button{
-    color: var(--outlinefocus);
-    background-color: var(--outline);
+    color: var(--beige);
+    background-color: var(--darkbeige);
     cursor: default;
 }
 
 #submit-btn:disabled:hover,
 .form-input:disabled::file-selector-button:hover{
-    border: solid 2px var(--outline);
+    border: solid 2px var(--darkbeige);
 }
 
 #home-btn,
@@ -125,7 +128,7 @@ textarea:disabled,
     width: 250px;
     min-width: 100px;
     border: none;
-    outline: solid 1px var(--outlinefocus);
+    outline: solid 1px var(--beige);
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.8rem;
     border-radius: 25px;
@@ -147,7 +150,7 @@ textarea:disabled,
     border-radius: 15px 15px 0px 0px;
     font-size: 1.4rem;
     margin-right: 10px;
-    border: solid 1px var(--outlinefocus);
+    /* border: solid 1px black; */
     border-bottom: none;
     cursor: pointer;
 }
@@ -175,7 +178,8 @@ textarea:disabled,
 #submit-btn:hover,
 #home-btn:hover{
     background-color: var(--bg);
-    border: 2px solid var(--outlinefocus);
+    border: 2px solid var(--bg);
+    color: var(--beige);
 }
 
 
@@ -186,8 +190,8 @@ textarea:disabled,
     padding: 5px 15px;
     border-radius: 25px;
     cursor: pointer;
-    background-color: #ffffff;
-    color: #009688;
+    background-color: var(--beige);
+    color: bg;
     font-family: inherit;
     margin-right: 10px;
     margin-top: 2px;

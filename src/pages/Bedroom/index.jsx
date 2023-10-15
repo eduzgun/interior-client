@@ -3,19 +3,10 @@ import { Room, StylesComponent, BackButton,BlobToImage } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
-import './explore.css'
+import '../explore.css'
 import { useAuth } from '../../contexts';
 import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
-
- const bedroomImages = [
-   { id: 1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-   { id: 2, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/2.png', alt: 'Image 2', clickCount: 0},
-  { id: 3, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/3.png', alt: 'Image 3', clickCount: 0 },
-  { id: 4, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/4.png', alt: 'Image 4', clickCount: 0 },
-  { id: 5, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/5.png', alt: 'Image 5', clickCount: 0 },
-  { id: 7, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/bedroom/6.jpeg', alt: 'Image 6', clickCount: 0 },
- ];
 
 
 function BedroomPage() {
@@ -77,26 +68,35 @@ const sendLikeData = async (user, roomId) => {
   }
 };
 
-useEffect(() => {
-  async function callRoomImages(){
-    const call = await axiosInstance.get("/rooms").then(data => {
-      const rooms = data.data.rooms
-      const tempArr = []
-      let counter = 0
-      for(let i=0;i<rooms.length;i++){
-        if(rooms[i].category === "Bedroom"){
-          console.log(rooms[i].cover_image);
-            // rooms[i].src = rooms[i].cover_image
-          rooms[i].src = bedroomImages[counter].src
-          rooms[i].alt = 'Image 1'
-          tempArr.push(rooms[i])
-          counter += 1
-        }
-      }
-      setRoomArray(tempArr)
-    })
+async function callRoomImages(){
+  const call = await axiosInstance.get("/rooms").then(data => {
+    const rooms = data.data.rooms
+    const tempArr = []
+    let counter = 0
+    for(let i=0;i<rooms.length;i++){
+      if(rooms[i].category === "Bedroom"){
+        let room = ""
 
-  }
+        if(rooms[i].name.includes(" ")){
+          room = rooms[i].name.split(" ").join("_")
+          console.log("106",room);
+        }else{
+          room = rooms[i].name
+        }
+        rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
+        rooms[i].alt = 'Image 1'
+        tempArr.push(rooms[i])
+        counter += 1
+      }
+    }
+    console.log(tempArr);
+    setRoomArray(tempArr)
+  })
+
+
+}
+
+useEffect(() => {
   callRoomImages()
 },[])
 
@@ -143,7 +143,7 @@ useEffect(() => {
       onMouseLeave={() => setHoveredImageIndex(null)}
     >
     <img className='bedroom__item' src={image.src} alt={image.alt} />
-    <div className="bedroom__item-caption">{image.name}
+    <div className="bedroom__item-caption">{image.name.split("_").join(" ")}
     {hoveredImageIndex == image.id && (
       <div className="icon-container">
     
@@ -166,8 +166,8 @@ useEffect(() => {
       {selectedImage && (
         <div className="fullscreen-div">
         <div className="fullscreen-content">
-            <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-            <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} roomType={"Bedroom"} room_name={selectedImage.name} user_id={selectedImage.user_id}/>
+          <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
         </div>
     </div>
       )}

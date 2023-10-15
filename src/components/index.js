@@ -20,4 +20,6 @@ export { default as ImageBox } from "./ImageBox"
 
 export { default as EmailButton } from './Email'
 
+export { default as EditOverlay } from "./EditOverlay"
 
+export { default as DeleteOverlay } from "./DeleteOverlay"

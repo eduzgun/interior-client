@@ -1,42 +1,39 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import axiosInstance from '../../helpers';
+import "./style.css"
+import { EditOverlay, DeleteOverlay } from "../../components"
 
-const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1 }) => {
+const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1, setRefresh }) => {
   const inputRef = useRef(null)
   // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
+  const [likedRooms,setLikedRooms] = useState([])
+  const [hoverImage,setHoverImage] = useState(null)
 
-  const bedroomImages = [
-    {id: 1, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-    {id: 2, src: '../../src/assets/environmentMaps/0/1/pz.png', alt: 'Image 1', clickCount: 0},
-    {id: 3, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', caption: "Modern", clickCount: 0 },
-    {id: 4, src: '../../src/assets/environmentMaps/bedroom/3.jpeg', alt: 'Image 1', clickCount: 0 },
-     {id: 5, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 6, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-    {id: 7, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 8, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 9, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
-    {id: 10, src: '../../src/assets/environmentMaps/bedroom/1.png', alt: 'Image 1', clickCount: 0 },
-    {id: 11, src: '../../src/assets/environmentMaps/bedroom/2.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 12, src: '../../src/assets/environmentMaps/bedroom/4.jpeg', alt: 'Image 1', clickCount: 0 },
-     {id: 13, src: '../../src/assets/environmentMaps/bedroom/5.avif', alt: 'Image 1', clickCount: 0 },
-    {id: 14, src: '../../src/assets/environmentMaps/bedroom/6.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 15, src: '../../src/assets/environmentMaps/bedroom/7.jpeg', alt: 'Image 1', clickCount: 0 },
-    {id: 16, src: '../../src/assets/environmentMaps/bedroom/8.webp', alt: 'Image 1', clickCount: 0 },
-  
-    
-  ];
+  const [imgToDelete,setImgToDelete] = useState(null)
 
-  const likedBedrooms = likes
-    ? bedroomImages.filter((image) => likes.some((like) => like.room_id === image.id))
-    : [];
+  const [toggleDeleteBtn,setToggleDeleteBtn] = useState(false)
+
+  async function getLikedRooms() {
+    const rooms = []
+    const x = await axiosInstance("/rooms").then(resp => {
+      const data = resp.data.rooms
+      for(let i=0;i<data.length;i++){
+        if(data[i].user_id == user.id){
+          rooms.push(data[i])
+        }
+      }
+      setLikedRooms(rooms)
+    })
+  }
 
   useEffect(() => {
-  }, []);
+    getLikedRooms()
+  }, [likes]);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -86,6 +83,11 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
     setLikesVisible(true);
   };
 
+  const toDelete = (room) => {
+    setToggleDeleteBtn(!toggleDeleteBtn)
+    setImgToDelete(room)
+  }
+
   return (
     <>
       {/* <div>Profile</div> */}
@@ -94,46 +96,6 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
           <p>loading ...</p>
           ) : (
             <>
-              {/* <div id="sidebar">
-                
-                <div 
-                  role='profile-icon' 
-                  id='profile-icon-container1'
-                  style={{ margin: 0, padding: 0 }}
-                  onClick={handleClick}
-                >
-                  {profileImage ? (
-                    <img src={profileImage} 
-                      alt='Profile' 
-                      id='profile-icon' 
-                      style={{ maxWidth: '8rem', maxHeight: '8rem', padding: 0 }}
-                    />
-                  ) : (
-                    
-                    <img src="src/assets/images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
-                  )}
-                   
-
-
-                  <input
-                  type='file'
-                  accept='image/*'
-                  placeholder='Edit'
-                  style={{display: "none"}}
-                  ref={inputRef}
-                  onChange={
-                    handleImageChange
-                  }
-                />
-                <label id="edit-image" htmlFor="profile-icon-container1">Edit</label>
-                
-                </div>
-
-                <h4>{user.username}</h4>
-                <h5>Email: {user.email}</h5>
-                
-                
-              </div> */}
               <div id="main-content">
               <div 
                   role='profile-icon' 
@@ -202,35 +164,53 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                 </div>
                 
                 
-                <div style={{ display: likesVisible ? 'block' : 'none', paddingTop: "30px" }}>
+                <div style={{ display: likesVisible ? 'flex' : 'none', paddingTop: "30px" }}>
                   {/* <h3 id='likes' role='heading4'>Likes</h3> */}
-                  <div id='likes-container' style={{ display: 'flex', flexDirection: 'row', padding: "0"}}>
-                    {likes == null ? (
+                  <div id='likes-container' style={likedRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
+                    {likedRooms.length < 1
+                    ? (
                       <p>You have not liked any rooms.<br></br> <Link to={`/explore`}><button>Find Rooms</button></Link></p>
-                    ) : (
-                      likedBedrooms.map((like, index) => (
-                        <Link id="imgs-container" style={{textDecoration: "none"}} key={index} to={`/studio`}>
-                          <img src={like.src} className="likes-img" id='profile-imgs'  alt="" /> 
-                          <p key={index} id='profile-imgs-text' > 
-                            Room {like.id}
-                          </p>
-                        </Link>
+                    ) 
+                    : (
+                      likedRooms.map((room, index) => (
+                        <div className='card-wrapper'>
+                          <Link 
+                          className="imgs-container" 
+                          style={{textDecoration: "none"}} 
+                          key={index} 
+                          to={`/${room.category}`}
+                          onMouseEnter={() => setHoverImage(room.id)}
+                          onMouseLeave={() => setHoverImage(null)}>
+                            <img src={`https://res.cloudinary.com/de2nposrf/image/upload/${room.category}/${room.user_id}/${room.name}/nz.png`} className="likes-img" alt="" /> 
+                            <p key={index} id='profile-imgs-text'>{room.name.split("_").join(" ")}</p>
+                            
+                          </Link>
+                          {hoverImage == room.id && (
+                            <div
+                            className="config"
+                            onMouseEnter={() => setHoverImage(room.id)}
+                            onMouseLeave={() => setHoverImage(null)}
+                            >
+                              <p id="edit">⚙</p>
+                              <p id='delete' onClick={() => toDelete(room)}>-</p>
+                            </div>
+                          )}
+                        </div>
                       ))
+
                     )}
+                      
                   </div>
-                  
+
                 </div>
-                
-                
               </div>
-
-              
-
-              
             </>
         )}
         
-        
+      { toggleDeleteBtn
+        ? <DeleteOverlay hoverImg={imgToDelete} toggle={toggleDeleteBtn} setToggle={setToggleDeleteBtn} setRefresh={setRefresh}/>
+        : ""
+      }
         
       </div>
     </>

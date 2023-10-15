@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts'
 import axiosInstance from "../../helpers"
 import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
+import axios from 'axios'
 
 const GenerateRoom = () => {
 
@@ -18,6 +19,7 @@ const GenerateRoom = () => {
     const [theme, setTheme] = useState("")
     const [select,setSelect] = useState("Bedroom")
     const [imageTypeSelect,setImageTypeSelect] = useState(false)
+    const [returnURL,setReturnURL] = useState("")
     const [files, setFiles] = useState([])
 
     const [px,setPx] = useState([])
@@ -49,7 +51,7 @@ const GenerateRoom = () => {
 
     const navigate = useNavigate()
     
-
+    const cloudinaryURL = ""
 
     const positions = ["pz","nz","px","nx","py","ny"]
 
@@ -69,14 +71,14 @@ const GenerateRoom = () => {
 
       const inactiveStyle = {
         "zIndex":"1",
-        "color":"var(--font)",
-        "backgroundColor":"#ffffff"
+        "color":"var(--bg)",
+        "backgroundColor":"var(--beige)"
       }
 
       const activeStyle = {
         "zIndex":"1",
-        "color":"#ffffff",
-        "backgroundColor":"rgb(60,62,73)"
+        "color":"var(--bg)",
+        "backgroundColor":"var(--beige)"
       }
 
 // creates class for each cube face, containing relevant manipulatable data
@@ -263,13 +265,12 @@ const GenerateRoom = () => {
         const arr = []
         const sortedArray = []
         const formData = new FormData()
+        const posPositions = ["px","nx","py","ny","pz","nz"]
+        // const uploadPromises = []
 
 
         if(imageTypeSelect){
             imgs = facesRef.current.children
-            console.log("panorama");
-
-            const posPositions = ["px","nx","py","ny","pz","nz"]
     
             posPositions.forEach(order => {
     
@@ -293,21 +294,56 @@ const GenerateRoom = () => {
             }
         }
 
-        for(let i=0;i<sortedArray.length;i++){
-            const imgBlobURLToSend = sortedArray[i]
-            const response = await fetch(imgBlobURLToSend);
-            const blob = await response.blob();
-            formData.append(`file${i}`,blob)
-        } 
-        
-        
+        // for(let i=0;i<sortedArray.length;i++){
+        //     const filesFormData = new FormData()
+        //     const imgBlobURLToSend = sortedArray[i]
+        //     const response = await fetch(imgBlobURLToSend);
+        //     const blob = await response.blob();
+        //     const dynamicPath = `${user}/${filename}/${posPositions[i]}`
+        //     filesFormData.append("file",blob)
+        //     filesFormData.append("public_id",dynamicPath)
+        //     filesFormData.append("upload_preset","de2nposrf")
+        //     uploadPromises.push(filesFormData)
+        // } 
+        let extractedString = ""
+        const uploadPromises = sortedArray.map(async (blobURL,index) => {
+            const fileForm = new FormData()
+            const resp = await fetch(blobURL)
+            const blob = await resp.blob()
+            const dynamicPath = `${select}/${user}/${filename.replace(/\s+/g, "_")}/${posPositions[index]}`
+            fileForm.append("file",blob)
+            fileForm.append("public_id",dynamicPath)
+            fileForm.append("upload_preset","interiorLAP4")
 
-        formData.append("name",filename)
+            try {
+                const response = await axios.post("https://api.cloudinary.com/v1_1/de2nposrf/upload",fileForm)
+                const xx = response.data.url
+                
+                extractedString = (xx.split("/upload/")[1])
+                extractedString = extractedString.split("/")[0]              
+
+            } catch (error) {
+                console.log("line320",error.response.data);
+            }
+
+        })
+
+        setReturnURL(extractedString)
+        console.log(extractedString);
+        let name = ""
+        if(filename.includes(" ")){
+            name = filename.split(" ").join("_")
+        }else{
+            name = filename
+        }
+
+        formData.append("name",name)
         formData.append("dimensions",dimensions)
         formData.append("description",description)
         formData.append("theme",theme)
         formData.append("category",select)
         formData.append("user_id",user)
+        formData.append("fetchUID",extractedString)
 
 
         // KEEP THIS
@@ -319,7 +355,7 @@ const GenerateRoom = () => {
                 }
               })
               .then(response => {
-                console.log('Response:', response.data);
+                console.log("success",response.data.data);
               })
               .catch(error => {
                 console.error('Error:', error);
@@ -348,9 +384,6 @@ const GenerateRoom = () => {
             } catch (error) {
                 console.log(error)
             }
-            
-
-
         }else{
             // await getUserData()
             console.log(user,"Not done yet")
@@ -505,14 +538,14 @@ const GenerateRoom = () => {
        You can use that to upload a <strong>PANORAMIC</strong> image and turn it into a cubemap that creates a room! <br /><br />
    </p>,
         summaryContent:<p>Don't know what a <strong>PANORAMIC</strong> image is? Open me for an example!</p>,
-        image:"./src/pages/GenerateRoom/example-panorama.jpg"
+        image:"https://res.cloudinary.com/de2nposrf/image/upload/v1697124657/static/example_panorama.jpg"
     }
 
     const cubeQuestionMark = {
         header:"What do I do here?",
         body:<p>See those "choose file" buttons? Each of those correspond to a <strong>CUBEMAP</strong> image.<br /><br />They go in order:<br /> PX, NX, PY, NY, PZ ,NZ<br /><br />Make sure your files are inserted in that order too, as the renderer is very specific and we don't want your room to come out the wrong way. <br /><br /></p>,
         summaryContent:<p>Don't know what a <strong>CUBEMAP</strong> is? Open me for an example!</p>,
-        image:"./src/pages/GenerateRoom/example-cubemap.jpg"
+        image:"https://res.cloudinary.com/de2nposrf/image/upload/v1697124747/static/example_cubemap.jpg"
     }
 
     return (
@@ -567,7 +600,7 @@ const GenerateRoom = () => {
                             <option value="Kitchen">Kitchen</option>
                             <option value="Garden">Garden</option>
                             <option value="Bathroom">Bathroom</option>
-                            <option value="Living Room">Living Room</option>
+                            <option value="Living">Living Room</option>
                             <option value="Studio">Studio</option>
                         </select>
                     </div>
@@ -637,7 +670,7 @@ const GenerateRoom = () => {
                         <option value="Kitchen">Kitchen</option>
                         <option value="Garden">Garden</option>
                         <option value="Bathroom">Bathroom</option>
-                        <option value="Living Room">Living Room</option>
+                        <option value="Living">Living Room</option>
                         <option value="Studio">Studio</option>
                     </select>
                 </div>
@@ -653,5 +686,3 @@ const GenerateRoom = () => {
 }
 
 export default GenerateRoom
-
-

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
 
 const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
-    const baseUrl = 'https://lap-4-project.onrender.com/'
+    const baseUrl = 'http://localhost:5000/'
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
     const { setUser } = useAuth()
@@ -89,7 +89,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
   return (
     <div id="login"  className="card" style={Object.assign({"height":cardHeight},!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
         <div className="lamp">
-            <img src="./src/assets/images/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
+            <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
             <div id="llight" style={!toggleSwitch ? showLight : {}}></div>
         </div>
         <QuestionHelp active={toggleSwitch} title={"Logging In"} content={<p>Made an account? <br></br> Then please enter your username and password in the entries below.<br /><br />Haven't made one? Hit the switch in the center!</p>}/>

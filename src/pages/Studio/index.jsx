@@ -3,25 +3,10 @@ import { Room, StylesComponent, BackButton } from '../../components'
 import { Link } from 'react-router-dom';
 import Heart from "react-animated-heart";
 import { AiFillEye } from 'react-icons/ai'
-import './explore.css'
+import '../explore.css'
 import { useAuth } from '../../contexts';
 import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
-
-const studioImages = [
-  { id:1, src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/1.png', alt: 'Image 1' },
-  { id:2,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/2.png', alt: 'Image 1' },
-  { id:3,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/3.png', alt: 'Image 1' },
-  { id:4,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/4.png', alt: 'Image 1' },
-  { id:5,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/5.png', alt: 'Image 1' },
-  { id:6,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/6.png', alt: 'Image 1' },
-  { id:7,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/4.png', alt: 'Image 1' },
-
-  { id:7,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/7.png', alt: 'Image 1' },
-  { id:8,src: 'https://interior-cloud-store.s3.eu-central-1.amazonaws.com/room-images/studio/8.jpeg', alt: 'Image 1' },
-  // { src: '../../src/assets/environmentMaps/studio/8.jpeg', alt: 'Image 1' },
-];
-
 
 function StudioPage() {
   const { user } = useAuth();
@@ -92,9 +77,15 @@ useEffect(() => {
       let counter = 0
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].category === "Studio"){
-            // rooms[i].src = rooms[i].cover_image
-            console.log(rooms[i].cover_image);
-          rooms[i].src = studioImages[counter].src
+          let room = ""
+
+          if(rooms[i].name.includes(" ")){
+            room = rooms[i].name.split(" ").join("_")
+            console.log("106",room);
+          }else{
+            room = rooms[i].name
+          }
+          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].fetchUID}/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
           counter += 1
@@ -123,7 +114,7 @@ return (
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
   <img className='studio__item' src={image.src} alt={image.alt} />
-  <div className="studio__item-caption">{image.name}
+  <div className="studio__item-caption">{image.name.split("_").join(" ")}
   {hoveredImageIndex == image.id && (
     <div className="icon-container">
   
@@ -146,8 +137,8 @@ return (
     {selectedImage && (
       <div className="fullscreen-div">
       <div className="fullscreen-content">
-          <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} />
-          <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+        <Room mapSet="bedroom" initialMapIndex={selectedImageIndex} roomType={"Studio"} room_name={selectedImage.name} user_id={selectedImage.user_id}/>
+        <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
       </div>
   </div>
     )}

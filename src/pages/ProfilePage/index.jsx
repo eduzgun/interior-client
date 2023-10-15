@@ -6,7 +6,7 @@ import axios from "axios";
 import './profile.css'
 
 const Profile = () => {
-  const baseUrl = 'https://lap-4-project.onrender.com'
+  const baseUrl = 'http://localhost:5000'
   const { usersUsername, setUsersUsername } = useAuth()
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -15,9 +15,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [imageUrl1, setImageUrl1] = useState("");
   const [editsSaved, setEditsSaved] = useState(false)
+  const [refresh,setRefresh] = useState(0)
 
   const apiUrl =
-    "https://lap-4-project.onrender.com//filestorage/static-files/profile.png"; 
+    "https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/default_pfp.png"; 
 
   useEffect(() => {
     axios
@@ -45,7 +46,7 @@ const Profile = () => {
       setLoading(false)
     }
     displayUser()
-  }, [])
+  }, [refresh])
 
   async function updateUser(newUsername, newEmail) {
     try {
@@ -75,7 +76,7 @@ const Profile = () => {
 
   return (
     <>
-      <UserProfile imageUrl1={imageUrl1} setImageUrl1={setImageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} />
+      <UserProfile imageUrl1={imageUrl1} setImageUrl1={setImageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} setRefresh={setRefresh}/>
     </>
     
   )

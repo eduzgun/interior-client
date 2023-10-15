@@ -4,7 +4,9 @@
   --fg: hsl(246, 12%, 32%);
   --outline: rgba(20,8,14);
   --outlinefocus: rgba(62,137,137);
-  --font : rgba(62,137,137);
+  --font : rgb(86, 255, 247);
+  --beige: #FAF8F2;
+  --darkbeige: #a5a4a3;
   font-size: 24px;
   font-family: 'Space Grotesk', sans-serif;
 }
@@ -86,7 +88,7 @@ font-size: 18px;
 
 
 /* opacity of text when visibible - regarding the useState in the marker component  */
-.text.visible {
+/* .text.visible {
 opacity: 1;
 visibility: visible;
 }
@@ -100,10 +102,10 @@ align-items: center;
 margin-top: 0px;
 overflow-y: auto;
 
-}
+} */
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
-.arrow-button {
+/* .arrow-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -122,10 +124,10 @@ overflow-y: auto;
 .arrow-button.right {
   right: 10px;
   
-}
+} */
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
-.environment-map {
+/* .environment-map {
 margin-left: 30px;
 margin-right: 30px;
 width: 1800px; 
@@ -187,8 +189,8 @@ left: 20px;
 
 .right-arrow {
 right: 20px;
-}
-
+}*/
+/*
 .center-page-room {
   display: flex;
   justify-content: center;
@@ -196,10 +198,10 @@ right: 20px;
   text-align: center;
   height: 100vh; 
   width: 100vw; 
-  /* overflow-y: auto; */
-}
+  overflow-y: auto;
+}*/
 
-.kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
+/* .kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
 grid-gap: 30px;
@@ -299,10 +301,10 @@ transform: scale(1.05);
   cursor: pointer;
   background-color: #009688;
   outline: solid 2px var(--outlinefocus);
-}
+} */
 
 
-.bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
+/* .bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
 position: relative;
 display: inline-block;
 }
@@ -316,9 +318,9 @@ width: 100%;
 text-align: left;
 font-family: Arial, Helvetica, sans-serif;
 
-}
+} */
 
-.bedroom-page.dimmed .bedroom__item, 
+/* .bedroom-page.dimmed .bedroom__item, 
 .bedroom-page.dimmed .bedroom__item-caption, .kitchen-page.dimmed .kitchen__item
 .kitchen-page.dimmed .kitchen-caption, .garden-page.dimmed .garden__item 
 .garden-page.dimmed .garden-caption, .bathroom-page.dimmed .bathroom__item 
@@ -363,7 +365,7 @@ color: #009688;
 } */
 
 
-.heart-container {
+/* .heart-container {
 size: 60px;
   position: absolute;
   top: 0px;  
@@ -385,4 +387,4 @@ size: 60px;
   background: rgb(240, 240, 240, 0.1);
   z-index: 10; 
   font-family: Arial, Helvetica, sans-serif;
-}
+} */

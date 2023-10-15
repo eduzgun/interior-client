@@ -103,7 +103,7 @@ scene.backgroundIntensity = 1
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
       controls.update();
-      renderer.render(scene, camera);
+      renderer.render(scene,camera)
       requestAnimationFrame(tick);
     };
 

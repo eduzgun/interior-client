@@ -9,7 +9,7 @@ const NavBar = () => {
   const { user, setUser } = useAuth();
 
   const activeStyle = {
-    outline: "solid 2px #3E8989",
+    outline: "solid 2px #FAF8F2",
     backgrounColor: "var(--outline)",
   };
 
@@ -22,8 +22,7 @@ const NavBar = () => {
   return (
     <>
       <nav className="nav-row">
-
-        <img id="logo" src='https://interior-cloud-store.s3.amazonaws.com/images/logo.png' alt="API Image" />
+        <img id="logo" src='https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/logo.png' alt="API Image" />
 
         <ul>
           <li>

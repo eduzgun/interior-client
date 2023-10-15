@@ -17,16 +17,16 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    outline: 1px solid var(--outline);
-    color: var(--font);
+    outline: 1px solid black;
+    color: black;
     box-shadow: 0px 3px 2px 2px rgba(0,0,0,0.5);
 }
 
 #qmark:hover{
     cursor: pointer;
     background-color: var(--bg);
-    outline: 1px solid var(--outlinefocus);
-
+    outline: 1px solid var(--beige);
+    color: var(--beige);
 }
 
 #qbox{
@@ -34,13 +34,14 @@
     display: none;
     /* left: 50%; */
     top: 0;
-    width: 400px;
+    width: 300px;
     background: linear-gradient(0deg, rgba(15,13,20,1) 0%, #EDE4D9 0%);
     padding: 10px;
     border-radius: 25px;
     outline: 2px solid var(--outline);
-    font-size: 20px;
-    text-align: center;
+    font-size: 16px;
+    text-align: left;
+    color: black;
 }
 
 #qbox>h3{
@@ -49,9 +50,17 @@
     width: 100%;
     text-align: left;
     text-decoration: dashed;
-    
+    margin-bottom: 5px;
 }
 
 #example-panoramic{
     width: 100%;
+}
+
+#qbox>p{
+    color: black;
+}
+
+#summarytext>*{
+    color: black;
 }

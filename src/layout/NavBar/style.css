@@ -1,15 +1,11 @@
-
 .nav-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    height: 60px;
     font-family: 'Space Grotesk', sans-serif;
-    background-color:#FAF8F2;
+    /* background-color:#FAF8F2; */
     padding: 5px;
-   
-
-    
 }
 
 /* .nav-row h2{
@@ -36,33 +32,32 @@
 .nav-row a{
     font-size: 0.8rem;
     text-decoration: none;
-    margin-right: 60px;
-    outline: solid 2px var(--outline);
-    padding: 12px 60px;
+    margin-right: 40px;
+    outline: solid 2px var(--darkbeige);
+    padding: 8px 40px;
     border-radius: 100px;
-    color: var(--font);
+    color: var(--beige);
 }
 
 .nav-row a:hover{
     cursor: pointer;
     background-color: var(--outline);
-    outline: solid 2px var(--outline);
+    outline: solid 2px var(--beige);
     
 }
 
 .nav-row a:visited{
-    color: #00776C;
+    color: var(--beige);
     
    
 
 }
 
 #logo{
-    
     max-width:250px ;
     max-height: 300px;
-    
-
+    filter: invert();
+    margin-left: 20px;
 }
 
 /* styling for the three-container - this is the canvas it sits on the page, not the page layout  */
